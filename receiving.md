@@ -25,6 +25,7 @@ The available driver names are:
 | `NexmoDriver` | Nexmo
 | `SlackDriver` | Slack
 | `TelegramDriver` | Telegram
+| `WeChatDriver` | WeChat
 
 <a id="matching-patterns"></a>
 ## Matching Patterns and Keywords

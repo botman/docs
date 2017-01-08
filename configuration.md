@@ -6,6 +6,7 @@
 - [Nexmo](#nexmo)
 - [Slack](#slack)
 - [Telegram](#telegram)
+- [WeChat](#wechat)
 
 > {callout-info} Most messaging drivers require a valid URL that can be accessed from the internet in order to set up webhooks. If you are working with Laravel, you can use [Valet](https://laravel.com/docs/5.3/valet) to get an URL to your local development environment using `valet share`.
 If you are not developing with Laravel, take a look at [Ngrok](http://ngrok.io) to create a sharable URL.
@@ -109,17 +110,13 @@ There you will find an input field called `Callback URL for Inbound Message` - p
 <a id="slack"></a>
 ## Slack
 
-**Note:**
-
-You have three possibilities to set up Slack to connect with BotMan.
-
 #### Use a bot with the Slack Realtime API
 
 **Pros:** 
    * Your bot user will be a real bot and be able to join channels / talk to in direct messages
    * Very easy to set up
 
-> **Note:** Until now, you can not yet use  [interactive message buttons](https://api.slack.com/docs/message-buttons) with BotMan and Slack Realtime API.
+> {callout-warning} Please note: Until now, you can not yet use  [interactive message buttons](https://api.slack.com/docs/message-buttons) with BotMan and Slack Realtime API.
 
 
 #### Use an [outgoing webhook](https://api.slack.com/outgoing-webhooks)
@@ -137,12 +134,11 @@ You have three possibilities to set up Slack to connect with BotMan.
 
 **Cons:** 
   * Pretty cumbersome to set up *Note:* Let the folks from [SlackHQ](https://twitter.com/slackhq) know this. If we make enough noise, they'll hopefully simplify the bot token creation process!
-  * Your bot user will appear offline
 
 
 ### Usage with the Realtime API
 
-> **Note:** The Realtime API requires the additional compose package `mpociot/slack-client` to be installed.
+> {callout-warning} Please note: The Realtime API requires the additional compose package `mpociot/slack-client` to be installed.
 > 
 > Simply install it using `composer require mpociot/slack-client`.
 
@@ -210,3 +206,33 @@ You can do this by sending a `POST` request to this URL:
 `https://api.telegram.org/bot<YOUR-TELEGRAM-TOKEN-HERE>/setWebhook`
 
 This POST request needs only one parameter called `url` with the URL that points to your BotMan logic / controller.
+
+<a id="wechat"></a>
+## WeChat
+
+> {callout-warning} Please note: WeChat currently does not support interactive messages / question buttons.
+
+Login to your [developer sandbox account](http://admin.wechat.com/debug/cgi-bin/sandbox?t=sandbox/login) and take note of your appId and appSecret.
+
+There is a section called "API Config" where you need to provide a public accessible endpoint for your bot.
+Place the URL that points to your BotMan logic / controller in the URL field.
+
+This URL needs to validate itself against WeChat. Choose a unique
+verify token, which you can check against in your verify controller and place it in the Token field.
+
+BotMan comes with a method to simplify the verification process. Just place this line after the initialization:
+
+```php
+$botman->verifyServices('', 'MY_SECRET_WECHAT_VERIFICATION_TOKEN');
+```
+
+Pass the WeChat App ID and App Key to the `BotManFactory` upon initialization.
+
+```php
+[
+    'wechat_app_id' => 'YOUR-WECHAT-APP-ID',
+    'wechat_app_key' => 'YOUR-WECHAT-APP-KEY',
+]
+```
+
+And that's it - you can now use BotMan with WeChat to create interactive bots!
