@@ -110,35 +110,9 @@ There you will find an input field called `Callback URL for Inbound Message` - p
 <a id="slack"></a>
 ## Slack
 
-#### Use a bot with the Slack Realtime API
-
-**Pros:** 
-   * Your bot user will be a real bot and be able to join channels / talk to in direct messages
-   * Very easy to set up
-
-> {callout-warning} Please note: Until now, you can not yet use  [interactive message buttons](https://api.slack.com/docs/message-buttons) with BotMan and Slack Realtime API.
-
-
-#### Use an [outgoing webhook](https://api.slack.com/outgoing-webhooks)
- 
-**Pros:** Very easy to set up
- 
-**Cons:** 
-  * You don't have a bot user in your channel / no direct messaging
-  * You can not send and interact with [interactive message buttons](https://api.slack.com/docs/message-buttons)
-  * Your bot will be limited to specific channels (those you set up when adding the outgoing webhook to your Slack team)
-    
-#### Use a bot in combination with the Slack Event API
-
-**Pros:** All BotMan features available
-
-**Cons:** 
-  * Pretty cumbersome to set up *Note:* Let the folks from [SlackHQ](https://twitter.com/slackhq) know this. If we make enough noise, they'll hopefully simplify the bot token creation process!
-
-
 ### Usage with the Realtime API
 
-> {callout-warning} Please note: The Realtime API requires the additional compose package `mpociot/slack-client` to be installed.
+> {callout-warning} Please note: The Realtime API requires the additional composer package `mpociot/slack-client` to be installed.
 > 
 > Simply install it using `composer require mpociot/slack-client`.
 
@@ -177,8 +151,6 @@ Then simply run this file by using `php my-bot-file.php` - your bot should conne
 Add a new "Outgoing Webhook" integration to your Slack team - this URL needs to point to the controller where your BotMan bot is living in.
 
 To let BotMan listen to all incoming messages, do **not** specify a trigger word, but define a channel instead.
-
-> If you are using Laravel Valet, you can get an external URL for testing using the `valet share` command.
 
 With the Webhook implementation, there is no need to add a `slack_token` configuration. 
 _Yes - that is all you need to do, to use BotMan_
