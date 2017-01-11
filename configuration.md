@@ -14,7 +14,7 @@ If you are not developing with Laravel, take a look at [Ngrok](http://ngrok.io) 
 <a id="facebook-messenger"></a>
 ## Facebook Messenger
 
-Facebook Messenger requires a valid URL in order to set up webhooks and receive events and information from the chat users. This URL needs to validate itself against Facebook. When you create the webhook on the Facebook developer website, you have to choose a unique verify token, which you can check against in your verify controller.
+Facebook Messenger requires a valid and secure (HTTPS) URL in order to set up webhooks and receive events and information from the chat users. This URL needs to validate itself against Facebook. When you create the webhook on the Facebook developer website, you have to choose a unique verify token, which you can check against in your verify controller.
                                     
 BotMan comes with a method to simplify the verification process.
 
@@ -24,7 +24,7 @@ Just place this line after the initialization:
 $botman->verifyServices('MY_SECRET_VERIFICATION_TOKEN');
 ```
 
-To connect BotMan with your Facebook Messenger Bot, you first need to follow the [official quick start guide](https://developers.facebook.com/docs/messenger-platform/guides/quick-start) to create your Messenger Bot and retrieve an access token.
+To connect BotMan with Facebook Messenger, you first need to follow the [official quick start guide](https://developers.facebook.com/docs/messenger-platform/guides/quick-start) to create your Facebook Messenger application and retrieve an access token.
 
 Once you have obtained the page access token, place it in your BotMan configuration.
 
