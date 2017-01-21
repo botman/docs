@@ -84,11 +84,12 @@ $botman->hears('emotion', function($bot) {
     $extras = $bot->getMessage()->getExtras();
     // Access extra information
     $entities = $extras['entities'];
+    ...
 });
 ```
 
 The current Wit.ai middleware will send all incoming text messages to wit.ai and adds the `entities` received from wit.ai back to the message.
-You can then access the information using `$bot->getMessage()->getExtras()`. This method returns an array containing all wit.ai entities.
+You can then access the information using `$bot->getMessage()->getExtras()`. This method returns an array containing all wit.ai entities. This extra information will help you building the next reply.
 
 If you only want to get a single element of the extras, you can optionally pass a key to the `getExtras` method. If no matching key was found, the method will return `null`.
 

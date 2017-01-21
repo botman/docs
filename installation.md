@@ -19,7 +19,7 @@ $ composer require mpociot/botman
 ## Basic Usage
 
 This sample bot listens for the word "hello".
-It listens on all messaging services, that you have configured - all using the exacet same codebase.
+It listens on all messaging services, that you have configured - all using the exact same codebase.
 
 ```php
 <?php
