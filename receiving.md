@@ -1,71 +1,75 @@
 # Hearing Messages
 
-
-- [Introduction](#introduction)
-- [Matching Patterns](#matching-patterns)
+- [Basic commands](#basic-commands)
+- [Command parameters](#command-parameters)
+- [Matching Regular Expression](#matching-regular-expressions)
+- [Command groups](#command-groups)
+    - [Drivers](#command-groups-drivers)
+    - [Middleware](#command-groups-middleware)
+    - [Channels](#command-groups-channels)
 - [Middleware](#middleware)
+- [Driver Specifics](#driver-specifics)
 
-## Introduction
+<a id="basic-commands"></a>
+## Basic commands
 
-BotMan can listen to many different [messaging drivers](#connect-with-your-messaging-service) and therefore it might be required for you, to respond differently depending on which
-driver was used to respond to your message.
-
-Each messaging driver in BotMan has a `getName()` method, that returns a human readable name of the driver.
- 
-You can access the driver object using `$botman->getDriver()`.
-To match against the driver name, you can use each driver's `NAME` constant or use the table below.
-
-The available driver names are:
-
-| Driver | Name 
-|--- |---
-| `BotFrameworkDriver` | BotFramework
-| `FacebookDriver` | Facebook
-| `HipChatDriver` | HipChat
-| `NexmoDriver` | Nexmo
-| `SlackDriver` | Slack
-| `TelegramDriver` | Telegram
-| `WeChatDriver` | WeChat
-
-<a id="matching-patterns"></a>
-## Matching Patterns and Keywords
-
-BotMan provides a `hears()` function, which will listen to specific patterns in public and/or private channels.
-
-| Argument | Description
-|--- |---
-| pattern | A string with a regular expressions to match
-| callback | Callback function or `Classname@method` notation that receives a BotMan object, as well as additional matching regular expression parameters
-| in | Defines where the Bot should listen for this message. Can be either `BotMan::DIRECT_MESSAGE` or `BotMan::PUBLIC_CHANNEL`.
-
-<div class="col-xs-12 col-md-8">
+The easiest way to listen for BotMan commands is by using listening for a specific keyword and a Closure, providing a very simple and expressive method of defining bot commands:
 
 ```php
-$botman->hears('keyword', function(BotMan $bot) {
-    // do something to respond to message
-    $bot->reply('You used a keyword!');
+$botman->hears('foo', function ($bot) {
+    $bot->reply('Hello World');
 });
-
-$botman->hears('keyword', 'MyClass@heardKeyword');
 ```
 
-When using the built in regular expression matching, the results of the expression will be passed to the callback function. For example:
+In addition to the Closure you can also pass a class and method that will get called if the keyword matches.
 
 ```php
-$botman->hears('open the {doorType} doors', function(BotMan $bot, $doorType) {
-    if ($doorType === 'pod bay') {
-        return $bot->reply('I\'m sorry, Dave. I\'m afraid I can\'t do that.');
+$botman->hears('foo', 'Some\Namespace\MyBotCommands@handleFoo');
+
+class MyBotCommands {
+
+    public function handleFoo($bot) {
+        $bot->reply('Hello World');
     }
 
-    return $bot->reply('Okay');
+}
+```
+
+<a id="command-parameters"></a>
+## Command Parameters
+
+Listening to basic keywords is fine, but sometimes you will need to capture parts of the information your bot users are providing. 
+For example, you may need to listen for a bot command that captures a user's name. You may do so by defining command parameters:
+
+```php
+$botman->hears('call me {name}', function ($bot, $name) {
+    $bot->reply('Your name is: '.$name);
 });
 ```
 
-</div>
+You may define as many command parameters as required by your command:
 
-<div class="hidden-xs col-md-4 bot-example">
-    <iframe src="https://webchat.botframework.com/embed/botman-test-bot?s=hBI7tb3_Coc.cwA.u4Y.W4LWjA_6pOtpAqkSZ9Bwcfwv_e1OshFHjhpfUImhb8Q" border="none" style="border:none;height: 502px; max-height: 502px;"></iframe>
-</div>
+```php
+$botman->hears('call me {name} the {adjective}', function ($bot, $name, $adjective) {
+    //
+});
+```
+
+Command parameters are always encased within `{}` braces and should consist of alphabetic characters.
+
+<a id="matching-regular-expressions"></a>
+## Matching Regular Expressions
+
+If command parameters do not give you enough power and flexibility for your bot commands, you can also use more complex regular expressions in your bot commands. For example, you may want your bot to only listen for digits. You may do so by defining a regular expression in your command like this:
+
+
+```php
+$botman->hears('I want ([0-9]+)', function ($bot, $number) {
+    $bot->reply('You will get: '.$number);
+});
+```
+
+Just like the command parameters, each regular expression match group will be passed to the handling Closure.
 
 <a id="middleware"></a>
 ## Midleware
@@ -89,3 +93,26 @@ You can then access the information using `$bot->getMessage()->getExtras()`. Thi
 If you only want to get a single element of the extras, you can optionally pass a key to the `getExtras` method. If no matching key was found, the method will return `null`.
 
 In addition to that, it will check against a custom trait entity called `intent` instead of using the built-in matching pattern.
+
+<a id="driver-specifics"></a>
+## Driver Specifics
+
+BotMan can listen to many different [messaging drivers](#connect-with-your-messaging-service) and therefore it might be required for you, to respond differently depending on which
+driver was used to respond to your message.
+
+Each messaging driver in BotMan has a `getName()` method, that returns a human readable name of the driver.
+ 
+You can access the driver object using `$botman->getDriver()`.
+To match against the driver name, you can use each driver's `NAME` constant or use the table below.
+
+The available driver names are:
+
+| Driver | Name 
+|--- |---
+| `BotFrameworkDriver` | BotFramework
+| `FacebookDriver` | Facebook
+| `HipChatDriver` | HipChat
+| `NexmoDriver` | Nexmo
+| `SlackDriver` | Slack
+| `TelegramDriver` | Telegram
+| `WeChatDriver` | WeChat
