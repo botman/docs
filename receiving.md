@@ -71,6 +71,35 @@ $botman->hears('I want ([0-9]+)', function ($bot, $number) {
 
 Just like the command parameters, each regular expression match group will be passed to the handling Closure.
 
+<a id="command-groups"></a>
+## Command Groups
+
+Command groups allow you to share command attributes, such as middleware or channels, across a large number of commands without needing to define those attributes on each individual command. Shared attributes are specified in an array format as the first parameter to the `$botman->group` method.
+
+### Drivers
+A common use-case for command groups is restricting the commands to a specific messaging service using the `driver` parameter in the group array:
+
+```php
+$botman->group(['driver' => SlackDriver::class], function($bot) {
+    $bot->hears('keyword', function($bot) {
+        // Only listens on Slack
+    });
+});
+```
+
+### Middleware
+
+### Channels
+Command groups may also be used to restrict the commands to specific "channels", meaning they get restricted to the user sending the message to your bot. You can access the Channel-IDs in your commands using `$bot->getMessage()->getChannel();`.
+
+```php
+$botman->group(['channel' => '1234567890'], function($bot) {
+    $bot->hears('keyword', function($bot) {
+        // Only listens when user/channel '1234567890' is sending the message.
+    });
+});
+```
+
 <a id="middleware"></a>
 ## Midleware
 
