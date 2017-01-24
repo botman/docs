@@ -101,7 +101,7 @@ $botman->group(['channel' => '1234567890'], function($bot) {
 ```
 
 <a id="middleware"></a>
-## Midleware
+## Middleware
 
 The usage of custom middleware allows you to enrich the messages your bot received with additional information from third party services such as [wit.ai](http://wit.ai) or [api.ai](http://api.ai).
 
