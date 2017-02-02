@@ -121,10 +121,11 @@ To match against the driver name, you can use each driver's `NAME` constant or u
 
 The available driver names are:
 
-| Driver | Name 
-|--- |---
+| Driver | Name | Note
+|--- |---|---
 | `BotFrameworkDriver` | BotFramework
 | `FacebookDriver` | Facebook
+| `FacebookPostbackDriver` | Facebook | Allows you to listen for custom Facebook Postback payloads.
 | `HipChatDriver` | HipChat
 | `NexmoDriver` | Nexmo
 | `SlackDriver` | Slack
