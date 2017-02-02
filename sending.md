@@ -2,18 +2,19 @@
 
 - [Introduction](#introduction)
 - [Single Message Replies](#single-message-replies)
-- [Multi Message Replies](#multi-message-replies)
+- [Type Indicators](#type-indicators)
+- [Originating Messages](#originating-messages)
 
 ## Introduction
 
 Bots have to send messages to deliver information and present an interface for their
-functionality.  BotMan bots can send messages in several different ways, depending
+functionality.  BotMan can send messages in several different ways, depending
 on the type and number of messages that will be sent.
 
 Single message replies to incoming commands can be sent using the `$bot->reply()` function.
 
 Multi-message replies, particularly those that present questions for the end user to respond to,
-can be sent using the `$bot->startConversation()` function and the related conversation sub-functions. 
+can be sent using the `$bot->startConversation()` function and the related [conversation](/conversations) sub-functions. 
 
 Bots can originate messages - that is, send a message based on some internal logic or external stimulus - using `$bot->say()` method.
 
@@ -21,38 +22,20 @@ Bots can originate messages - that is, send a message based on some internal log
 
 ## Single Message Replies
 
-Once a bot has received a message using `hears()`, a response
-can be sent using `$bot->reply()`.
+Once a bot has received a message using `hears()`, you may send a response  using `$bot->reply()`.
 
-Messages sent using `$bot->reply()` are sent immediately. If multiple messages are sent via
-`$bot->reply()` in a single event handler, they will arrive in the  client very quickly
-and may be difficult for the user to process. We recommend using `$bot->startConversation()`
-if more than one message needs to be sent.
-
-You may pass either a string, a `Message` object or a `Question` object to the function.
-
-As a second parameter, you may also send any additional fields to pass along the configured driver.
-
-#### $bot->reply()
-
-| Argument | Description
-|--- |---
-| reply | _String_ or _Message_ or _Question_ Outgoing response
-| additionalParameters | _Optional_ Array containing additional parameters
-
-Simple reply example:
+This is the simplest way to respond to an incoming command:
 
 ```php
 $botman->hears('keyword', function (BotMan $bot) {
-    // do something to respond to message
-    // ...
-
     $bot->reply("Tell me more!");
 });
 ```
 
-You can also compose your message using the `Mpociot\BotMan\Messages\Message` class to have a unified API to add images 
-to your chat messages. 
+A common use case would be to not only send plain-text messages, but to also include images or videos.
+
+You may do this by composing your message using the `Message` class. This class takes care of transforming your data for each
+individual messaging service.
 
 ```php
 use Mpociot\BotMan\Messages\Message;
@@ -61,35 +44,47 @@ $botman->hears('keyword', function (BotMan $bot) {
     // Build message object
     $message = Message::create('This is my text')
                 ->image('http://www.some-url.com/image.jpg');
+    
     // Reply message object
     $bot->reply($message);
 });
 ```
 
+<a id="type-indicators"></a>
 
-Slack-specific fields and attachments:
+## Type Indicators
+
+To make your bot feel and act more human, you can make it send "typing ..." indicators. 
 
 ```php
-$botman->hears('keyword', function (BotMan $bot) {
-    // do something...
 
-    // then respond with a message object
-    $bot->reply("A more complex response",[
-        'username' => "ReplyBot",
-        'icon_emoji' => ":dash:",
-    ]);
-})
+$botman->hears('keyword', function (BotMan $bot) {
+    $bot->typesAndWaits(2);
+    $bot->reply("Tell me more!");
+});
 ```
 
-<a id="multi-message-replies"></a>
-## Multi Message Replies
+This will send a typing indicator and sleep for 2 seconds, before actually sending the "Tell me more!" response.
 
-For more complex commands, multiple messages may be necessary to send a response,
-particularly if the bot needs to collect additional information from the user.
+Please note, that not all messaging services support typing indicators. If it is not supported, it will simply do nothing and just reply the message.
 
-BotMan provides a `Conversation` object that is used to string together several
-messages, including questions for the user, into a cohesive unit. BotMan conversations
-provide useful methods that enable developers to craft complex conversational
-user interfaces that may span several minutes of dialog with a user, without having to manage
-the complexity of connecting multiple incoming and outgoing messages across
-multiple API calls into a single function.
+<a id="originating-messages"></a>
+
+## Originating Messages
+
+BotMan also allows you to send messages to your chat users programatically. You could, for example, send out a daily message to your users that get's triggered
+by your cronjob.
+
+The easiest way is to just specify the driver-specific recipient ID when calling the `say` method.
+
+```php
+$botman->say('Message', 'my-recipient-user-id');
+```
+
+You may also specify the messaging driver if you know it:
+
+```php
+$botman->say('Message', 'my-recipient-user-id', TelegramDriver::class);
+```
+
+Just as the regular `reply` method, this method also accepts either simple strings or `Message` objects.
