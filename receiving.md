@@ -7,7 +7,6 @@
     - [Drivers](#command-groups-drivers)
     - [Middleware](#command-groups-middleware)
     - [Channels](#command-groups-channels)
-- [Middleware](#middleware)
 - [Driver Specifics](#driver-specifics)
 
 <a id="basic-commands"></a>
@@ -88,6 +87,15 @@ $botman->group(['driver' => SlackDriver::class], function($bot) {
 ```
 
 ### Middleware
+You may also group your commands, to send them through custom middleware classes. These classes can either listen for different parts of the message or extend your message by sending it to a third party service. The most common use-case would be the use of a Natural Language Processor like wit.ai or api.ai.
+
+```php
+$botman->group(['middleware' => new MyCustomMiddleware()], function($bot) {
+    $bot->hears('keyword', function($bot) {
+        // Will be sent through the custom middleware object.
+    });
+});
+```
 
 ### Channels
 Command groups may also be used to restrict the commands to specific "channels", meaning they get restricted to the user sending the message to your bot. You can access the Channel-IDs in your commands using `$bot->getMessage()->getChannel();`.
@@ -99,30 +107,6 @@ $botman->group(['channel' => '1234567890'], function($bot) {
     });
 });
 ```
-
-<a id="middleware"></a>
-## Midleware
-
-The usage of custom middleware allows you to enrich the messages your bot received with additional information from third party services such as [wit.ai](http://wit.ai) or [api.ai](http://api.ai).
-
-To let your BotMan instance make use of a middleware, simply add it to the list of middlewares:
-
-```php
-$botman->middleware(Wit::create('MY-WIT-ACCESS-TOKEN'));
-$botman->hears('emotion', function($bot) {
-    $extras = $bot->getMessage()->getExtras();
-    // Access extra information
-    $entities = $extras['entities'];
-    ...
-});
-```
-
-The current Wit.ai middleware will send all incoming text messages to wit.ai and adds the `entities` received from wit.ai back to the message.
-You can then access the information using `$bot->getMessage()->getExtras()`. This method returns an array containing all wit.ai entities. This extra information will help you building the next reply.
-
-If you only want to get a single element of the extras, you can optionally pass a key to the `getExtras` method. If no matching key was found, the method will return `null`.
-
-In addition to that, it will check against a custom trait entity called `intent` instead of using the built-in matching pattern.
 
 <a id="driver-specifics"></a>
 ## Driver Specifics
