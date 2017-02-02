@@ -125,7 +125,7 @@ The available driver names are:
 |--- |---|---
 | `BotFrameworkDriver` | BotFramework
 | `FacebookDriver` | Facebook
-| `FacebookPostbackDriver` | Facebook | Allows you to listen for custom Facebook Postback payloads.
+| `FacebookPostbackDriver` | FacebookPostback | Allows you to listen for custom Facebook Postback payloads.
 | `HipChatDriver` | HipChat
 | `NexmoDriver` | Nexmo
 | `SlackDriver` | Slack
