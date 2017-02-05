@@ -15,7 +15,7 @@ For example, NLP tools take a sentence like this:
 Hey Calendar, schedule dinner with Nicole at 8 pm tomorrow.
 ```
 
-and returns structured data like that BotMan can process:
+and returns structured data that BotMan can process:
 
 ```javascript
 {
