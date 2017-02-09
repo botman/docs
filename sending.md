@@ -4,6 +4,7 @@
 - [Single Message Replies](#single-message-replies)
 - [Type Indicators](#type-indicators)
 - [Originating Messages](#originating-messages)
+- [Sending Facebook Templates](#sending-facebook-templates)
 
 ## Introduction
 
@@ -89,6 +90,7 @@ $botman->say('Message', 'my-recipient-user-id', TelegramDriver::class);
 
 Just as the regular `reply` method, this method also accepts either simple strings or `Message` objects.
 
+<a id="sending-facebook-templates"></a>
 ## Sending Facebook Templates
 
 BotMan supports all the main [Facebook templates](https://developers.facebook.com/docs/messenger-platform/send-api-reference/templates) like `Button`, `Generic`, `List` and the `Receipt`. All of them are available through an expressive and easy API.
