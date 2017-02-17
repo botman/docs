@@ -51,6 +51,19 @@ $botman->hears('keyword', function (BotMan $bot) {
 });
 ```
 
+For Slack Realtime API, you can upload a file like so:
+
+```php
+$botman->hears('give file to me', function (BotMan $bot) {
+    // Build message object
+    $message = Message::create('This is my comment for the uploaded file')
+                ->filePath('/tmp/file.mp3');
+    
+    // Reply message object
+    $bot->reply($message);
+});
+```
+
 <a id="type-indicators"></a>
 
 ## Type Indicators
