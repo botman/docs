@@ -91,3 +91,13 @@ use Mpociot\BotMan\Cache\CodeIgniterCache;
 $this->load->driver('cache');
 $botman = BotManFactory::create($config, new CodeIgniterCache($this->cache->file));
 ```
+
+<a id="redis-cache"></a>
+### Redis Cache
+[Redis](https://redis.io) in-memory data structure store. If you have https://github.com/igbinary/igbinary module available, it will be used instead of standard php serializer:
+
+```php
+use Mpociot\BotMan\Cache\RedisCache;
+
+$botman = BotManFactory::create($config, new RedisCache('127.0.0.1', 6379));
+```
