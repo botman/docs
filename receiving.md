@@ -7,6 +7,7 @@
     - [Drivers](#command-groups-drivers)
     - [Middleware](#command-groups-middleware)
     - [Channels](#command-groups-channels)
+- [Fallbacks](#fallbacks)
 - [Driver Specifics](#driver-specifics)
 
 <a id="basic-commands"></a>
@@ -105,6 +106,17 @@ $botman->group(['channel' => '1234567890'], function($bot) {
     $bot->hears('keyword', function($bot) {
         // Only listens when user/channel '1234567890' is sending the message.
     });
+});
+```
+
+<a id="fallbacks"></a>
+## Fallbacks
+
+BotMan allows you to create a fallback method, that gets called if none of your "hears" patterns matches. You may use this feature to give your bot users guidance on how to use your bot.
+
+```php
+$botman->fallback(function($bot) {
+    $bot->reply('Sorry, I did not understand these commands. Here is a list of commands I understand: ...');
 });
 ```
 

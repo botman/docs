@@ -1,88 +1,74 @@
 # Conversations
 
-- [Start a Conversation](#start)
-- [Control Conversation Flow](#control-conversation-flow)
+- [Start a Conversation](#start-a-conversation)
+- [Asking Questions](#asking-questions)
+- [Structured Question with Patterns](#structured-question)
 
-<a id="start"></a>
-## Start a Conversation
+When it comes to chat bots, you probably don't want to simply react to single keywords, but instead, you might need to gather information from the user, using a conversation. 
+Let's say, that you want your chat bot to provide an elegant user onboarding experience for your application users. In the onboarding process we are going to ask the user for their firstname and email address - that's a perfect fit for conversations!
 
-#### $bot->startConversation()
-
-| Argument | Description
-|---  |---
-| conversation  | A `Conversation` object
-
-`startConversation()` is a function that creates conversation in response to an incoming message. You can control where the bot should start the conversation by calling `startConversation` in the `hears()` method of your bot.
-
-Simple conversation example:
+<a id="starting-a-conversation"></a>
+## Starting a Conversation
+You can start a conversation with your users using the `startConversation` method inside a keyword callback:
 
 ```php
-$botman->hears('start conversation', function (BotMan $bot) {
-    $bot->startConversation(new PizzaConversation);
+$botman->hears('Hello', function($bot) {
+    $bot->startConversation(new OnboardingConversation);
 });
 ```
 
-When starting a new conversation using the `startConversation()` method, you need to pass the method the conversation that you want to start gathering information with.
-Each conversation object needs to extend from the BotMan `Conversation` object and must implement a simple `run()` method.
-
-This is the very first method that gets executed when the conversation starts.
-
-Example conversation object:
+Let's take a look at the `OnboardingConversation` class:
 
 ```php
-class PizzaConversation extends Conversation
+class OnboardingConversation extends Conversation
 {
-    protected $size;
+    protected $firstname;
+    
+    protected $email;
 
-    public function askSize()
+    public function askFirstname()
     {
-        $this->ask('What pizza size do you want?', function(Answer $answer) {
-            // Save size for next question
-            $this->size = $answer->getText();
+        $this->ask('Hello! What is your firstname?', function(Answer $answer) {
+            // Save result
+            $this->firstname = $answer->getText();
 
-            $this->say('Got it. Your pizza will be '.$answer->getText());
+            $this->say('Nice to meet you '.$this->firstname);
+            $this->askEmail();
+        });
+    }
+
+    public function askEmail()
+    {
+        $this->ask('One more thing - what is your email?', function(Answer $answer) {
+            // Save result
+            $this->email = $answer->getText();
+
+            $this->say('Great - that is all we need, '.$this->firstname);
         });
     }
 
     public function run()
     {
         // This will be called immediately
-        $this->askSize();
+        $this->askFirstname();
     }
 }
-``` 
+```
 
-<a id="control-conversation-flow"></a>
-## Control Conversation Flow
+All conversations that your bot might use need to extend the abstract Conversation class and implement a `run` method.
 
-#### $conversation->say()
-| Argument | Description
-|---  |---
-| message   | String or `Question` object
+This is the starting point of your conversation and get's executed immediately.
 
-Call $conversation->say() several times in a row to queue messages inside the conversation. Only one message will be sent at a time, in the order in which they are queued.
+As you can see in the onboarding conversation, we have two questions that get asked one after another. Just like a regular conversation, the bot first asks for the firstname and saves the value in the conversation object itself.
 
-#### $conversation->ask()
-| Argument | Description
-|---  |---
-| message   | String or `Question` object
-| callback _or_ array of callbacks   | callback function in the form function($answer), or array of arrays in the form ``[ 'pattern' => regular_expression, 'callback' => function($answer) { ... } ]``
+After it retrieves an answer from the user, the callback gets executed and the bot asks the next question, which retrieves the user's email address.
 
-When passed a callback function, $conversation->ask will execute the callback function for any response.
-This allows the bot to respond to open-ended questions, collect the responses, and handle them in whatever
-manner it needs to.
+> {callout-info} Conversations get persisted in the cache. This means that the conversation class will be serialized in order to maintain the conversation state. Keep that in mind when developing for BotMan.
 
-When passed an array, the bot will look first for a matching pattern, and execute only the callback whose
-pattern is matched. This allows the bot to present multiple choice options, or to proceed
-only when a valid response has been received. 
-The patterns can have the same placeholders as the `$bot->reply()` method has. All matching parameters will be passed to the callback function.
+<a id="asking-questions"></a>
+## Asking Questions
 
-Callback functions passed to `ask()` receive (at least) two parameters - the first is an `Answer` object containing
-the user's response to the question. 
-If the conversation continues because of a matching pattern, all matching pattern parameters will be passed to the callback function too.
-The last parameter is always a reference to the conversation itself.
-
-##### Using $conversation->ask with a callback:
+BotMan gives you two ways to ask your users questions. The straight forward aproach is simply using a string as a question:
 
 ```php
 // ...inside the conversation object...
@@ -94,37 +80,11 @@ public function askMood()
 }
 ```
 
-##### Using $conversation->ask with an array of callbacks:
-
-
-```php
-// ...inside the conversation object...
-public function askNextStep()
-{
-    $this->ask('Shall we proceed? Say YES or NO', [
-        [
-            'pattern' => 'yes|yep',
-            'callback' => function () {
-                $this->say('Okay - we\'ll keep going');
-            }
-        ],
-        [
-            'pattern' => 'nah|no|nope',
-            'callback' => function () {
-                $this->say('PANIC!! Stop the engines NOW!');
-            }
-        ]
-    ]);
-}
-
-```
-#### Using $conversation->ask with a Question object
-
-Instead of passing a string to the `ask()` method, it is also possible to create a `Question` object.
-The Question objects make use of the interactive messages from Facebook, Telegram and Slack to present the user buttons to interact with.
+Instead of passing a string to the `ask()` method, it is also possible to create a question object.
+The question objects make use of the interactive messages from supported messaging services to present the user buttons to interact with.
 
 When passing question objects to the `ask()` method, the returned `Answer` object has a method called `isInteractiveMessageReply` to detect, if 
-the user interacted with the message and clicked on a button.
+the user interacted with the message and clicked on a button or simply entered text.
 
 Creating a simple Question object:
 
@@ -148,4 +108,38 @@ public function askForDatabase()
         }
     });
 }
+```
+
+<a id="patterns"></a>
+
+## Structured Question with Patterns
+
+You might also want to ask your user questions, where you already know the answer should be in a fixed set of possible options.
+For example a simple yes or no question. 
+
+Instead of passing a closure to the `ask` method, you can simply pass it an array.
+BotMan will then look first for a matching pattern, and execute only the callback whose pattern is matched. 
+
+This allows the bot to present multiple choice options, or to proceed only when a valid response has been received. The patterns can have the same placeholders as the `$bot->reply()` method has. All matching parameters will be passed to the callback function.
+
+```php
+// ...inside the conversation object...
+public function askNextStep()
+{
+    $this->ask('Shall we proceed? Say YES or NO', [
+        [
+            'pattern' => 'yes|yep',
+            'callback' => function () {
+                $this->say('Okay - we\'ll keep going');
+            }
+        ],
+        [
+            'pattern' => 'nah|no|nope',
+            'callback' => function () {
+                $this->say('PANIC!! Stop the engines NOW!');
+            }
+        ]
+    ]);
+}
+
 ```
