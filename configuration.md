@@ -151,7 +151,7 @@ Then simply run this file by using `php my-bot-file.php` - your bot should conne
 
 ### Usage with an outgoing webhook
 
-Add a new "Outgoing Webhook" integration to your Slack team - this URL needs to point to the controller where your BotMan bot is living in.
+Add a new "Outgoing Webhook" integration to your Slack team - this URL needs to point to the controller where your BotMan bot is living in. You will find this integration when you search for `Outgoing WebHooks` in the Slack Apps Directory.
 
 To let BotMan listen to all incoming messages, do **not** specify a trigger word, but define a channel instead.
 
