@@ -181,6 +181,8 @@ You can do this by sending a `POST` request to this URL:
 `https://api.telegram.org/bot<YOUR-TELEGRAM-TOKEN-HERE>/setWebhook`
 
 This POST request needs only one parameter called `url` with the URL that points to your BotMan logic / controller.
+If you use [mpociot/botman-laravel-starter](https://github.com/mpociot/botman-laravel-starter) it will be:
+`https://yourapp.domain/botman`. HTTPS is a must, because of security reasons.
 
 <a id="wechat"></a>
 ## WeChat
