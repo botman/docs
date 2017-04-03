@@ -20,8 +20,13 @@ BotMan comes with a method to simplify the verification process.
 
 Just place this line after the initialization:
 
-```
+```php
+// In your BotMan controller
 $botman->verifyServices('MY_SECRET_VERIFICATION_TOKEN');
+
+// ...
+$botman->hears('foo', function($bot){});
+$botman->listen();
 ```
 
 To connect BotMan with Facebook Messenger, you first need to follow the [official quick start guide](https://developers.facebook.com/docs/messenger-platform/guides/quick-start) to create your Facebook Messenger application and retrieve an access token.
