@@ -9,6 +9,7 @@
     - [Telegram](/__version__/configuration#telegram)
     - [WeChat](/__version__/configuration#wechat)
 - [Hearing Messages](/__version__/receiving)
+- [Receiving additional content](/__version__/receiving-additional-content)
 - [Natural Language Processing](/__version__/nlp)
 - [Sending Messages](/__version__/sending)
 - [Conversations](/__version__/conversations)
