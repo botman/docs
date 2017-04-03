@@ -205,7 +205,12 @@ verify token, which you can check against in your verify controller and place it
 BotMan comes with a method to simplify the verification process. Just place this line after the initialization:
 
 ```php
+// In your BotMan controller
 $botman->verifyServices('', 'MY_SECRET_WECHAT_VERIFICATION_TOKEN');
+
+// ...
+$botman->hears('foo', function($bot){});
+$botman->listen();
 ```
 
 Pass the WeChat App ID and App Key to the `BotManFactory` upon initialization.
