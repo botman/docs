@@ -131,6 +131,7 @@ A `Generic Template` is a horizontal scrollable carousel of elements. Every elem
 
 ```php
 $bot->reply(GenericTemplate::create()
+	->addImageAspectRatio(GenericTemplate::RATIO_SQUARE)
 	->addElements([
 		Element::create('BotMan Documentation')
 			->subtitle('All about BotMan')
