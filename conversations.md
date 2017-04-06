@@ -63,7 +63,7 @@ As you can see in the onboarding conversation, we have two questions that get as
 
 After it retrieves an answer from the user, the callback gets executed and the bot asks the next question, which retrieves the user's email address.
 
-> {callout-info} Conversations get persisted in the cache. This means that the conversation class will be serialized in order to maintain the conversation state. Keep that in mind when developing for BotMan.
+> {callout-info} Conversations get persisted in the cache. This means that the conversation class will be serialized in order to maintain the conversation state. Keep that in mind when developing for BotMan. The default cache duration is set to 30 minutes. If you need to increase or decrease this value, you can set a `conversation_cache_time` key on your BotMan configuration.
 
 <a id="asking-questions"></a>
 ## Asking Questions
