@@ -2,6 +2,7 @@
 
 
 - [Project Starter Kit](#starter-kit)
+- [Tinker](#tinker)
 - [Use BotMan in your existing project](#existing-projects)
 
 <a id="starter-kit"></a>
@@ -14,7 +15,7 @@ You can create a new project using the `composer create-project` command:
 $ composer create-project mpociot/botman-laravel-starter my_new_bot
 ```
 
-This will create a new folder called `my_new_bot` with a fresh Laravel 5.3 project, which is preconfigured for the use of BotMan.
+This will create a new folder called `my_new_bot` with a fresh Laravel 5.4 project, which is preconfigured for the use of BotMan.
 After you created the boiler plate project, edit your `.env` file with the configuration services of your choice.
 
 The bot logic can be found in the `routes/botman.php` file, which works as a single definition point for your BotMan `hears` commands.
@@ -27,6 +28,12 @@ $botman->hears('test', function($bot){
 $botman->hears('Start conversation', BotManController::class.'@startConversation');
 ```
 
+<a id="tinker"></a>
+## Tinker
+
+The Laravel starter project comes with a neat Artisan command, that allows you to dry-run your chatbot without needing to setup external services.
+
+Just run `php artisan botman:tinker` and you have a chat with your bot right in your terminal!
 
 <a id="existing-projects"></a>
 ## Use BotMan in your existing project
