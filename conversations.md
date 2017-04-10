@@ -2,6 +2,7 @@
 
 - [Start a Conversation](#start-a-conversation)
 - [Asking Questions](#asking-questions)
+- [Asking for images, videos, audio or location](#asking-for-data)
 - [Structured Question with Patterns](#structured-question)
 
 When it comes to chat bots, you probably don't want to simply react to single keywords, but instead, you might need to gather information from the user, using a conversation. 
@@ -106,6 +107,65 @@ public function askForDatabase()
             $selectedValue = $answer->getValue(); // will be either 'yes' or 'no'
             $selectedText = $answer->getText(); // will be either 'Of course' or 'Hell no!'
         }
+    });
+}
+```
+
+<a id="asking-for-data"></a>
+## Asking for images, videos, audio or location
+
+With BotMan, you can easily let your bot [receive images, videos, audio files or locations](/__version__/receiving-additional-content).
+The same approach can be applied to your conversation. This is especially useful if you only want your bot users to provide you with specific attachment types. 
+
+You might use the `askForImages` method to ask your bot users a question and only accept one or more images as a valid answer:
+
+```php
+// ...inside the conversation object...
+public function askPhoto()
+{
+    $this->askForImages('Please upload an image.', function ($images) {
+        // $images contains an array with all images.
+    });
+}
+```
+
+The callback will receive an array containing all images the user has sent to the bot. By default, if the user does not provide a valid image, the question will just be repeated. But you can alter it, by specifying a third parameter. This is the callback that will be executed, once the provided message is not a valid image.
+
+```php
+// ...inside the conversation object...
+public function askPhoto()
+{
+    $this->askForImages('Please upload an image.', function ($images) {
+        //
+    }, function(Answer $answer) {
+        // This method is called when no valid image was provided.
+    });
+}
+```
+
+Similar to the `askForImages` method, you might also ask for videos, audio files or even your chatbot user's locations.
+
+```php
+```php
+// ...inside the conversation object...
+public function askVideos()
+{
+    $this->askForVideos('Please upload a video.', function ($videos) {
+        // $videos is an array containing all uploaded videos.
+    });
+}
+
+public function askAudio()
+{
+    $this->askForAudio('Please upload an audio file.', function ($audio) {
+        // $audio is an array containing all uploaded audio files.
+    });
+}
+
+public function askLocation()
+{
+    $this->askForLocation('Please tell me your location.', function (Location $location) {
+        // $location is a Location object with the latitude / longitude.
     });
 }
 ```
