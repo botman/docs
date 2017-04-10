@@ -5,6 +5,7 @@
 - [Type Indicators](#type-indicators)
 - [Originating Messages](#originating-messages)
 - [Sending Facebook Templates](#sending-facebook-templates)
+- [Send Low-Level reqeusts](#sending-low-level-requests)
 
 ## Introduction
 
@@ -211,3 +212,21 @@ $bot->reply(
 		->addAdjustment(ReceiptAdjustment::create('Laravel Bonus')->amount(5))
 );
 ```
+
+<a id="sending-low-level-requests"></a>
+## Sending Low-Level Requests
+
+Sometimes you develop your chatbot and come to the conclusion that you would need to call a particular native messaging service API. As BotMan tries to decouple as many APIs as possible, it is not possible to have all API methods for each messaging service in the core of BotMan.
+
+For this exact reason, there is the `sendRequest` method on the BotMan instance. What it does is, that it calls the messaging service endpoint with the given arguments and returns a Response object.
+
+```php
+// Calling the sendSticker API for Telegram
+$botman->hears('sticker', function($bot) {
+	$bot->sendRequest('sendSticker', [
+		'sticker' => '1234'
+	])
+});
+```
+
+If your API endpoint needs a Chat-ID, User-ID or Channel-ID that BotMan already knows, it will be passed along in the appropriate format for you, so you do not need to worry about it.

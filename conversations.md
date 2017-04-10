@@ -4,6 +4,7 @@
 - [Asking Questions](#asking-questions)
 - [Asking for images, videos, audio or location](#asking-for-data)
 - [Structured Question with Patterns](#structured-question)
+- [Originating Conversations](#originating-conversations)
 
 When it comes to chat bots, you probably don't want to simply react to single keywords, but instead, you might need to gather information from the user, using a conversation. 
 Let's say, that you want your chat bot to provide an elegant user onboarding experience for your application users. In the onboarding process we are going to ask the user for their firstname and email address - that's a perfect fit for conversations!
@@ -202,4 +203,15 @@ public function askNextStep()
     ]);
 }
 
+```
+
+<a id="originating-conversations"></a>
+## Originating Conversations
+
+Just like it is possible with BotMan to [originate messages](/__version__/sending#originating-messages), it is also possible to start complete conversations on the bot's behalf. You might, for example, start a new conversation that gets triggered through your cronjob.
+
+To do so, just use the `startConversation` method, as you would normally do, but pass a user ID and the driver name as additional arguments:
+
+```php
+$botman->startConversation(new PizzaConversation(), 'my-recipient-user-id', TelegramDriver::class);
 ```
