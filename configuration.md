@@ -118,6 +118,32 @@ There you will find an input field called `Callback URL for Inbound Message` - p
 <a id="slack"></a>
 ## Slack
 
+### Usage with a Slack App (recommended)
+
+The easiest way of making use of all BotMan features in your Slack team, is to create your own Slack app. You can do this at the [Slack API website](https://api.slack.com/apps?new_app=1).
+
+Once you have created a new Slack app, you need to configure three sections:
+
+#### Interactive Messages
+Interactive messages allow your chatbot to respond to message buttons. If you want to use this feature, just configure it and provide the URL that points to your BotMan logic / controller.
+
+#### Event Subscriptions
+Event subscription is needed, so that your BotMan application receives all incoming messages. You can either use event subscriptions or the Realtime API.
+When configuring your Slack app for event subscriptions, provide the URL that points to your BotMan logic / controller in the "Request URL" field.
+
+Then subscribe for these bot events:
+`message.channels` - A message was posted to a channel
+`message.im` - A message was posted in a direct message channel
+
+#### Bots
+This is the most obvious part - to communicate with BotMan in your Slack team, you need a bot user. Just give it a nice name.
+
+After you have configured these sections, go to "Install App" and install the app in your own team.
+Take note of the *Bot User OAuth Access Token* and use this token as your `slack_token` configuration parameter.
+
+That's it.
+
+
 ### Usage with the Realtime API
 
 > {callout-warning} Please note: The Realtime API requires the additional composer package `mpociot/slack-client` to be installed.
