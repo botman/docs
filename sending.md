@@ -5,6 +5,7 @@
 - [Type Indicators](#type-indicators)
 - [Originating Messages](#originating-messages)
 - [Sending Facebook Templates](#sending-facebook-templates)
+- [Sending Slack Menus](#sending-slack-menus)
 - [Send Low-Level reqeusts](#sending-low-level-requests)
 
 ## Introduction
@@ -212,6 +213,111 @@ $bot->reply(
 		->addAdjustment(ReceiptAdjustment::create('Laravel Bonus')->amount(5))
 );
 ```
+
+<a id="sending-slack-menus"></a>
+## Sending Slack Menus
+
+BotMan supports sending Slack's [interactive message menus](https://api.slack.com/docs/message-menus) through an expressive and easy to use API.
+They can be used in combination with BotMan's [conversation questions](/conversations#asking-questions).
+
+There are multiple ways to define an interactive message menu. You can simply attach a `Menu` object to your question, just as you would with regular Buttons.
+
+You can access the selected option(s) using `$answer->getValue()` which will then return an array containing the selected option values.
+
+### Custom drop down menu 
+
+<center>
+	<img width="366" src="/img/slack/interactive_menus.png" />
+</center>
+
+```php
+// Inside your conversation
+$question = Question::create('Would you like to play a game?')
+    ->callbackId('game_selection')
+    ->addAction(
+    	Menu::create('Pick a game...')
+    		->name('games_list')
+    		->options([
+    			[
+    				'text' => 'Hearts',
+    				'value' => 'hearts',
+    			],
+    			[
+    				'text' => 'Bridge',
+    				'value' => 'bridge',
+    			]
+    			[
+    				'text' => 'Poker',
+    				'value' => 'poker',
+    			]
+    		])
+    );
+
+$this->ask($question, function (Answer $answer) {
+    $selectedOptions = $answer->getValue();
+});
+```
+
+### Allow users to select from a list of team members
+
+<center>
+	<img width="366" src="/img/slack/interactive_menus_users.png" />
+</center>
+
+```php
+// Inside your conversation
+$question = Question::create('Who wins the lifetime supply of chocolate?')
+    ->callbackId('select_users')
+    ->addAction(
+    	Menu::create('Who should win?')
+    		->name('winners_list')
+    		->chooseFromUsers()
+    );
+
+$this->ask($question, function (Answer $answer) {
+    $selectedOptions = $answer->getValue();
+});
+```
+
+### Let users choose one of their team's channels
+
+<center>
+	<img width="366" src="/img/slack/interactive_menus_channels.png" />
+</center>
+
+```php
+// Inside your conversation
+$question = Question::create('It's time to nominate the channel of the week')
+    ->callbackId('select_channel')
+    ->addAction(
+    	Menu::create('Which channel changed your life this week?')
+    		->name('channels_list')
+    		->chooseFromChannels()
+    );
+
+$this->ask($question, function (Answer $answer) {
+    $selectedOptions = $answer->getValue();
+});
+```
+
+### Let users choose one of their conversations
+
+```php
+// Inside your conversation
+$question = Question::create('Let's get a productive conversation going')
+    ->callbackId('select_conversation')
+    ->addAction(
+    	Menu::create('Who did you talk to last?')
+    		->name('conversations_list')
+    		->chooseFromConversations()
+    );
+
+$this->ask($question, function (Answer $answer) {
+    $selectedOptions = $answer->getValue();
+});
+```
+
+
 
 <a id="sending-low-level-requests"></a>
 ## Sending Low-Level Requests
