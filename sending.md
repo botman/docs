@@ -287,7 +287,7 @@ $this->ask($question, function (Answer $answer) {
 
 ```php
 // Inside your conversation
-$question = Question::create('It's time to nominate the channel of the week')
+$question = Question::create('It\'s time to nominate the channel of the week')
     ->callbackId('select_channel')
     ->addAction(
     	Menu::create('Which channel changed your life this week?')
@@ -304,7 +304,7 @@ $this->ask($question, function (Answer $answer) {
 
 ```php
 // Inside your conversation
-$question = Question::create('Let's get a productive conversation going')
+$question = Question::create('Let\'s get a productive conversation going')
     ->callbackId('select_conversation')
     ->addAction(
     	Menu::create('Who did you talk to last?')
