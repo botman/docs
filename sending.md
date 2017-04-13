@@ -6,7 +6,7 @@
 - [Originating Messages](#originating-messages)
 - [Sending Facebook Templates](#sending-facebook-templates)
 - [Sending Slack Menus](#sending-slack-menus)
-- [Send Low-Level reqeusts](#sending-low-level-requests)
+- [Send Low-Level requests](#sending-low-level-requests)
 
 ## Introduction
 
