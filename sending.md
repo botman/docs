@@ -5,7 +5,7 @@
 - [Type Indicators](#type-indicators)
 - [Originating Messages](#originating-messages)
 - [Sending Facebook Templates](#sending-facebook-templates)
-- [Send Low-Level reqeusts](#sending-low-level-requests)
+- [Send Low-Level requests](#sending-low-level-requests)
 
 ## Introduction
 
