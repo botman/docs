@@ -52,7 +52,7 @@ After you have created the integration, take note of the URL HipChat presents yo
 
 This URL will be used to send the BotMan replies to your rooms.
  
- > Note: If you want your bot to live in multiple channels, you need to add the ingration multiple times. This is a HipChat limitation.
+ > Note: If you want your bot to live in multiple channels, you need to add the integration multiple times. This is a HipChat limitation.
  
 Next, you need to add webhooks to each channel that you have added an integration to.
 
