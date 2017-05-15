@@ -42,14 +42,20 @@ To listen in BotMan for certain API.ai actions, you can use the ApiAi middleware
 ```php
 use Mpociot\BotMan\Middleware\ApiAi;
 
-$botman->hears('my_api_action', function($bot) {
-	// The incoming message matched the "my_api_action" on API.ai
-	// Retrieve API.ai information:
-	$extras = $bot->getMessage()->getExtras();
-	$apiReply = $extras['apiReply'];
-	$apiAction = $extras['apiAction'];
-	$apiIntent = $extras['apiIntent'];
+$apiAi = ApiAi::create('your-api-ai-token')->listenForAction();
 
-	$bot->reply("this is my reply");
-})->middleware(ApiAi::create('your-api-ai-token')->listenForAction());
+// Apply global "received" middleware
+$botman->middleware->received($apiAi);
+
+// Apply matching middleware per hears command
+$botman->hears('my_api_action', function (BotMan $bot) {
+    // The incoming message matched the "my_api_action" on API.ai
+    // Retrieve API.ai information:
+    $extras = $bot->getMessage()->getExtras();
+    $apiReply = $extras['apiReply'];
+    $apiAction = $extras['apiAction'];
+    $apiIntent = $extras['apiIntent'];
+    
+    $bot->reply("this is my reply");
+})->middleware($apiAi);
 ```
