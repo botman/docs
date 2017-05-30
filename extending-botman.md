@@ -133,7 +133,7 @@ To make use of your new driver, you first have to tell BotMan's DriverManager ab
 DriverManager::loadDriver(CustomDriver::class);
 ```
 
-BotMan will now try to match all incoming requests will your new driver as well.
+BotMan will now try to match all incoming requests with your new driver as well.
 
 You can of couse use the custom driver, like the built-in drivers and restrict certain messages to it:
 
