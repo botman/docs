@@ -42,7 +42,7 @@ BotMan requires PHP >=5.6.
 <a id="can-i-add-a-facebook-persistent-menu"></a>
 ## Can I add a Facebook persistent menu?
 
-Yes you can, but not with BotMan ;-) Adding a persistent Facebook menu is just [one HTTP request](https://developers.facebook.com/docs/messenger-platform/thread-settings/persistent-menu) to the Facebook API. No need to implement it here.
+Yes you can, but not with BotMan ;-) Adding a persistent Facebook menu is just [one HTTP request](https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu) to the Facebook API. No need to implement it here.
 
 <a id="how-does-botman-saves-the-state-of-a-conversation"></a>
 ## How does BotMan saves the state of a conversation?
