@@ -1,6 +1,6 @@
 # Conversations
 
-- [Start a Conversation](#start-a-conversation)
+- [Start a Conversation](#starting-a-conversation)
 - [Asking Questions](#asking-questions)
 - [Asking for images, videos, audio or location](#asking-for-data)
 - [Structured Question with Patterns](#structured-question)
@@ -171,7 +171,7 @@ public function askLocation()
 }
 ```
 
-<a id="patterns"></a>
+<a id="structured-question"></a>
 
 ## Structured Question with Patterns
 
