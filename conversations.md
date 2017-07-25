@@ -1,6 +1,6 @@
 # Conversations
 
-- [Start a Conversation](#start-a-conversation)
+- [Start a Conversation](#starting-a-conversation)
 - [Asking Questions](#asking-questions)
 - [Asking for images, videos, audio or location](#asking-for-data)
 - [Structured Question with Patterns](#structured-question)
@@ -147,7 +147,6 @@ public function askPhoto()
 Similar to the `askForImages` method, you might also ask for videos, audio files or even your chatbot user's locations.
 
 ```php
-```php
 // ...inside the conversation object...
 public function askVideos()
 {
@@ -171,7 +170,7 @@ public function askLocation()
 }
 ```
 
-<a id="patterns"></a>
+<a id="structured-question"></a>
 
 ## Structured Question with Patterns
 
@@ -214,4 +213,56 @@ To do so, just use the `startConversation` method, as you would normally do, but
 
 ```php
 $botman->startConversation(new PizzaConversation(), 'my-recipient-user-id', TelegramDriver::class);
+```
+
+## Skip or Stop Conversations
+
+While being in a conversation it is sometimes useful to stop it for a certain reason. In order to make this possible there a two methods available in every conversation class: `skipConversation()` and `stopConversation()`. Inside those methods you can return true or false to skip or stop a conversation. Skip will stop the conversation just for this one request. Afterwards it will go on as if nothing happened. The stop method will delete the conversation, so there is no turning back.
+
+The example below will stop the conversation if the message says `stop` and skip it if it says `pause`. 
+
+```php
+class OnboardingConversation extends Conversation
+{
+    protected $firstname;
+    
+    protected $email;
+    
+    public function stopConversation(Message $message)
+	{
+		if ($message->getMessage() == 'stop') {
+			return true;
+		}
+
+		return false;
+	}
+	
+	public function skipConversation(Message $message)
+	{
+		if ($message->getMessage() == 'pause') {
+			return true;
+		}
+
+		return false;
+	}
+
+    // ...
+
+}
+```
+
+There are several scenarios where this could be handy. For example in Facebook there is a menu in the chat. When the user clicks a menu button you want to leave a current conversation in order to show the new information. But it also possible to use this functionality on a "global" level.
+
+```php
+$botman->hears('stop', function(BotMan $bot) {
+	$bot->reply('stopped');
+})->stopsConversation();
+```
+
+Here we are stopping the conversation through a `hears` method, where we are listening for the message `stop`. This comes handy when we want to stop a conversation, not matter which one it is. This also works for skipping.
+
+```php
+$botman->hears('pause', function(BotMan $bot) {
+	$bot->reply('stopped');
+})->skipsConversation();
 ```
