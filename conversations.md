@@ -147,7 +147,6 @@ public function askPhoto()
 Similar to the `askForImages` method, you might also ask for videos, audio files or even your chatbot user's locations.
 
 ```php
-```php
 // ...inside the conversation object...
 public function askVideos()
 {
