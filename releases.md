@@ -5,7 +5,7 @@
 
 <a id="support"></a>
 ## Support policy
-For LTS releases, such as Laravel 5.1, bug fixes are provided for 2 years and security fixes are provided for 3 years. These releases provide the longest window of support and maintenance. For general releases, bug fixes are provided for 6 months and security fixes are provided for 1 year.
+-- TBD --
 
 <a id="botman-2.0"></a>
 ## 2.0
