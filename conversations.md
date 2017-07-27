@@ -11,6 +11,9 @@ Let's say, that you want your chat bot to provide an elegant user onboarding exp
 
 <a id="starting-a-conversation"></a>
 ## Starting a Conversation
+
+> {callout-info} You must configure an Cache Driver to use BotMan's Conversation. To use a Cache Driver in BotMan read the Guide on the [Installation](/__version__/installation) Page.
+
 You can start a conversation with your users using the `startConversation` method inside a keyword callback:
 
 ```php
