@@ -13,7 +13,8 @@
 <a id="basic-commands"></a>
 ## Basic commands
 
-The easiest way to listen for BotMan commands is by using listening for a specific keyword and a Closure, providing a very simple and expressive method of defining bot commands:
+
+The easiest way to listen for BotMan commands is by "listening" for a specific keyword and a Closure, providing a very simple and expressive method of defining bot commands. Take a look at this example, where the chatbot listens for the exact match of "foo" and calls the method once it hears the message.
 
 ```php
 $botman->hears('foo', function ($bot) {
@@ -55,7 +56,7 @@ $botman->hears('call me {name} the {adjective}', function ($bot, $name, $adjecti
 });
 ```
 
-Command parameters are always encased within `{}` braces and should consist of alphabetic characters.
+Command parameters are always encased within `{}` braces and should consist of alphabetic characters only.
 
 <a id="matching-regular-expressions"></a>
 ## Matching Regular Expressions
