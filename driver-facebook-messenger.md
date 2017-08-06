@@ -2,6 +2,11 @@
 
 - [Installation & Setup](#installation-setup)
 - [Sending Facebook Templates](#sending-facebook-templates)
+- [Studio Features](#studio-features)
+    - [Get Started Command](#get-started-command)
+    - [Greeting Text Command](#greeting-text-command)
+    - [Persistent Menu Command](#persistent-menu-command)
+    - [Whitelist Domains Command](#whitelist-domains-command)
 
 Facebook Messenger is the biggest Messenger out there and therefor a great choice for building a chatbot. There are more than 1 Billion active users per month.
 
@@ -137,3 +142,65 @@ $bot->reply(
 		->addAdjustment(ReceiptAdjustment::create('Laravel Bonus')->amount(5))
 );
 ```
+
+<a id="studio-features"></a>
+## Studio Features
+
+<a id="get-started-command"></a>
+### Get Started Command
+
+Adding a [Get Started](https://developers.facebook.com/docs/messenger-platform/messenger-profile/get-started-button) button resolves the issue of users not knowing what to write to break the ice with your bot. It is displayed the first time the user interacts with a Facebook chatbot. When you click it, it will send a payload (text) to BotMan and you can react to it and send the first welcome message to the user and tell him how to use your bot. In order to define this payload you need to send a CURL with some data to Facebook. But BotMan Studio can do that for you too!
+
+First define the payload text in your `config/botman/facebook.php` file.
+
+```php
+'start_button_payload' => 'YOUR_PAYLOAD_TEXT'
+```
+
+Then run the artisan command:
+```sh
+php artisan botman:facebookAddMenu 
+```
+
+This will add the Get Started button to your page's chat. You are now able to listen to this button with the payload in your `hears` method.
+
+```php
+$botman->hears('YOUR_PAYLOAD_TEXT', function (BotMan $bot) {
+	...
+});
+```
+
+<a id="greeting-text-command"></a>
+### Greeting Text Command
+
+The [Facebook Greeting](https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text) text is shown on the welcome screen when a user interacts with your bot the first time. (like the Get Started Button)
+
+Define this text in your `config/botman/facebook.php` file. Then use the Artisan command to trigger the command:
+
+```sh
+php artisan botman:facebookAddGreetingText
+```
+
+<a id="persistent-menu-command"></a>
+### Persistent Menu Command
+
+With BotMan Studio it now gets much easier to add a [Persistent Facebook Menu](https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu) to your bot. First define the structure and types of your menu in your `config/botman/facebook.php` file. There you will find a `persistent_menu` demo menu payload. Just edit it to your needs.
+
+Then use the Artisan command to trigger the command:
+
+```sh
+php artisan botman:facebookAddMenu
+```
+
+<a id="whitelist-domains-command"></a>
+### Whitelist Domains Command
+
+Some features like Messenger Extensions and Checkbox Plugin require a bot to specify a [domain whitelist](https://developers.facebook.com/docs/messenger-platform/messenger-profile/domain-whitelisting).
+
+Define all domains in your `config/botman/facebook.php` file. Then use the Artisan command to trigger the command:
+
+```sh
+php artisan botman:facebookWhitelistDomains
+```
+
+
