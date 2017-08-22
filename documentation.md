@@ -31,4 +31,5 @@
 - Extending BotMan
     - [Custom Middleware](/__version__/driver-telegram)
     - [Custom Driver](/__version__/driver-wechat)
+- [Testing](/__version__/testing)
 - [FAQ](/__version__/faq)
