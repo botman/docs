@@ -1,16 +1,10 @@
 # Installation
 
+- [Server Requirements](#requirements)
 - [Installation & Setup](#installation-setup)
 - [Basic Usage](#basic-usage)
-- [Cache Drivers](#cache-drivers)
 
-BotMan is a framework agnostic PHP library that is designed to simplify the task of developing innovative bots for multiple messaging platforms, including Slack, Telegram, Microsoft Bot Framework, Nexmo, HipChat, Facebook Messenger and WeChat.
-
-```php
-$botman->hears('I want cross-platform bots with PHP!', function (BotMan $bot) {
-    $bot->reply('Look no further!');
-});
-```
+BotMan is a framework agnostic PHP library that is designed to simplify the task of developing innovative bots for multiple messaging platforms, including Slack, Telegram, Microsoft Bot Framework, Nexmo, HipChat, Facebook Messenger, WeChat and many more.
 
 <a id="installation-setup"></a>
 ## Installation & Setup
@@ -61,43 +55,4 @@ $botman->hears('hello', function (BotMan $bot) {
 
 // start listening
 $botman->listen();
-```
-
-<a id="cache-drivers"></a>
-## Cache drivers
-
-If you want to make use of BotMans Conversation feature, you need to use a persistent cache driver, where BotMan can store and retrieve the conversations.
-If not specified otherwise, BotMan will use ``array`` cache which is non-persistent. When using the Laravel facade it will automatically use the Laravel Cache component.
-
-BotMan supports many cache drivers out of the box.
-
-<a id="doctrine-cache"></a>
-### Doctrine Cache
-Use any [Doctrine Cache](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/caching.html) driver by passing it to the factory:
-
-```php
-use Mpociot\BotMan\Cache\DoctrineCache;
-
-$botman = BotManFactory::create($config, new DoctrineCache($doctrineCacheDriver));
-```
-
-<a id="codeigniter-cache"></a>
-### CodeIgniter Cache
-Use any [CodeIgniter Cache](https://www.codeigniter.com/userguide3/libraries/caching.html) adapter by passing it to the factory:
-
-```php
-use Mpociot\BotMan\Cache\CodeIgniterCache;
-
-$this->load->driver('cache');
-$botman = BotManFactory::create($config, new CodeIgniterCache($this->cache->file));
-```
-
-<a id="redis-cache"></a>
-### Redis Cache
-[Redis](https://redis.io) in-memory data structure store. If you have https://github.com/igbinary/igbinary module available, it will be used instead of standard php serializer:
-
-```php
-use Mpociot\BotMan\Cache\RedisCache;
-
-$botman = BotManFactory::create($config, new RedisCache('127.0.0.1', 6379));
 ```

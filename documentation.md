@@ -3,7 +3,8 @@
 	- [Upgrade Guide](/__version__/upgrade)
 
 - Setup
-	- [Installation & Setup](/__version__/installation)
+	- [Installation](/__version__/installation)
+	- [Cache drivers](/__version__/cache-drivers)
 	- [BotMan Studio](/__version__/installation-laravel)
 
 - Core Concepts

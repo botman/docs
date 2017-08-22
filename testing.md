@@ -10,7 +10,7 @@
 
 Like Laravel, BotMan is build with testing in mind. Every part of it is well tested and this is the only way to keep such a big project running properly.
 
-But also your bots should be build with tests and this is why BotMan Studio will help you with that. Testing bots and conversation is very different from your other projects. This is why BotMan Studio provides lots of helper methods for you. This is the basic test example you will find in your `ExampleTest.php` file.
+But also your bots should be built with tests and this is why BotMan Studio will help you with that. Testing bots and conversations is very different from your other projects. This is why BotMan Studio provides lots of helper methods for you. This is the basic test example you will find in your `ExampleTest.php` file.
 
 ```php
 	public function testBasicTest()
