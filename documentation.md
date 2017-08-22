@@ -4,8 +4,8 @@
 
 - Setup
 	- [Installation](/__version__/installation)
+	- [BotMan Studio](/__version__/botman-studio)
 	- [Cache drivers](/__version__/cache-drivers)
-	- [BotMan Studio](/__version__/installation-laravel)
 
 - Core Concepts
 	- [Hearing Messages](/__version__/receiving)

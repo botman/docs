@@ -8,7 +8,6 @@
     - [Middleware](#command-groups-middleware)
     - [Channels](#command-groups-channels)
 - [Fallbacks](#fallbacks)
-- [Driver Specifics](#driver-specifics)
 
 <a id="basic-commands"></a>
 ## Basic commands
@@ -20,12 +19,16 @@ The easiest way to listen for BotMan commands is by "listening" for a specific k
 $botman->hears('foo', function ($bot) {
     $bot->reply('Hello World');
 });
+// Process incoming message
+$botman->listen();
 ```
 
 In addition to the Closure you can also pass a class and method that will get called if the keyword matches.
 
 ```php
 $botman->hears('foo', 'Some\Namespace\MyBotCommands@handleFoo');
+// Process incoming message
+$botman->listen();
 
 class MyBotCommands {
 
@@ -120,27 +123,3 @@ $botman->fallback(function($bot) {
     $bot->reply('Sorry, I did not understand these commands. Here is a list of commands I understand: ...');
 });
 ```
-
-<a id="driver-specifics"></a>
-## Driver Specifics
-
-BotMan can listen to many different [messaging drivers](#connect-with-your-messaging-service) and therefore it might be required for you, to respond differently depending on which
-driver was used to respond to your message.
-
-Each messaging driver in BotMan has a `getName()` method, that returns a human readable name of the driver.
- 
-You can access the driver object using `$botman->getDriver()`.
-To match against the driver name, you can use each driver's `NAME` constant or use the table below.
-
-The available driver names are:
-
-| Driver | Name | Note
-|--- |---|---
-| `BotFrameworkDriver` | BotFramework
-| `FacebookDriver` | Facebook
-| `FacebookPostbackDriver` | FacebookPostback | Allows you to listen for custom Facebook Postback payloads.
-| `HipChatDriver` | HipChat
-| `NexmoDriver` | Nexmo
-| `SlackDriver` | Slack
-| `TelegramDriver` | Telegram
-| `WeChatDriver` | WeChat
