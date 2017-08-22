@@ -27,7 +27,7 @@ $botman->on('team_join', function($payload, $botman) {
 });
 
 /**
- * Greet a new user when he joins a Slack channel.
+ * Perform an action when a message was read on Facebook.
  */
 $botman->on('messaging_reads', function($payload, $botman) {
 	// a message was read.
