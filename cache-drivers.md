@@ -46,7 +46,7 @@ $botman = BotManFactory::create($config, new CodeIgniterCache($this->cache->file
 
 <a id="redis"></a>
 ### Redis Cache
-Use your [Redis](https://redis.io) in-memory data structure to cache BotMan conversation information. If you have the [igbinary module](https://github.com/igbinary/igbinary module) available, it will be used instead of standard PHP serializer:
+Use your [Redis](https://redis.io) in-memory data structure to cache BotMan conversation information. If you have the [igbinary module](https://github.com/igbinary/igbinary) available, it will be used instead of standard PHP serializer:
 
 ```php
 use BotMan\BotMan\Cache\RedisCache;
