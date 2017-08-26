@@ -6,16 +6,16 @@
 <a id="installation-setup"></a>
 ## Installation & Setup
 
-First you need to pull in the Facebook Driver.
+First you need to pull in the Telegram Driver.
 
 ```sh
-composer require botman/driver-facebook
+composer require botman/driver-telegram
 ```
 
 Or if you use BotMan Studio:
 
 ```sh
-php artisan botman:install-driver facebook
+php artisan botman:install-driver telegram
 ```
 
 This driver requires a valid and secure URL in order to set up webhooks and receive events and information from the chat users. This means your application should be accessible through an HTTPS URL.
