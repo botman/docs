@@ -9,7 +9,7 @@
 
 - Core Concepts
 	- [Hearing Messages](/__version__/receiving)
-	- [Hearing attachments](/__version__/receiving-additional-content)
+	- [Hearing Attachments](/__version__/receiving-additional-content)
 	- [Sending Messages](/__version__/sending)
 	- [Conversations](/__version__/conversations)
 	- [Events](/__version__/events)

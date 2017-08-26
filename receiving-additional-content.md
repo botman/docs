@@ -1,4 +1,4 @@
-# Receiving additional content
+# Hearing Attachments
 
 - [Introduction](#introduction)
 - [Images](#images)
