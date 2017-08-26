@@ -1,6 +1,15 @@
 # User Information
 
+- [Introduction](#introduction)
+- [Retrieving User Information](#retrieving-user-information)
 
+## Introduction
+
+
+
+<a id="retrieving-user-information"></a>
+
+## Retrieving User Information
 BotMan has a simple way to let you retrieve user relevant information.
 
 ```php

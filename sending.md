@@ -5,7 +5,7 @@
 - [Attachments](#attachments)
 - [Type Indicators](#type-indicators)
 - [Originating Messages](#originating-messages)
-- [Send Low-Level requests](#sending-low-level-requests)
+- [Send Low-Level Requests](#sending-low-level-requests)
 
 ## Introduction
 
@@ -16,7 +16,7 @@ on the type and number of messages that will be sent.
 Single message replies to incoming commands can be sent using the `$bot->reply()` function.
 
 Multi-message replies, particularly those that present questions for the end user to respond to,
-can be sent using the `$bot->startConversation()` function and the related [conversation](/conversations) sub-functions. 
+can be sent using the `$bot->startConversation()` function and the related [conversation](/__version__/conversations) sub-functions. 
 
 Bots can originate messages - that is, send a message based on some internal logic or external stimulus - using `$bot->say()` method.
 
