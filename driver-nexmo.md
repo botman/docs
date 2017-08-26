@@ -1,8 +1,30 @@
 # Nexmo
 
-To connect BotMan with Nexmo, you first need to create a Nexmo account [here](https://dashboard.nexmo.com/sign-up) and [buy a phone number](https://dashboard.nexmo.com/buy-numbers), which is capable of sending SMS.
+- [Installation & Setup](#installation-setup)
 
-Go to the Nexmo dashboard at [https://dashboard.nexmo.com/settings](https://dashboard.nexmo.com/settings) and copy your API key and API secret.
+<a id="installation-setup"></a>
+## Installation & Setup
+
+First you need to pull in the Nexmo Driver.
+
+```sh
+composer require botman/driver-nexmo
+```
+
+Or if you use BotMan Studio:
+
+```sh
+php artisan botman:install-driver nexmo
+```
+
+This driver requires a valid and secure URL in order to set up webhooks and receive events and information from the users. This means your application should be accessible through an HTTPS URL.
+
+> {callout-info} [ngrok](https://ngrok.com/) is a great tool to create such a public HTTPS URL for your local application. If you use Laravel Valet, you can create it with "valet share" as well.
+
+To connect BotMan with Nexmo, you first need to create a Nexmo account [here](https://dashboard.nexmo.com/sign-up) and [buy a phone number](https://dashboard.nexmo.com/buy-numbers), which is capable of sending SMS.
+<br><br>
+Go to the Nexmo dashboard at [https://dashboard.nexmo.com/settings](https://dashboard.nexmo.com/settings) and copy your API key and API secret into your BotMan configuration.
+If you use BotMan Studio, you can find the configuration file located under `config/botman/nexmo.php`.
 
 ```php
 'botman' => [

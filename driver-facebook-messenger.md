@@ -13,17 +13,23 @@ Facebook Messenger is the biggest Messenger out there and therefor a great choic
 <a id="installation-setup"></a>
 ## Installation & Setup
 
-First you need to pull in the Facebook Driver repository.
+First you need to pull in the Facebook Driver.
 
 ```sh
-$ composer require botman/driver-facebook
+composer require botman/driver-facebook
 ```
 
-Facebook Messenger requires a valid and secure URL in order to set up webhooks and receive events and information from the chat users. This means your application should be accessible through an HTTPS URL.
+Or if you use BotMan Studio:
+
+```sh
+php artisan botman:install-driver facebook
+```
+
+This driver requires a valid and secure URL in order to set up webhooks and receive events and information from the chat users. This means your application should be accessible through an HTTPS URL.
 
 > {callout-info} [ngrok](https://ngrok.com/) is a great tool to create such a public HTTPS URL for your local application. If you use Laravel Valet, you can create it with "valet share" as well.
 
-To connect BotMan with Facebook Messenger, you first need to follow the [official quick start guide](https://developers.facebook.com/docs/messenger-platform/guides/quick-start) to create your Facebook Messenger application and retrieve an access token as well as an app secret. Place both of them in your BotMan configuration.
+To connect BotMan with Facebook Messenger, you first need to follow the [official quick start guide](https://developers.facebook.com/docs/messenger-platform/guides/quick-start) to create your Facebook Messenger application and retrieve an access token as well as an app secret. Place both of them in your BotMan configuration. If you use BotMan Studio, you can find the configuration file located under `config/botman/facebook.php`.
 
 ```php
 'botman' => [

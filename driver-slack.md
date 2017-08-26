@@ -1,12 +1,29 @@
 # Slack
 
-- [Usage with a Slack App (recommended)](#installation-setup)
-- [Usage with the Realtime API](#installation-setup)
+- [Installation & Setup](#installation-setup)
+- [Usage with a Slack App (recommended)](#slack-app)
+- [Usage with the Realtime API](#realtime-api)
 - [Usage with an outgoing webhook](#sending-facebook-templates)
 - [Sending Slack Menus](#sending-slack-menus)
 
+<a id="installation-setup"></a>
+## Installation & Setup
+
+First you need to pull in the Nexmo Driver.
+
+```sh
+composer require botman/driver-slack
+```
+
+Or if you use BotMan Studio:
+
+```sh
+php artisan botman:install-driver slack
+```
+
 Slack is a cloud-based set of team collaboration tools and services.
 
+<a id="slack-app"></a>
 ## Usage with a Slack App (recommended)
 
 The easiest way of making use of all BotMan features in your Slack team, is to create your own Slack app. You can do this at the [Slack API website](https://api.slack.com/apps?new_app=1).
@@ -33,9 +50,10 @@ Take note of the *Bot User OAuth Access Token* and use this token as your `slack
 That's it.
 
 
+<a id="realtime-api"></a>
 ## Usage with the Realtime API
 
-> {callout-warning} Please note: The Realtime API requires the additional composer package `mpociot/slack-client` to be installed.
+> {callout-info} Please note: The Realtime API requires the additional composer package `mpociot/slack-client` to be installed.
 > 
 > Simply install it using `composer require mpociot/slack-client`.
 
@@ -48,12 +66,14 @@ As the Realtime API needs a websocket, you need to create a PHP script that will
 <?php
 require 'vendor/autoload.php';
 
-use Mpociot\BotMan\BotManFactory;
 use React\EventLoop\Factory;
+use BotMan\BotMan\BotManFactory;
 
 $loop = Factory::create();
 $botman = BotManFactory::createForRTM([
-    'slack_token' => 'YOUR-SLACK-BOT-TOKEN'
+    'slack' => [
+        'token' => 'YOUR-SLACK-BOT-TOKEN',
+    ],
 ], $loop);
 
 $botman->hears('keyword', function($bot) {
