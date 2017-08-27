@@ -28,9 +28,5 @@
     - [Slack](/__version__/driver-slack)
     - [Telegram](/__version__/driver-telegram)
     - [WeChat](/__version__/driver-wechat)
-
-- Extending BotMan
-    - [Custom Middleware](/__version__/driver-telegram)
-    - [Custom Driver](/__version__/driver-wechat)
 - [Testing](/__version__/testing)
 - [FAQ](/__version__/faq)

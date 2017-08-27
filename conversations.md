@@ -1,9 +1,9 @@
 # Conversations
 
-- [Start a Conversation](#starting-a-conversation)
+- [Start A Conversation](#starting-a-conversation)
 - [Asking Questions](#asking-questions)
-- [Asking for images, videos, audio or location](#asking-for-data)
-- [Structured Question with Patterns](#structured-question)
+- [Asking For Images, Videos, Audio Or Location](#asking-for-data)
+- [Structured Question With Patterns](#structured-question)
 - [Originating Conversations](#originating-conversations)
 
 When it comes to chat bots, you probably don't want to simply react to single keywords, but instead, you might need to gather information from the user, using a conversation. 
@@ -12,7 +12,7 @@ Let's say, that you want your chat bot to provide an elegant user onboarding exp
 > {callout-info} You must configure a persistent [Cache Driver](/__version__/cache-drivers) to use BotMan's Conversation, as BotMan will keep the conversation state cached. BotMan Studio handles it all for you
 
 <a id="starting-a-conversation"></a>
-## Starting a Conversation.
+## Starting A Conversation
 
 You can start a conversation with your users using the `startConversation` method inside a keyword callback:
 
@@ -118,7 +118,7 @@ public function askForDatabase()
 ```
 
 <a id="asking-for-data"></a>
-## Asking for images, videos, audio or location
+## Asking For Images, Videos, Audio or Location
 
 With BotMan, you can easily let your bot [receive images, videos, audio files or locations](/__version__/receiving-additional-content).
 The same approach can be applied to your conversation. This is especially useful if you only want your bot users to provide you with specific attachment types. 
@@ -177,7 +177,7 @@ public function askLocation()
 
 <a id="structured-question"></a>
 
-## Structured Question with Patterns
+## Structured Question With Patterns
 
 You might also want to ask your user questions, where you already know the answer should be in a fixed set of possible options.
 For example a simple yes or no question. 

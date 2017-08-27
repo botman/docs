@@ -1,10 +1,10 @@
 # Upgrade Guide
 
-- [Upgrading to 2.0 from 1.5](#upgrade-2.0)
+- [Upgrading To 2.0 From 1.5](#upgrade-2.0)
 
 <a id="upgrade-2.0"></a>
 
-## Upgrading to 2.0 from 1.5
+## Upgrading To 2.0 From 1.5
 
 The BotMan 2.0 release is a new major version release. While the first version of BotMan was provided under the personal vendor namespace `mpociot`, the projectt is now moved into a separate [GitHub organization](https://github.com/botman/). This results in a change of all BotMan classes, since they now live in a different namespace than in version 1.5.
 
@@ -43,12 +43,12 @@ Make sure to load all manually installed drivers via the `DriverManager::loadDri
 ### Command `channel` Group
 The `channel` command group has been renamed to `recipient`.
 
-### Sending Messages and Attachments
+### Sending Messages And Attachments
 The `Message` class was renamed to `BotMan\BotMan\Messages\Outgoing\OutgoingMessage`. Instead of providing `image`, `video`, etc. methods for attachments, those attachments are now separated in different classes and can be sent using the `withAttachment` method.
 <br><br>
 Take a look at the [Sending Messages](/__version__/sending#attachments) documentation for code examples.
 
-### Storage `get` method
+### Storage `get` Method
 The Storage classes now have a `find` method, that replaces the `get` method. This allows easier access of default entry keys.
 Replace all your `get` occurences with `find`.
 

@@ -2,23 +2,71 @@
 
 - [Introduction](#introduction)
 - [Retrieving User Information](#retrieving-user-information)
+- [Retrieve The User's First Name](#retrieving-user-firstname)
+- [Retrieve The User's Last Name](#retrieving-user-lastname)
+- [Retrieve The User-ID](#retrieving-user-id)
+- [Retrieve The Username](retrieving-username)
+- [Retrieve The Raw User Information](#retrieving-raw-user-information)
 
 ## Introduction
-
-
+BotMan makes it simple to access your chatbot user information. Which user fields are available purely depend on the messaging service you use. Some services offer more information than others do. Yet you can access them using the same API with BotMan.
 
 <a id="retrieving-user-information"></a>
 
 ## Retrieving User Information
-BotMan has a simple way to let you retrieve user relevant information.
+BotMan has a simple way to let you retrieve user relevant information. Once you listened to a command and are in either a conversation or a message callback, you can use the `getUser` method on the BotMan instance.
+
+<a id="retrieving-user-firstname"></a>
+### Retrieve The User's First Name
+You can access the user's first name using:
 
 ```php
-$botman->hears('Hello', function($bot) {
-	$user = $bot->getUser();
-	$bot->reply('Hello '.$user->getFirstName().' '.$user->getLastName());
-	$bot->reply('Your username is: '.$user->getUsername());
-	$bot->reply('Your ID is: '.$user->getId());
-});
+// Access user
+$user = $bot->getUser();
+// Access first name
+$firstname = $user->getFirstName();
 ```
 
-> {callout-info} Not every messaging service allows BotMan to retrieve all available user information. Nexmo for example does not have any detailed user information, since it is just an SMS messaging service, that has no additional user information stored in their system.
+<a id="retrieving-user-lastname"></a>
+### Retrieve The User's Last Name
+You can access the user's last name using:
+
+```php
+// Access user
+$user = $bot->getUser();
+// Access last name
+$lastname = $user->getLastName();
+```
+
+<a id="retrieving-user-id"></a>
+### Retrieve The User-ID
+You can access the user ID using:
+
+```php
+// Access user
+$user = $bot->getUser();
+// Access ID
+$id = $user->getId();
+```
+
+<a id="retrieving-username"></a>
+### Retrieve The Username
+You can access the user ID using:
+
+```php
+// Access user
+$user = $bot->getUser();
+// Access ID
+$id = $user->getUsername();
+```
+
+<a id="retrieving-raw-user-information"></a>
+### Retrieve The Raw User Information
+You can access also access the unprocessed raw messaging service user information that BotMan receives using:
+
+```php
+// Access user
+$user = $bot->getUser();
+// Access ID
+$info = $user->getInfo();
+```

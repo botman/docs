@@ -133,7 +133,7 @@ $message = OutgoingMessage::create('This is my text')
 $bot->reply($message);
 ```
 
-### Generic files
+### Generic Files
 You may use the `File` class to attach a generic file URL to your outgoing message.
 It takes a file URL and an optional custom payload as constructor parameters.
 
@@ -154,7 +154,7 @@ $message = OutgoingMessage::create('This is my text')
 $bot->reply($message);
 ```
 
-### Location information
+### Location Information
 You may use the `Location` class to attach a GPS location information to your outgoing message.
 It takes the latitude, longitude and an optional custom payload as constructor parameters.
 

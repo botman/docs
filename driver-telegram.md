@@ -1,7 +1,7 @@
 # Telegram
 
 - [Installation & Setup](#installation-setup)
-- [Register your Webhook](#register-webhook)
+- [Register Your Webhook](#register-webhook)
 
 <a id="installation-setup"></a>
 ## Installation & Setup
@@ -36,7 +36,7 @@ Once you have obtained the access token, place it in your BotMan configuration. 
 ```
 
 <a id="register-webhook"></a>
-## Register your Webhook
+## Register Your Webhook
 
 To let your Telegram Bot know, how it can communicate with your BotMan bot, you have to register the URL where BotMan is running at,
 with Telegram.

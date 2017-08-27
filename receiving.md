@@ -1,16 +1,16 @@
 # Hearing Messages
 
-- [Basic commands](#basic-commands)
-- [Command parameters](#command-parameters)
+- [Basic Commands](#basic-commands)
+- [Command Parameters](#command-parameters)
 - [Matching Regular Expression](#matching-regular-expressions)
-- [Command groups](#command-groups)
+- [Command Groups](#command-groups)
     - [Drivers](#command-groups-drivers)
     - [Middleware](#command-groups-middleware)
     - [Recipients](#command-groups-recipients)
 - [Fallbacks](#fallbacks)
 
 <a id="basic-commands"></a>
-## Basic commands
+## Basic Commands
 
 
 The easiest way to listen for BotMan commands is by "listening" for a specific keyword and a Closure, providing a very simple and expressive method of defining bot commands. Take a look at this example, where the chatbot listens for the exact match of "foo" and calls the method once it hears the message.

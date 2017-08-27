@@ -1,7 +1,7 @@
 # Testing
 
 - [Introduction](#introduction)
-- [Testing multiple replies](#testing-multiple-replies)
+- [Testing Multiple Replies](#testing-multiple-replies)
 - [Testing Questions](#testing-questions)
 - [Testing Conversations](#testing-conversations)
 - [Testing Facebook Templates](#testing-facebook-templates)
@@ -23,7 +23,7 @@ But also your bots should be built with tests and this is why BotMan Studio will
 	}
 ```
 <a id="testing-multiple-replies"></a>
-### Testing multiple replies
+### Testing Multiple Replies
 If your bot replies with more than one message to `Hi` ,you can you use the `assertReplies()` helper.
 
 ```php
