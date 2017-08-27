@@ -40,7 +40,7 @@ Please refer to the [API.ai documentation](https://docs.api.ai/page/guidelines) 
 To listen in BotMan for certain API.ai actions, you can use the ApiAi middleware class.
 
 ```php
-use Mpociot\BotMan\Middleware\ApiAi;
+use BotMan\BotMan\Middleware\ApiAi;
 
 $apiAi = ApiAi::create('your-api-ai-token')->listenForAction();
 

@@ -58,7 +58,7 @@ Some messaging services also allow your bot users to send their GPS location to 
 The method will pass a Location object to the callback method.
 
 ```php
-use Mpociot\BotMan\Attachments\Location;
+use BotMan\BotMan\Messages\Attachments\Location;
 
 $bot->receivesLocation(function($bot, Location $location) {
     $lat = $location->getLatitude();

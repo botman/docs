@@ -35,7 +35,7 @@ Take a look at the [BotMan Studio](/__version__/botman-studio) documentation, to
 If you don't want to use [BotMan Studio](/__version__/botman-studio), you can install BotMan directly by requiring it in your existing project.
 
 ```sh
-composer require mpociot/botman
+composer require botman/botman
 ```
 
 This will download the BotMan package and all it's dependencies.
