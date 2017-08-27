@@ -53,7 +53,7 @@ use BotMan\BotMan\BotMan;
 use BotMan\BotMan\BotManFactory;
 
 $config = [
-    // Your driverspecific configuration
+    // Your driver-specific configuration
 ];
 
 // create an instance
