@@ -6,7 +6,7 @@
 - [Command groups](#command-groups)
     - [Drivers](#command-groups-drivers)
     - [Middleware](#command-groups-middleware)
-    - [Channels](#command-groups-channels)
+    - [Recipients](#command-groups-recipients)
 - [Fallbacks](#fallbacks)
 
 <a id="basic-commands"></a>
@@ -80,6 +80,7 @@ Just like the command parameters, each regular expression match group will be pa
 
 Command groups allow you to share command attributes, such as middleware or channels, across a large number of commands without needing to define those attributes on each individual command. Shared attributes are specified in an array format as the first parameter to the `$botman->group` method.
 
+<a id="command-groups-drivers"></a>
 ### Drivers
 A common use-case for command groups is restricting the commands to a specific messaging service using the `driver` parameter in the group array:
 
@@ -91,6 +92,7 @@ $botman->group(['driver' => SlackDriver::class], function($bot) {
 });
 ```
 
+<a id="command-groups-middleware"></a>
 ### Middleware
 You may also group your commands, to send them through custom middleware classes. These classes can either listen for different parts of the message or extend your message by sending it to a third party service. The most common use-case would be the use of a Natural Language Processor like wit.ai or api.ai.
 
@@ -102,13 +104,14 @@ $botman->group(['middleware' => new MyCustomMiddleware()], function($bot) {
 });
 ```
 
-### Channels
-Command groups may also be used to restrict the commands to specific "channels", meaning they get restricted to the user sending the message to your bot. You can access the Channel-IDs in your commands using `$bot->getMessage()->getChannel();`.
+<a id="command-groups-recipients"></a>
+### Recipients
+Command groups may also be used to restrict the commands to specific recipients, meaning they get restricted to the user sending the message to your bot.
 
 ```php
-$botman->group(['channel' => '1234567890'], function($bot) {
+$botman->group(['recipient' => '1234567890'], function($bot) {
     $bot->hears('keyword', function($bot) {
-        // Only listens when user/channel '1234567890' is sending the message.
+        // Only listens when recipient '1234567890' is sending the message.
     });
 });
 ```

@@ -1,13 +1,5 @@
 # BotMan Release Notes
-
-- [Support policy](#support)
-- [2.0](#botman-2.0)
-
-<a id="support"></a>
-## Support policy
--- TBD --
-
-<a id="botman-2.0"></a>
+<br><br>
 ## 2.0
 BotMan 2.0 is a new major release and continues the ideas of BotMan 1.5 by adding a new middleware system, support for messaging service events, painless driver installation and listing, a chatbot testing framework on top of PHPUnit, custom exception handling, automatic messaging service verification, extended messaging service user information, support for additional drivers such as Kik, Discord or Cisco Spark, sending file attachments, and more.
 
