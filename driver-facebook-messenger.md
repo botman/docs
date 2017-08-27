@@ -1,7 +1,9 @@
 # Facebook Messenger
 
 - [Installation & Setup](#installation-setup)
+- [Supported Features](#supported-features)
 - [Sending Facebook Templates](#sending-facebook-templates)
+- [Supported Events](#supported-events)
 - [Studio Features](#studio-features)
     - [Get Started Command](#get-started-command)
     - [Greeting Text Command](#greeting-text-command)
@@ -39,6 +41,42 @@ To connect BotMan with Facebook Messenger, you first need to follow the [officia
 	]
 ],
 ```
+
+<a id="supported-features"></a>
+## Supported Features
+This is a list of features that the this driver supports.
+If a driver does not support a specific action, it is in most cases a limitation from the messaging service - not BotMan.
+
+<table class="table">
+<thead>
+	<tr>
+		<th>Feature</th>
+		<th>Supported?</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>Question-Buttons</td>
+		<td>✅</td>
+	</tr>
+	<tr>
+		<td>Image Attachment</td>
+		<td>✅</td>
+	</tr>
+	<tr>
+		<td>Video Attachment</td>
+		<td>✅</td>
+	</tr>
+	<tr>
+		<td>Audio Attachment</td>
+		<td>✅</td>
+	</tr>
+	<tr>
+		<td>Location Attachment</td>
+		<td>✅</td>
+	</tr>
+</tbody>
+</table>
 
 <a id="sending-facebook-templates"></a>
 ## Sending Facebook Templates
@@ -147,6 +185,18 @@ $bot->reply(
 		)
 		->addAdjustment(ReceiptAdjustment::create('Laravel Bonus')->amount(5))
 );
+```
+
+<a id="supported-events"></a>
+## Supported Events
+
+The BotMan Facebook driver supports listening for the following events:
+```
+- messaging_checkout_updates
+- messaging_deliveries
+- messaging_optins
+- messaging_reads
+- messaging_referrals
 ```
 
 <a id="studio-features"></a>

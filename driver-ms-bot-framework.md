@@ -1,6 +1,7 @@
 # Microsoft Bot Framework / Skype
 
 - [Installation & Setup](#installation-setup)
+- [Supported Features](#supported-features)
 
 <a id="installation-setup"></a>
 ## Installation & Setup
@@ -37,3 +38,39 @@ If you use BotMan Studio, you can find the configuration file located under `con
     ]
 ],
 ```
+
+<a id="supported-features"></a>
+## Supported Features
+This is a list of features that the this driver supports.
+If a driver does not support a specific action, it is in most cases a limitation from the messaging service - not BotMan.
+
+<table class="table">
+<thead>
+	<tr>
+		<th>Feature</th>
+		<th>Supported?</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>Question-Buttons</td>
+		<td>✅</td>
+	</tr>
+	<tr>
+		<td>Image Attachment</td>
+		<td>✅</td>
+	</tr>
+	<tr>
+		<td>Video Attachment</td>
+		<td>✅</td>
+	</tr>
+	<tr>
+		<td>Audio Attachment</td>
+		<td>✅</td>
+	</tr>
+	<tr>
+		<td>Location Attachment</td>
+		<td>✅</td>
+	</tr>
+</tbody>
+</table>

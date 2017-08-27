@@ -1,6 +1,7 @@
 # Slack
 
 - [Installation & Setup](#installation-setup)
+- [Supported Features](#supported-features)
 - [Usage with a Slack App (recommended)](#slack-app)
 - [Usage with the Realtime API](#realtime-api)
 - [Usage with an outgoing webhook](#sending-facebook-templates)
@@ -22,6 +23,43 @@ php artisan botman:install-driver slack
 ```
 
 Slack is a cloud-based set of team collaboration tools and services.
+
+
+<a id="supported-features"></a>
+## Supported Features
+This is a list of features that the this driver supports.
+If a driver does not support a specific action, it is in most cases a limitation from the messaging service - not BotMan.
+
+<table class="table">
+<thead>
+    <tr>
+        <th>Feature</th>
+        <th>Supported?</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>Question-Buttons</td>
+        <td>✅</td>
+    </tr>
+    <tr>
+        <td>Image Attachment</td>
+        <td>✅</td>
+    </tr>
+    <tr>
+        <td>Video Attachment</td>
+        <td>✅</td>
+    </tr>
+    <tr>
+        <td>Audio Attachment</td>
+        <td>✅</td>
+    </tr>
+    <tr>
+        <td>Location Attachment</td>
+        <td>❌</td>
+    </tr>
+</tbody>
+</table>
 
 <a id="slack-app"></a>
 ## Usage with a Slack App (recommended)
