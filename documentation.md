@@ -15,7 +15,7 @@
 	- [Events](/__version__/events)
 
 - Advanced Topics
-	- [Middleware](/__version__/nlp)
+	- [Middleware](/__version__/middleware)
 	- [Natural Language Processing](/__version__/nlp)
 	- [User Information](/__version__/user-information)
 	- [Storing Information](/__version__/storing-information)
