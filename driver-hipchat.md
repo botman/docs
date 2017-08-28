@@ -1,4 +1,4 @@
-# Facebook Messenger
+# HipChat
 
 - [Installation & Setup](#installation-setup)
 - [Supported Features](#supported-features)
@@ -6,7 +6,7 @@
 <a id="installation-setup"></a>
 ## Installation & Setup
 
-First you need to pull in the Facebook Driver.
+First you need to pull in the HipChat Driver.
 
 ```sh
 composer require botman/driver-hipchat
