@@ -68,4 +68,4 @@ $botman->hears('hello', function (BotMan $bot) {
 $botman->listen();
 ```
 
-Pretty simple, right? To dig deeper, you may want to look into the core concept of [hearing messages](__version__/receiving) next.
+Pretty simple, right? To dig deeper, you may want to look into the core concept of [hearing messages](/__version__/receiving) next.
