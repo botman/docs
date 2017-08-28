@@ -122,5 +122,3 @@ Not all drivers support receiving attachments, or because of the lack of referen
 | WeChat             |   ✔/✔  |   ✔/❌  |  ✔/❌  |  ❌/❌  |    ✔/❌    |
 | HipChat            |   ❌/❌  |   ❌/❌  |  ❌/❌  |  ❌/❌  |    ❌/❌    |
 | Nexmo              |   ❌/❌  |   ❌/❌  |  ❌/❌  |  ❌/❌  |    ❌/❌    |
-| Discord            |   ❌/❌  |   ❌/❌  |  ❌/❌  |  ❌/❌  |    ❌/❌    |
-| Cisco-Spark        |   ❌/❌  |   ❌/❌  |  ❌/❌  |  ❌/❌  |    ❌/❌    |
