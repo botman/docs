@@ -166,7 +166,7 @@ $question = Question::create('Would you like to play a game?')
     			[
     				'text' => 'Bridge',
     				'value' => 'bridge',
-    			]
+    			],
     			[
     				'text' => 'Poker',
     				'value' => 'poker',
