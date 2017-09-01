@@ -10,7 +10,7 @@
 <a id="installation-setup"></a>
 ## Installation & Setup
 
-First you need to pull in the Nexmo Driver.
+First you need to pull in the Slack Driver.
 
 ```sh
 composer require botman/driver-slack
