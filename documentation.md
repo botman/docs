@@ -3,18 +3,19 @@
 	- [Upgrade Guide](/__version__/upgrade)
 
 - Setup
-	- [Installation & Setup](/__version__/installation)
-	- [BotMan Studio](/__version__/installation-laravel)
+	- [Installation](/__version__/installation)
+	- [BotMan Studio](/__version__/botman-studio)
+	- [Cache drivers](/__version__/cache-drivers)
 
 - Core Concepts
 	- [Hearing Messages](/__version__/receiving)
-	- [Hearing attachments](/__version__/receiving-additional-content)
+	- [Hearing Attachments](/__version__/receiving-additional-content)
 	- [Sending Messages](/__version__/sending)
 	- [Conversations](/__version__/conversations)
 	- [Events](/__version__/events)
 
 - Advanced Topics
-	- [Middleware](/__version__/nlp)
+	- [Middleware](/__version__/middleware)
 	- [Natural Language Processing](/__version__/nlp)
 	- [User Information](/__version__/user-information)
 	- [Storing Information](/__version__/storing-information)
@@ -26,9 +27,7 @@
     - [Nexmo](/__version__/driver-nexmo)
     - [Slack](/__version__/driver-slack)
     - [Telegram](/__version__/driver-telegram)
+    - [Web](/__version__/driver-web)
     - [WeChat](/__version__/driver-wechat)
-
-- Extending BotMan
-    - [Custom Middleware](/__version__/driver-telegram)
-    - [Custom Driver](/__version__/driver-wechat)
+- [Testing](/__version__/testing)
 - [FAQ](/__version__/faq)

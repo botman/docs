@@ -1,17 +1,9 @@
 # BotMan Release Notes
-
-- [Support policy](#support)
-- [2.0](#botman-2.0)
-
-<a id="support"></a>
-## Support policy
--- TBD --
-
-<a id="botman-2.0"></a>
+<br><br>
 ## 2.0
 BotMan 2.0 is a new major release and continues the ideas of BotMan 1.5 by adding a new middleware system, support for messaging service events, painless driver installation and listing, a chatbot testing framework on top of PHPUnit, custom exception handling, automatic messaging service verification, extended messaging service user information, support for additional drivers such as Kik, Discord or Cisco Spark, sending file attachments, and more.
 
-## Driver events
+## Driver Events
 BotMan 2.0 gives you the ability to listen not only for incoming messages of your users, but also for service events. 
 Need some inspiration?
 You can greet new users that join a Slack channel, or perform a specific task, whenever your Facebook messages were read.
@@ -27,7 +19,7 @@ $botman->on('team_join', function($payload, $botman) {
 });
 
 /**
- * Greet a new user when he joins a Slack channel.
+ * Perform an action when a message was read on Facebook.
  */
 $botman->on('messaging_reads', function($payload, $botman) {
 	// a message was read.
@@ -78,7 +70,7 @@ $this->botman->middleware->heard(new HeardMiddleware());
 
 For more information on middleware, check out the <a href="">middleware documentation</a>.
 
-## Exception handling
+## Exception Handling
 We have to admit it - exceptions in our code happen from time to time. But we need to catch them properly and notify the chatbot users if they happen. This becomes super simple with BotMan 2.0, as it provides a fluent and expressive API to hook into the exception handling during your chatbot lifetime.
 
 ```php

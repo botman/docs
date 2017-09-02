@@ -1,54 +1,59 @@
 # Installation
 
-- [Installation & Setup](#installation-setup)
-- [Basic Usage](#basic-usage)
-- [Cache Drivers](#cache-drivers)
+- [Server Requirements](#requirements)
+- [Installing BotMan](#installation)
+- [Basic Usage without BotMan Studio](#basic-usage-without-botman-studio)
 
-BotMan is a framework agnostic PHP library that is designed to simplify the task of developing innovative bots for multiple messaging platforms, including Slack, Telegram, Microsoft Bot Framework, Nexmo, HipChat, Facebook Messenger and WeChat.
+BotMan is a framework agnostic PHP library that is designed to simplify the task of developing innovative bots for multiple messaging platforms, including Slack, Telegram, Microsoft Bot Framework, Nexmo, HipChat, Facebook Messenger, WeChat and many more.
 
-```php
-$botman->hears('I want cross-platform bots with PHP!', function (BotMan $bot) {
-    $bot->reply('Look no further!');
-});
-```
+<a id="installation"></a>
+## Installing BotMan
 
-<a id="installation-setup"></a>
-## Installation & Setup
+BotMan utilizes [Composer](https://getcomposer.org/) to manage its dependencies. So, before using BotMan, make sure you have Composer installed on your machine.
+<br><br>
+The recommended way of getting started with BotMan and chatbot development is by using [BotMan Studio](/__version__/botman-studio) - a boilerplate project built on top of the popular Laravel PHP framework.
 
-Require this package with composer using the following command:
+### Via BotMan Studio
+First, download the BotMan installer using Composer:
 
 ```sh
-$ composer require mpociot/botman
+composer global require "botman/installer"
 ```
 
-<a id="basic-usage"></a>
-## Basic Usage
+Make sure to place the `$HOME/.composer/vendor/bin` directory (or the equivalent directory for your OS) in your $PATH so the `botman` executable can be located by your system.
+<br><br>
+Once installed, the `botman new` command will create a fresh BotMan Studio installation in the directory you specify. For instance, `botman new weatherbot` will create a directory named `weatherbot` containing a fresh BotMan Studio installation with all of BotMan's dependencies already installed:
 
-This sample bot listens for the word "hello".
-It listens on all messaging services, that you have configured - all using the exact same codebase.
+```sh
+botman new weatherbot
+```
+
+Take a look at the [BotMan Studio](/__version__/botman-studio) documentation, to learn more about how to add and configure messaging drivers.
+
+### Via Composer
+
+If you don't want to use [BotMan Studio](/__version__/botman-studio), you can install BotMan directly by requiring it in your existing project.
+
+```sh
+composer require botman/botman
+```
+
+This will download the BotMan package and all it's dependencies.
+
+<a id="basic-usage-without-botman-studio"></a>
+## Basic Usage without BotMan Studio
+
+This code shows you the very basics of how you can use BotMan as a standalone composer dependency.
+Make sure to place this code in a file that is accessible through the web - like a controller class.
 
 ```php
 <?php
 
-use Mpociot\BotMan\BotManFactory;
-use Mpociot\BotMan\BotMan;
+use BotMan\BotMan\BotMan;
+use BotMan\BotMan\BotManFactory;
 
 $config = [
-    'hipchat_urls' => [
-        'YOUR-INTEGRATION-URL-1',
-        'YOUR-INTEGRATION-URL-2',
-    ],
-    'nexmo_key' => 'YOUR-NEXMO-APP-KEY',
-    'nexmo_secret' => 'YOUR-NEXMO-APP-SECRET',
-    'microsoft_bot_handle' => 'YOUR-MICROSOFT-BOT-HANDLE',
-    'microsoft_app_id' => 'YOUR-MICROSOFT-APP-ID',
-    'microsoft_app_key' => 'YOUR-MICROSOFT-APP-KEY',
-    'slack_token' => 'YOUR-SLACK-TOKEN-HERE',
-    'telegram_token' => 'YOUR-TELEGRAM-TOKEN-HERE',
-    'facebook_token' => 'YOUR-FACEBOOK-TOKEN-HERE',
-    'facebook_app_secret' => 'YOUR-FACEBOOK-APP-SECRET-HERE',
-    'wechat_app_id' => 'YOUR-WECHAT-APP-ID',
-    'wechat_app_key' => 'YOUR-WECHAT-APP-KEY',
+    // Your driver-specific configuration
 ];
 
 // create an instance
@@ -63,41 +68,4 @@ $botman->hears('hello', function (BotMan $bot) {
 $botman->listen();
 ```
 
-<a id="cache-drivers"></a>
-## Cache drivers
-
-If you want to make use of BotMans Conversation feature, you need to use a persistent cache driver, where BotMan can store and retrieve the conversations.
-If not specified otherwise, BotMan will use ``array`` cache which is non-persistent. When using the Laravel facade it will automatically use the Laravel Cache component.
-
-BotMan supports many cache drivers out of the box.
-
-<a id="doctrine-cache"></a>
-### Doctrine Cache
-Use any [Doctrine Cache](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/caching.html) driver by passing it to the factory:
-
-```php
-use Mpociot\BotMan\Cache\DoctrineCache;
-
-$botman = BotManFactory::create($config, new DoctrineCache($doctrineCacheDriver));
-```
-
-<a id="codeigniter-cache"></a>
-### CodeIgniter Cache
-Use any [CodeIgniter Cache](https://www.codeigniter.com/userguide3/libraries/caching.html) adapter by passing it to the factory:
-
-```php
-use Mpociot\BotMan\Cache\CodeIgniterCache;
-
-$this->load->driver('cache');
-$botman = BotManFactory::create($config, new CodeIgniterCache($this->cache->file));
-```
-
-<a id="redis-cache"></a>
-### Redis Cache
-[Redis](https://redis.io) in-memory data structure store. If you have https://github.com/igbinary/igbinary module available, it will be used instead of standard php serializer:
-
-```php
-use Mpociot\BotMan\Cache\RedisCache;
-
-$botman = BotManFactory::create($config, new RedisCache('127.0.0.1', 6379));
-```
+Pretty simple, right? To dig deeper, you may want to look into the core concept of [hearing messages](/__version__/receiving) next.

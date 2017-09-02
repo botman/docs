@@ -2,9 +2,10 @@
 
 - [Introduction](#introduction)
 - [Single Message Replies](#single-message-replies)
+- [Attachments](#attachments)
 - [Type Indicators](#type-indicators)
 - [Originating Messages](#originating-messages)
-- [Send Low-Level requests](#sending-low-level-requests)
+- [Send Low-Level Requests](#sending-low-level-requests)
 
 ## Introduction
 
@@ -15,7 +16,7 @@ on the type and number of messages that will be sent.
 Single message replies to incoming commands can be sent using the `$bot->reply()` function.
 
 Multi-message replies, particularly those that present questions for the end user to respond to,
-can be sent using the `$bot->startConversation()` function and the related [conversation](/conversations) sub-functions. 
+can be sent using the `$bot->startConversation()` function and the related [conversation](/__version__/conversations) sub-functions. 
 
 Bots can originate messages - that is, send a message based on some internal logic or external stimulus - using `$bot->say()` method.
 
@@ -33,35 +34,145 @@ $botman->hears('keyword', function (BotMan $bot) {
 });
 ```
 
-A common use case would be to not only send plain-text messages, but to also include images or videos.
+Do you feel like chatting some more? You may also send multiple responses in a single method.
 
-You may do this by composing your message using the `Message` class. This class takes care of transforming your data for each
+```php
+$botman->hears('keyword', function (BotMan $bot) {
+    $bot->reply("Tell me more!");
+    $bot->reply("And even more");
+});
+```
+
+<a id="attachments"></a>
+
+## Attachments
+
+A common use case would be to not only send plain-text messages, but to also include an attachment along with your message.
+Depending on the messaging services you use, BotMan can send images, videos, audio files, generic files or even location data as attachment information.
+
+You may do this by composing your message using the `OutgoingMessage` class. This class takes care of transforming your data for each
 individual messaging service.
 
 ```php
-use Mpociot\BotMan\Messages\Message;
+use BotMan\BotMan\Messages\Attachments\Image;
+use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
 
 $botman->hears('keyword', function (BotMan $bot) {
+    // Create attachment
+    $attachment = new Image('http://image-url-here.jpg');
+
     // Build message object
-    $message = Message::create('This is my text')
-                ->image('http://www.some-url.com/image.jpg');
+    $message = OutgoingMessage::create('This is my text')
+                ->withAttachment($attachment);
     
     // Reply message object
     $bot->reply($message);
 });
 ```
 
-For Slack Realtime API, you can upload a file like so:
+### Images
+You may use the `Image` class to attach an image URL to your outgoing message.
+It takes an image URL and an optional custom payload as constructor parameters,
 
 ```php
-$botman->hears('give file to me', function (BotMan $bot) {
-    // Build message object
-    $message = Message::create('This is my comment for the uploaded file')
-                ->filePath('/tmp/file.mp3');
+use BotMan\BotMan\Messages\Attachments\Image;
+use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
+
+// Create attachment
+$attachment = new Image('http://image-url-here.jpg', [
+    'custom_payload' => true,
+]);
+
+// Build message object
+$message = OutgoingMessage::create('This is my text')
+            ->withAttachment($attachment);
     
-    // Reply message object
-    $bot->reply($message);
-});
+// Reply message object
+$bot->reply($message);
+```
+
+### Videos
+You may use the `Video` class to attach a video URL to your outgoing message.
+It takes a video URL and an optional custom payload as constructor parameters.
+
+```php
+use BotMan\BotMan\Messages\Attachments\Video;
+use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
+
+// Create attachment
+$attachment = new Video('http://video-url-here.mp4', [
+    'custom_payload' => true,
+]);
+
+// Build message object
+$message = OutgoingMessage::create('This is my text')
+            ->withAttachment($attachment);
+    
+// Reply message object
+$bot->reply($message);
+```
+
+### Audio
+You may use the `Audio` class to attach an audio URL to your outgoing message.
+It takes an audio URL and an optional custom payload as constructor parameters.
+
+```php
+use BotMan\BotMan\Messages\Attachments\Audio;
+use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
+
+// Create attachment
+$attachment = new Audio('http://audio-url-here.mp3', [
+    'custom_payload' => true,
+]);
+
+// Build message object
+$message = OutgoingMessage::create('This is my text')
+            ->withAttachment($attachment);
+    
+// Reply message object
+$bot->reply($message);
+```
+
+### Generic Files
+You may use the `File` class to attach a generic file URL to your outgoing message.
+It takes a file URL and an optional custom payload as constructor parameters.
+
+```php
+use BotMan\BotMan\Messages\Attachments\File;
+use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
+
+// Create attachment
+$attachment = new File('http://file-url-here.pdf', [
+    'custom_payload' => true,
+]);
+
+// Build message object
+$message = OutgoingMessage::create('This is my text')
+            ->withAttachment($attachment);
+    
+// Reply message object
+$bot->reply($message);
+```
+
+### Location Information
+You may use the `Location` class to attach a GPS location information to your outgoing message.
+It takes the latitude, longitude and an optional custom payload as constructor parameters.
+
+```php
+use BotMan\BotMan\Messages\Attachments\Location;
+use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
+
+// Create attachment
+$attachment = new Location(61.766130, -6.822510, [
+    'custom_payload' => true,
+]);
+
+// Build message object
+$message = OutgoingMessage::create('This is my text')
+            ->withAttachment($attachment);
+    
+// Reply message object
+$bot->reply($message);
 ```
 
 <a id="type-indicators"></a>
@@ -101,7 +212,7 @@ You may also specify the messaging driver if you know it:
 $botman->say('Message', 'my-recipient-user-id', TelegramDriver::class);
 ```
 
-Just as the regular `reply` method, this method also accepts either simple strings or `Message` objects.
+Just as the regular `reply` method, this method also accepts either simple strings or `OutgoingMessage` objects.
 
 
 <a id="sending-low-level-requests"></a>

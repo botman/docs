@@ -1,17 +1,16 @@
 # Hearing Messages
 
-- [Basic commands](#basic-commands)
-- [Command parameters](#command-parameters)
+- [Basic Commands](#basic-commands)
+- [Command Parameters](#command-parameters)
 - [Matching Regular Expression](#matching-regular-expressions)
-- [Command groups](#command-groups)
+- [Command Groups](#command-groups)
     - [Drivers](#command-groups-drivers)
     - [Middleware](#command-groups-middleware)
-    - [Channels](#command-groups-channels)
+    - [Recipients](#command-groups-recipients)
 - [Fallbacks](#fallbacks)
-- [Driver Specifics](#driver-specifics)
 
 <a id="basic-commands"></a>
-## Basic commands
+## Basic Commands
 
 
 The easiest way to listen for BotMan commands is by "listening" for a specific keyword and a Closure, providing a very simple and expressive method of defining bot commands. Take a look at this example, where the chatbot listens for the exact match of "foo" and calls the method once it hears the message.
@@ -20,12 +19,16 @@ The easiest way to listen for BotMan commands is by "listening" for a specific k
 $botman->hears('foo', function ($bot) {
     $bot->reply('Hello World');
 });
+// Process incoming message
+$botman->listen();
 ```
 
 In addition to the Closure you can also pass a class and method that will get called if the keyword matches.
 
 ```php
 $botman->hears('foo', 'Some\Namespace\MyBotCommands@handleFoo');
+// Process incoming message
+$botman->listen();
 
 class MyBotCommands {
 
@@ -77,6 +80,7 @@ Just like the command parameters, each regular expression match group will be pa
 
 Command groups allow you to share command attributes, such as middleware or channels, across a large number of commands without needing to define those attributes on each individual command. Shared attributes are specified in an array format as the first parameter to the `$botman->group` method.
 
+<a id="command-groups-drivers"></a>
 ### Drivers
 A common use-case for command groups is restricting the commands to a specific messaging service using the `driver` parameter in the group array:
 
@@ -88,6 +92,7 @@ $botman->group(['driver' => SlackDriver::class], function($bot) {
 });
 ```
 
+<a id="command-groups-middleware"></a>
 ### Middleware
 You may also group your commands, to send them through custom middleware classes. These classes can either listen for different parts of the message or extend your message by sending it to a third party service. The most common use-case would be the use of a Natural Language Processor like wit.ai or api.ai.
 
@@ -99,13 +104,14 @@ $botman->group(['middleware' => new MyCustomMiddleware()], function($bot) {
 });
 ```
 
-### Channels
-Command groups may also be used to restrict the commands to specific "channels", meaning they get restricted to the user sending the message to your bot. You can access the Channel-IDs in your commands using `$bot->getMessage()->getChannel();`.
+<a id="command-groups-recipients"></a>
+### Recipients
+Command groups may also be used to restrict the commands to specific recipients, meaning they get restricted to the user sending the message to your bot.
 
 ```php
-$botman->group(['channel' => '1234567890'], function($bot) {
+$botman->group(['recipient' => '1234567890'], function($bot) {
     $bot->hears('keyword', function($bot) {
-        // Only listens when user/channel '1234567890' is sending the message.
+        // Only listens when recipient '1234567890' is sending the message.
     });
 });
 ```
@@ -120,27 +126,3 @@ $botman->fallback(function($bot) {
     $bot->reply('Sorry, I did not understand these commands. Here is a list of commands I understand: ...');
 });
 ```
-
-<a id="driver-specifics"></a>
-## Driver Specifics
-
-BotMan can listen to many different [messaging drivers](#connect-with-your-messaging-service) and therefore it might be required for you, to respond differently depending on which
-driver was used to respond to your message.
-
-Each messaging driver in BotMan has a `getName()` method, that returns a human readable name of the driver.
- 
-You can access the driver object using `$botman->getDriver()`.
-To match against the driver name, you can use each driver's `NAME` constant or use the table below.
-
-The available driver names are:
-
-| Driver | Name | Note
-|--- |---|---
-| `BotFrameworkDriver` | BotFramework
-| `FacebookDriver` | Facebook
-| `FacebookPostbackDriver` | FacebookPostback | Allows you to listen for custom Facebook Postback payloads.
-| `HipChatDriver` | HipChat
-| `NexmoDriver` | Nexmo
-| `SlackDriver` | Slack
-| `TelegramDriver` | Telegram
-| `WeChatDriver` | WeChat

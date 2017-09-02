@@ -1,7 +1,9 @@
 # Facebook Messenger
 
 - [Installation & Setup](#installation-setup)
+- [Supported Features](#supported-features)
 - [Sending Facebook Templates](#sending-facebook-templates)
+- [Supported Events](#supported-events)
 - [Studio Features](#studio-features)
     - [Get Started Command](#get-started-command)
     - [Greeting Text Command](#greeting-text-command)
@@ -13,17 +15,23 @@ Facebook Messenger is the biggest Messenger out there and therefor a great choic
 <a id="installation-setup"></a>
 ## Installation & Setup
 
-First you need to pull in the Facebook Driver repository.
+First you need to pull in the Facebook Driver.
 
 ```sh
-$ composer require botman/driver-facebook
+composer require botman/driver-facebook
 ```
 
-Facebook Messenger requires a valid and secure URL in order to set up webhooks and receive events and information from the chat users. This means your application should be accessible through an HTTPS URL.
+Or if you use BotMan Studio:
+
+```sh
+php artisan botman:install-driver facebook
+```
+
+This driver requires a valid and secure URL in order to set up webhooks and receive events and information from the chat users. This means your application should be accessible through an HTTPS URL.
 
 > {callout-info} [ngrok](https://ngrok.com/) is a great tool to create such a public HTTPS URL for your local application. If you use Laravel Valet, you can create it with "valet share" as well.
 
-To connect BotMan with Facebook Messenger, you first need to follow the [official quick start guide](https://developers.facebook.com/docs/messenger-platform/guides/quick-start) to create your Facebook Messenger application and retrieve an access token as well as an app secret. Place both of them in your BotMan configuration.
+To connect BotMan with Facebook Messenger, you first need to follow the [official quick start guide](https://developers.facebook.com/docs/messenger-platform/guides/quick-start) to create your Facebook Messenger application and retrieve an access token as well as an app secret. Place both of them in your BotMan configuration. If you use BotMan Studio, you can find the configuration file located under `config/botman/facebook.php`.
 
 ```php
 'botman' => [
@@ -33,6 +41,42 @@ To connect BotMan with Facebook Messenger, you first need to follow the [officia
 	]
 ],
 ```
+
+<a id="supported-features"></a>
+## Supported Features
+This is a list of features that the this driver supports.
+If a driver does not support a specific action, it is in most cases a limitation from the messaging service - not BotMan.
+
+<table class="table">
+<thead>
+	<tr>
+		<th>Feature</th>
+		<th>Supported?</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>Question-Buttons</td>
+		<td>✅</td>
+	</tr>
+	<tr>
+		<td>Image Attachment</td>
+		<td>✅</td>
+	</tr>
+	<tr>
+		<td>Video Attachment</td>
+		<td>✅</td>
+	</tr>
+	<tr>
+		<td>Audio Attachment</td>
+		<td>✅</td>
+	</tr>
+	<tr>
+		<td>Location Attachment</td>
+		<td>✅</td>
+	</tr>
+</tbody>
+</table>
 
 <a id="sending-facebook-templates"></a>
 ## Sending Facebook Templates
@@ -141,6 +185,18 @@ $bot->reply(
 		)
 		->addAdjustment(ReceiptAdjustment::create('Laravel Bonus')->amount(5))
 );
+```
+
+<a id="supported-events"></a>
+## Supported Events
+
+The BotMan Facebook driver supports listening for the following events:
+```
+- messaging_checkout_updates
+- messaging_deliveries
+- messaging_optins
+- messaging_reads
+- messaging_referrals
 ```
 
 <a id="studio-features"></a>

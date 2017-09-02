@@ -1,6 +1,26 @@
 # HipChat
 
-> {callout-warning} Please note: HipChat currently does not support interactive messages / question buttons.
+- [Installation & Setup](#installation-setup)
+- [Supported Features](#supported-features)
+
+<a id="installation-setup"></a>
+## Installation & Setup
+
+First you need to pull in the HipChat Driver.
+
+```sh
+composer require botman/driver-hipchat
+```
+
+Or if you use BotMan Studio:
+
+```sh
+php artisan botman:install-driver hipchat
+```
+
+This driver requires a valid and secure URL in order to set up webhooks and receive events and information from the chat users. This means your application should be accessible through an HTTPS URL.
+
+> {callout-info} [ngrok](https://ngrok.com/) is a great tool to create such a public HTTPS URL for your local application. If you use Laravel Valet, you can create it with "valet share" as well.
 
 To connect BotMan with your HipChat team, you need to create an integration in the room(s) you want your bot to be in.
 After you have created the integration, take note of the URL HipChat presents you at "Send messages to this room by posting to this URL". 
@@ -28,3 +48,39 @@ curl -X POST -H "Authorization: Bearer YOUR-API-TOKEN" \
 > If you want your bot to live in multiple channels, you need to add the webhook to each channel. This is a HipChat limitation.
 
 Once you've set up the integration(s) and webhook(s), add them to your BotMan configuration.	
+
+<a id="supported-features"></a>
+## Supported Features
+This is a list of features that the this driver supports.
+If a driver does not support a specific action, it is in most cases a limitation from the messaging service - not BotMan.
+
+<table class="table">
+<thead>
+	<tr>
+		<th>Feature</th>
+		<th>Supported?</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>Question-Buttons</td>
+		<td>❌</td>
+	</tr>
+	<tr>
+		<td>Image Attachment</td>
+		<td>❌</td>
+	</tr>
+	<tr>
+		<td>Video Attachment</td>
+		<td>❌</td>
+	</tr>
+	<tr>
+		<td>Audio Attachment</td>
+		<td>❌</td>
+	</tr>
+	<tr>
+		<td>Location Attachment</td>
+		<td>❌</td>
+	</tr>
+</tbody>
+</table>
