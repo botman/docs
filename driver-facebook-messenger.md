@@ -42,6 +42,9 @@ To connect BotMan with Facebook Messenger, you first need to follow the [officia
 ],
 ```
 
+After that you can setup the webhook, which connects the Facebook application with your BotMan application. This is covered in the above mentioned Quick Start Guide as well, as connecting your Facebook application to a Facebook page.
+
+
 <a id="supported-features"></a>
 ## Supported Features
 This is a list of features that the this driver supports.
