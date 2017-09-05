@@ -218,7 +218,7 @@ First define the payload text in your `config/botman/facebook.php` file.
 
 Then run the artisan command:
 ```sh
-php artisan botman:facebookAddMenu 
+php artisan botman:facebookAddStartButton 
 ```
 
 This will add the Get Started button to your page's chat. You are now able to listen to this button with the payload in your `hears` method.
