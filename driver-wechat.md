@@ -12,6 +12,15 @@ First you need to pull in the WeChat Driver.
 composer require botman/driver-wechat
 ```
 
+Then load the driver before creating the BotMan instance (**only when you don't use BotMan Studio**):
+
+```php
+DriverManager::loadDriver(\BotMan\Drivers\WeChat\WeChatDriver::class);
+
+// Create BotMan instance
+BotManFactory::create($config);
+```
+
 Or if you use BotMan Studio:
 
 ```sh

@@ -16,6 +16,15 @@ First you need to pull in the Slack Driver.
 composer require botman/driver-slack
 ```
 
+Then load the driver before creating the BotMan instance (**only when you don't use BotMan Studio**):
+
+```php
+DriverManager::loadDriver(\BotMan\Drivers\Slack\SlackDriver::class);
+
+// Create BotMan instance
+BotManFactory::create($config);
+```
+
 Or if you use BotMan Studio:
 
 ```sh
