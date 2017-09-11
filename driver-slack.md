@@ -115,6 +115,11 @@ require 'vendor/autoload.php';
 
 use React\EventLoop\Factory;
 use BotMan\BotMan\BotManFactory;
+use BotMan\BotMan\Drivers\DriverManager;
+use BotMan\Drivers\Slack\SlackRTMDriver;
+
+// Load driver
+DriverManager::loadDriver(SlackRTMDriver::class);
 
 $loop = Factory::create();
 $botman = BotManFactory::createForRTM([
