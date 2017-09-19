@@ -4,11 +4,13 @@
 - [Supported Features](#supported-features)
 - [Sending Facebook Templates](#sending-facebook-templates)
 - [Supported Events](#supported-events)
+- [Built-in Natural Language Processing](#builtin-nlp)
 - [Studio Features](#studio-features)
     - [Get Started Command](#get-started-command)
     - [Greeting Text Command](#greeting-text-command)
     - [Persistent Menu Command](#persistent-menu-command)
     - [Whitelist Domains Command](#whitelist-domains-command)
+    - [Configure Natural Language Processing](#configure-nlp)
 
 Facebook Messenger is the biggest Messenger out there and therefor a great choice for building a chatbot. There are more than 1 Billion active users per month.
 
@@ -211,6 +213,19 @@ The BotMan Facebook driver supports listening for the following events:
 - messaging_referrals
 ```
 
+<a id="builtin-nlp"></a>
+## Built-in Natural Language Processing
+
+Facebook Messenger comes with an integrated [Natural Language Processing](https://developers.facebook.com/docs/messenger-platform/built-in-nlp/) tool that you can enable for your Facebook page, if you want.
+Whenever a message contains one or more natural language processing entities that Facebook knows - such as greetings, datetimes or saying goodbye - the message will contain an extra array called "nlp". 
+You may access this array using the `getExtras` method on the incoming message object like this:
+
+```php
+$entities = $message->getExtras('nlp');
+```
+
+If there are no NLP entities added to the message, this method will return `NULL`. You can take a look at the official [Facebook NLP documentation](https://developers.facebook.com/docs/messenger-platform/built-in-nlp/#handling_entities) to find out more about Facebook NLP entities and how they are structured.
+
 <a id="studio-features"></a>
 ## Studio Features
 
@@ -271,4 +286,17 @@ Define all domains in your `config/botman/facebook.php` file. Then use the Artis
 php artisan botman:facebookWhitelistDomains
 ```
 
+<a id="configure-nlp"></a>
+### Configure Natural Language Processing
 
+Facebook Messenger comes with an integrated [Natural Language Processing](https://developers.facebook.com/docs/messenger-platform/built-in-nlp/) tool that you can enable or disable using the BotMan Studio command.
+
+```sh
+php artisan botman:facebookNlp
+```
+
+If you want to disable the NLP feature for your Facebook page, you may use the `--disable` option:
+
+```sh
+php artisan botman:facebookNlp --disable
+```
