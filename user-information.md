@@ -77,7 +77,7 @@ $info = $user->getInfo();
 
 BotMan will cache user information for a duration of 30 minutes by default. This is especially useful for drivers like
 Facebook where it takes an additional request to retrieve this information. In the BotMan config you are able to
-change the duration. You can also set it to zero in order to prevent BotMan from caching the user information at all.
+change this duration with the `user_cache_time`. You can also set it to zero in order to prevent BotMan from caching the user information at all.
 
 ```php
 'botman' => [
