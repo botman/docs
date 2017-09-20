@@ -5,6 +5,8 @@
 - [Asking For Images, Videos, Audio Or Location](#asking-for-data)
 - [Structured Question With Patterns](#structured-question)
 - [Originating Conversations](#originating-conversations)
+- [Skipping Conversations](#skipping-conversations)
+- [Caching Conversations](#caching-conversations)
 
 When it comes to chat bots, you probably don't want to simply react to single keywords, but instead, you might need to gather information from the user, using a conversation. 
 Let's say, that you want your chat bot to provide an elegant user onboarding experience for your application users. In the onboarding process we are going to ask the user for their firstname and email address - that's a perfect fit for conversations!
@@ -69,8 +71,6 @@ This is the starting point of your conversation and get's executed immediately.
 As you can see in the onboarding conversation, we have two questions that get asked one after another. Just like a regular conversation, the bot first asks for the firstname and saves the value in the conversation object itself.
 
 After it retrieves an answer from the user, the callback gets executed and the bot asks the next question, which retrieves the user's email address.
-
-> {callout-info} Conversations get persisted in the cache. This means that the conversation class will be serialized in order to maintain the conversation state. Keep that in mind when developing for BotMan. The default cache duration is set to 30 minutes. If you need to increase or decrease this value, you can set a `conversation_cache_time` key on your BotMan configuration.
 
 <a id="asking-questions"></a>
 ## Asking Questions
@@ -220,6 +220,7 @@ To do so, just use the `startConversation` method, as you would normally do, but
 $botman->startConversation(new PizzaConversation(), 'my-recipient-user-id', TelegramDriver::class);
 ```
 
+<a id="skipping-conversations"></a>
 ## Skip or Stop Conversations
 
 While being in a conversation it is sometimes useful to stop it for a certain reason. In order to make this possible there a two methods available in every conversation class: `skipConversation()` and `stopConversation()`. Inside those methods you can return true or false to skip or stop a conversation. Skip will stop the conversation just for this one request. Afterwards it will go on as if nothing happened. The stop method will delete the conversation, so there is no turning back.
@@ -270,4 +271,15 @@ Here we are stopping the conversation through a `hears` method, where we are lis
 $botman->hears('pause', function(BotMan $bot) {
 	$bot->reply('stopped');
 })->skipsConversation();
+```
+
+<a id="caching-conversations"></a>
+## Caching Conversations
+
+Conversations get persisted in the cache. This means that the conversation class will be serialized in order to maintain the conversation state. Keep that in mind when developing for BotMan. The default cache duration is set to 30 minutes. If you need to increase or decrease this value, you can set a `conversation_cache_time` key on your BotMan configuration.
+
+```php
+'botman' => [
+	'conversation_cache_time' => 30
+],
 ```
