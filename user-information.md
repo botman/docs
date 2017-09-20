@@ -7,6 +7,7 @@
 - [Retrieve The User-ID](#retrieving-user-id)
 - [Retrieve The Username](retrieving-username)
 - [Retrieve The Raw User Information](#retrieving-raw-user-information)
+- [Caching User Information](#caching-user-information)
 
 ## Introduction
 BotMan makes it simple to access your chatbot user information. Which user fields are available purely depend on the messaging service you use. Some services offer more information than others do. Yet you can access them using the same API with BotMan.
@@ -69,4 +70,17 @@ You can access also access the unprocessed raw messaging service user informatio
 $user = $bot->getUser();
 // Access ID
 $info = $user->getInfo();
+```
+
+<a id="caching-user-information"></a>
+### Caching User Information
+
+BotMan will cache user information for a duration of 30 minutes by default. This is especially useful for drivers like
+Facebook where it takes an additional request to retrieve this information. In the BotMan config you are able to
+change the duration. You can also set it to zero in order to prevent BotMan from caching the user information at all.
+
+```php
+'botman' => [
+	'user_cache_time' => 30
+],
 ```
