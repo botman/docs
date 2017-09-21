@@ -2,14 +2,14 @@
 
 - [Server Requirements](#requirements)
 - [Preparations](#preparations)
-- [Installation Botman](#installation)
+- [Botman Installation](#installation)
 - [NGROK to the rescue](#ngrok)
 
 This is an installation for botman specifically on MacOS X. 
 
 <a id="requirements"></a>
 ## Server Requirements
-  - Mac Webserver (in my case I used MAMP) => https://www.mamp.info/
+  - Mac Webserver (MAMP) => https://www.mamp.info/
   - Terminal 
   - Composer
   - NGROK => https://ngrok.com/
@@ -25,7 +25,7 @@ This is an installation for botman specifically on MacOS X.
       `curl -sS https://getcomposer.org/installer | php`<br />
       `sudo mv composer.phar /usr/local/bin/composer`<br />      
   - Please check your PHP version by typing `php -v`
-  - if you already running the PHP version 7.1 then you do not require this preparations.
+  - if you already running PHP version 7.1 then you do not require this preparations.
   - to upgrade PHP for Mac you are recommended to used HomeBrew
   - install HomeBrew<br />
       `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
@@ -35,10 +35,10 @@ This is an installation for botman specifically on MacOS X.
       `brew tap homebrew/homebrew-php`<br />
       `brew unlink php56` only if you previously installing php using brew<br />
       `brew install php71`<br />
-  - ALRIGHT you are done
+  - You are done with preparations
 
 <a id="installation"></a>
-## Installation botman
+## Botman Installation 
   - Install botman studio<br />
       `composer global require "botman/installer"`
   - Once completed you need to edit `.bash_profile`
@@ -61,7 +61,7 @@ This is an installation for botman specifically on MacOS X.
   - Download NGROK and unzip
   - Move ngrok to `mv ngrok /usr/local/bin/`
   - Run `ngrok http -host-header=rewrite local.botman:80`
-  - You are now have https tunneling to setup hook for botman
+  - You are now have https tunneling for settingup Telegram hook for botman
   - CHEERS
     
     
