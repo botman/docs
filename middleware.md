@@ -7,6 +7,7 @@
 - [Matching Middleware](#matching-middleware)
 - [Heard Middleware](#heard-middleware)
 - [Sending Middleware](#sending-middleware)
+- [Example](#middleware-example)
 
 <a id="introduction"></a>
 ## Introduction
@@ -70,4 +71,98 @@ The `sending` middleware gets called before each message is sent out to the reci
 $middleware = new Middleware();
 $botman->middleware->sending($middleware);
 ```
+<a id="middleware-example"></a>
+## Example
+Following a simple example of how to implement your custom middleware.
 
+```php
+class MyCustomMiddleware implements MiddlewareInterface
+{
+    /**
+     * Handle a captured message.
+     *
+     * @param \BotMan\BotMan\Messages\Incoming\IncomingMessage $message
+     * @param BotMan $bot
+     * @param $next
+     *
+     * @return mixed
+     */
+    public function captured(IncomingMessage $message, $next, BotMan $bot)
+    {
+        return $next($message);
+    }
+    
+    /**
+     * Handle an incoming message.
+     *
+     * @param IncomingMessage $message
+     * @param BotMan $bot
+     * @param $next
+     *
+     * @return mixed
+     */
+    public function received(IncomingMessage $message, $next, BotMan $bot)
+    {
+        return $next($message);
+    }
+    
+    /**
+     * @param \BotMan\BotMan\Messages\Incoming\IncomingMessage $message
+     * @param string $pattern
+     * @param bool $regexMatched Indicator if the regular expression was matched too
+     * @return bool
+     */
+    public function matching(IncomingMessage $message, $pattern, $regexMatched)
+    {
+        return true;
+    }
+    
+    /**
+     * Handle a message that was successfully heard, but not processed yet.
+     *
+     * @param \BotMan\BotMan\Messages\Incoming\IncomingMessage $message
+     * @param BotMan $bot
+     * @param $next
+     *
+     * @return mixed
+     */
+    public function heard(IncomingMessage $message, $next, BotMan $bot)
+    {
+        return $next($message);
+    }
+    
+    /**
+     * Handle an outgoing message payload before/after it
+     * hits the message service.
+     *
+     * @param mixed $payload
+     * @param BotMan $bot
+     * @param $next
+     *
+     * @return mixed
+     */
+    public function sending($payload, $next, BotMan $bot)
+    {
+        return $next($payload);
+    }
+}
+```
+
+Let's consider a simple use case: suppose you want to show a typing indicator as soon as your bot receive any message:
+
+```php
+    public function received(IncomingMessage $message, $next, BotMan $bot)
+    {
+    	$bot->getDriver()->types($message);
+        return $next($message);
+    }
+```
+Note that we didn't use `$bot->types()` as you'd usually do, because it works by using the matched message. In this case, BotMan doesn't know which message might match, because it is inside a received middleware. The same apply to the `getUser()` function:
+```php
+    public function received(IncomingMessage $message, $next, BotMan $bot)
+    {
+    	$user = $bot->getDriver()->getUser($message);
+	// do something with the $user, i.e. store it to DB
+        return $next($message);
+    }
+```
