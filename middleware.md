@@ -148,7 +148,7 @@ class MyCustomMiddleware implements MiddlewareInterface
 }
 ```
 
-Let's consider a simple use case: suppose you want to show a typing indicator as soon as your bot receive any message:
+Let's consider a simple use case: suppose you want to show a typing indicator as soon as your bot receives any message:
 
 ```php
     public function received(IncomingMessage $message, $next, BotMan $bot)
@@ -157,12 +157,15 @@ Let's consider a simple use case: suppose you want to show a typing indicator as
         return $next($message);
     }
 ```
-Note that we didn't use `$bot->types()` as you'd usually do, because it works by using the matched message. In this case, BotMan doesn't know which message might match, because it is inside a received middleware. The same apply to the `getUser()` function:
+
+Note that we didn't use `$bot->types()` as you'd usually do, because at this point BotMan has not yet determined which driver to use. 
+The same apply to the `getUser()` function:
+
 ```php
     public function received(IncomingMessage $message, $next, BotMan $bot)
     {
     	$user = $bot->getDriver()->getUser($message);
-	// do something with the $user, i.e. store it to DB
+	    // do something with the $user, i.e. store it to DB
         return $next($message);
     }
 ```
