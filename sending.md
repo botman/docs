@@ -200,13 +200,7 @@ Please note, that not all messaging services support typing indicators. If it is
 BotMan also allows you to send messages to your chat users programatically. You could, for example, send out a daily message to your users that get's triggered
 by your cronjob.
 
-The easiest way is to just specify the driver-specific recipient ID when calling the `say` method.
-
-```php
-$botman->say('Message', 'my-recipient-user-id');
-```
-
-You may also specify the messaging driver if you know it:
+The easiest way is to just specify the driver-specific recipient ID when calling the `say` method and the driver to use.
 
 ```php
 $botman->say('Message', 'my-recipient-user-id', TelegramDriver::class);
