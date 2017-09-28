@@ -37,6 +37,13 @@ Or if you use BotMan Studio:
 ```sh
 php artisan botman:install-driver facebook
 ```
+Next you need to add to your .env file the following entries (only if you're using BotMan Studio): 
+
+```
+FACEBOOK_TOKEN=your-facebook-page-token
+TOKEN_VERIFY=your-wehbook-verify-token
+FACEBOOK_APP_SECRET=your-facebook-app-secret
+```
 
 This driver requires a valid and secure URL in order to set up webhooks and receive events and information from the chat users. This means your application should be accessible through an HTTPS URL.
 
