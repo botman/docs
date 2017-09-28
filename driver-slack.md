@@ -33,6 +33,7 @@ php artisan botman:install-driver slack
 
 Slack is a cloud-based set of team collaboration tools and services.
 
+> {callout-info} If you're using [ngrok](https://ngrok.com/) be aware that Slack has a timeout of 3 seconds. When using ngrok, depending on your location and connection speed, the time it takes for Slack to get a 200 OK can be longer than 3 seconds. In such cases you'll notice that your bot will answer multiple times. If you're facing this issue a possible solution is to deploy your bot to a production server or try to change the ngrok server location.
 
 <a id="supported-features"></a>
 ## Supported Features
