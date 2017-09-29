@@ -52,6 +52,15 @@ To connect BotMan with Facebook Messenger, you first need to follow the [officia
 	]
 ],
 ```
+If you dont use BotMan Studio, add these line to $config array that you pass when you create the object from BotManFactory
+```php
+'facebook' => [
+    'token' => 'page_token',
+    'app_secret' => 'app_secret',
+    'verification'=>'MY_SECRET_VERIFICATION_TOKEN',
+]
+```
+
 
 After that you can setup the webhook, which connects the Facebook application with your BotMan application. This is covered in the above mentioned Quick Start Guide as well, as connecting your Facebook application to a Facebook page.
 
