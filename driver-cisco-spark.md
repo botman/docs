@@ -37,13 +37,13 @@ To connect BotMan with your Cisco Spark Bot, you first need to follow the [offic
 
 Once you have obtained the access token and secret, place it in your BotMan configuration. If you use BotMan Studio, you can find the configuration file located under `config/botman/cisco-spark.php`.
 
+If you dont use BotMan Studio, add these line to $config array that you pass when you create the object from BotManFactory.
+
 ```php
-'botman' => [
-    'cisco-spark' => [
-        'token' => 'YOUR-CISCO-SPARK-TOKEN-HERE',
-        'secret' => 'YOUR-CISCO-SPARK-SECRET-HERE',
-    ]
-],
+'cisco-spark' => [
+    'token' => 'YOUR-CISCO-SPARK-TOKEN-HERE',
+    'secret' => 'YOUR-CISCO-SPARK-SECRET-HERE',
+]
 ```
 
 

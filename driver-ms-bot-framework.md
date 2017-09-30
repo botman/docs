@@ -39,13 +39,12 @@ Place the URL that points to your BotMan logic / controller in this field.
 Take note of your App ID and App Key assigned to your new bot and place it in your BotMan configuration.
 If you use BotMan Studio, you can find the configuration file located under `config/botman/botframework.php`.
 
+If you dont use BotMan Studio, add these line to $config array that you pass when you create the object from BotManFactory.
 ```php
-'botman' => [
-    'botframework' => [
-    	'app_id' => 'YOUR-MICROSOFT-APP-ID',
-    	'app_key' => 'YOUR-MICROSOFT-APP-KEY',
-    ]
-],
+'botframework' => [
+	'app_id' => 'YOUR-MICROSOFT-APP-ID',
+	'app_key' => 'YOUR-MICROSOFT-APP-KEY',
+]
 ```
 
 <a id="supported-features"></a>

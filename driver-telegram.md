@@ -37,12 +37,12 @@ To connect BotMan with your Telegram Bot, you first need to follow the [official
 
 Once you have obtained the access token, place it in your BotMan configuration. If you use BotMan Studio, you can find the configuration file located under `config/botman/telegram.php`.
 
+If you dont use BotMan Studio, add these line to $config array that you pass when you create the object from BotManFactory.
+
 ```php
-'botman' => [
-    'telegram' => [
-    	'token' => 'YOUR-TELEGRAM-TOKEN-HERE',
-    ]
-],
+'telegram' => [
+	'token' => 'YOUR-TELEGRAM-TOKEN-HERE',
+]
 ```
 
 

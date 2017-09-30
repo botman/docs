@@ -51,21 +51,12 @@ This driver requires a valid and secure URL in order to set up webhooks and rece
 
 To connect BotMan with Facebook Messenger, you first need to follow the [official quick start guide](https://developers.facebook.com/docs/messenger-platform/guides/quick-start) to create your Facebook Messenger application and retrieve an access token as well as an app secret. Place both of them in your BotMan configuration. If you use BotMan Studio, you can find the configuration file located under `config/botman/facebook.php`.
 
-```php
-'botman' => [
-	'facebook' => [
-		'token' => 'YOUR-FACEBOOK-PAGE-TOKEN-HERE',
-		'app_secret' => 'YOUR-FACEBOOK-APP-SECRET-HERE',
-		 'verification'=>'MY_SECRET_VERIFICATION_TOKEN',
-	]
-],
-```
-If you dont use BotMan Studio, add these line to $config array that you pass when you create the object from BotManFactory
+If you dont use BotMan Studio, add these line to $config array that you pass when you create the object from BotManFactory.
 ```php
 'facebook' => [
   	'token' => 'YOUR-FACEBOOK-PAGE-TOKEN-HERE',
 	'app_secret' => 'YOUR-FACEBOOK-APP-SECRET-HERE',
-    	'verification'=>'MY_SECRET_VERIFICATION_TOKEN',
+    'verification'=>'MY_SECRET_VERIFICATION_TOKEN',
 ]
 ```
 
