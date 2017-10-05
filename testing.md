@@ -2,9 +2,11 @@
 
 - [Introduction](#introduction)
 - [Testing Multiple Replies](#testing-multiple-replies)
-- [Testing Questions](#testing-questions)
+- [Simulating User Messages](#simulationg-user-messages)
+- [Available Assertions](#available-assertions)
 - [Testing Conversations](#testing-conversations)
-- [Testing Facebook Templates](#testing-facebook-templates)
+- [Testing Events](#testing-events)
+- [Advanced Testing](#advanced-testing)
 
 > {callout-info} The BotMan testing features are only available in combination with [BotMan Studio](/__version__/botman-studio).
 
@@ -22,9 +24,22 @@ But also your bots should be built with tests and this is why BotMan Studio will
 			->assertReply('Hello!');
 	}
 ```
+
 <a id="testing-multiple-replies"></a>
 ### Testing Multiple Replies
-If your bot replies with more than one message to `Hi` ,you can you use the `assertReplies()` helper.
+All assertion methods can be chained to test cases when your bot responds with more than one message.
+
+```php
+public function testBasicTest()
+{
+	$this->bot
+		->receives('Hi')
+		->assertReply('Hello!')
+		->assertReply('Nice to meet you');
+}
+```
+
+Additionally you can you use the `assertReplies()` method if you want to test multiple replies at once.
 
 ```php
 public function testBasicTest()
@@ -38,23 +53,189 @@ public function testBasicTest()
 }
 ```
 
-<a id="testing-questions"></a>
-## Testing Questions
-To check if the bot replies to a message with a question object, you can use the `assertReply` method as well. This way you can make sure the question, settings and buttons are the same as in your application.
+<a id="simulating-user-messages"></a>
+## Simulating User Messages
+### Receiving Attachments
+
+BotMan can receive attachment objects from user and there are methods that help you test those cases. You can use `receivesLocation`, `receivesImages`, `receivesVideos`, `receivesAudio` and `receivesFiles` methods to simulate that user has send valid attachments.
+
 ```php
-public function testStartConversation()
+public function testBasicTest()
 {
-	 $question = Question::create("Huh - you woke me up. What do you need?")
-				->fallback('Unable to ask question')
-				->callbackId('ask_reason')
+    $this->bot
+	->receivesLocation()
+	->assertReply('Thanks for locations');
+}
+```
+
+You can pass additional `$latitude` and `$longitude` arguments to `receivesLocation` if necessary.
+
+```php
+public function testBasicTest()
+{
+	$this->bot
+    		->receivesLocation($latitude, $longitude)
+    		->assertReply('Your latidude is ' . $latitude);
+}
+```
+
+You can pass additional array of urls to `receivesImages`, `receivesVideos`, `receivesAudio` and `receivesFiles` methods if necessary.
+
+```php
+public function testBasicTest()
+{
+	$this->bot
+    		->receivesImage(['www.example.com/dog'])
+    		->assertReply('You sent me dog image');
+}
+```
+
+### Receiving Interactive message
+There are cases when we expect our chatbot user to respond to a question with an interactive reply - for example a button click. To simulate that, use the `receivesInteractiveMessage` method. It accepts the button value as an argument.
+
+```php
+public function testBasicTest()
+{
+	$this->bot
+    		->receivesInteractiveMessage('dog')
+    		->assertReply('You chose dog!');
+}
+```
+
+<a id="available-assertions"></a>
+## Available Assertions
+BotMan comes with handful of useful methods to test you chatbots.
+
+### assertReply
+The `assertReply` method asserts that the chatbot replies with the given message.
+
+```php
+public function testBasicTest()
+{
+	$this->bot
+    		->receives('Hi')
+    		->assertReply('Hello');
+}
+```
+
+### assertReplies
+The `assertReplies` method asserts that the chatbot replies with all messages in the given array.
+
+```php
+public function testBasicTest()
+{
+	$this->bot
+    		->receives('Hi')
+    		->assertReplies([
+    			'Hello!',
+    			'Nice to meet you',
+    		]);
+}
+```
+
+### assertReplyIsNot
+The `assertReplyIsNot` method asserts that the chatbot does not reply with the given message.
+
+```php
+public function testBasicTest()
+{
+	$this->bot
+    		->receives('Hi')
+    		->assertReplyIsNot('Good bye');
+}
+```
+
+### assertReplyIn
+The `assertReplyIn` method asserts that the chatbot replies with one message from the given array. This is helpful if your bot uses random answers.
+
+```php
+public function testBasicTest()
+{
+	$this->bot
+    		->receives('Hi')
+    		->assertReplyIn([
+    		    'Hi',
+    		    'Hello',
+    		    'Bonjourno'
+    		]);
+}
+```
+
+### assertReplyNotIn
+The `assertReplyNotIn` method asserts that the chatbot does not reply with any of the given messages.
+
+```php
+public function testBasicTest()
+{
+	$this->bot
+    		->receives('Hi')
+    		->assertReplyNotIn([
+    		    'Bye',
+    		    'Good bye',
+    		    'Arrivederci'
+    		]);
+}
+```
+
+### assertReplyNothing
+The `assertReplyNothing` method asserts that the chatbot does not reply with any message at all. Useful when chained with other assertion methods to check that the chatbot stopped responding.
+
+```php
+public function testBasicTest()
+{
+	$this->bot
+    		->receives('Hi')
+    		->assertReply('Hello')
+    		->assertReplyNothing();
+}
+```
+
+### assertQuestion
+The `assertQuestion` method asserts that the chatbot replies with a Question object. If you call this method without an argument it just checks for a question occurance. Otherwise it will test for the question text.
+
+```php
+public function testBasicTest()
+{
+	$this->bot
+    		->receives('Start conversation')
+    		->assertQuestion();
+}
+
+public function testBasicTest()
+{
+	$this->bot
+    		->receives('Start conversation')
+    		->assertQuestion('What do you want to talk about');
+}
+```
+
+### assertTemplate
+The `assertTemplate` method asserts that the chatbot does reply with a given template class. This is especially useful when testing Facebook reply templates.
+
+```php
+public function testBasicTest()
+{
+	$this->bot
+    		->receives('News feed')
+    		->assertTemplate(GenericTemplate::class);
+}
+```
+
+You can pass `true` as a second argument to test that the templates are exactly the same (strict mode).
+
+```php
+public function testStartJokeConversation()
+{
+	$jokeTypeQuestion = ButtonTemplate::create('Please select the kind of joke you wanna hear:')
 				->addButtons([
-					Button::create('Tell a joke')->value('joke'),
-					Button::create('Give me a fancy quote')->value('quote'),
+					ElementButton::create('Chuck Norris')->type('payload')->payload('chucknorris'),
+					ElementButton::create('Children')->type('payload')->payload('children'),
+					ElementButton::create('Politics')->type('payload')->payload('politics'),
 				]);
 	
 	$this->bot
-		->receives('Start Conversation')
-		->assertReply($question);
+		->receives('start joke conversation')
+		->assertTemplate($jokeTypeQuestion, true);
 }
 ```
 
@@ -75,25 +256,115 @@ public function testStartConversation()
 }
 ```
 
-<a id="testing-facebook-templates"></a>
-## Testing Facebook Templates
-
-Templates, like the ones for the Facebook Messenger, can be tested like the Question objects with the `assertReply()` or `assertReplies()` methods.
+<a id="testing-events"></a>
+## Testing Events
+BotMan supports testing for driver specific events with the `receivesEvent` method.
 
 ```php
-public function testStartJokeConversation()
+public function testStartConversation()
 {
-	$jokeTypeQuestion = ButtonTemplate::create('Please select the kind of joke you wanna hear:')
-				->addButtons([
-					ElementButton::create('Chuck Norris')->type('payload')->payload('chucknorris'),
-					ElementButton::create('Children')->type('payload')->payload('children'),
-					ElementButton::create('Politics')->type('payload')->payload('politics'),
-				]);
-	
-	$this->bot->receives('start joke conversation')
-		->assertReplies([
-			'Ok lets go!',
-			$jokeTypeQuestion
-	]);
+	$this->bot
+		->receivesEvent('event_name')
+		->assertReplies('Received event');
 }
 ```
+
+You can pass a `$payload` array as an additional argument as well.
+
+```php
+public function testStartConversation()
+{
+	$this->bot
+		->receivesEvent('event_name', ['key' => 'value'])
+		->assertReplies('Received event);
+}
+```
+
+<a id="advanced-testing"></a>
+## Advanced Testing
+### Set Driver
+If you are building multi-driver chatbots with BotMan you may have restricted some commands to specific drivers only - for example using the `group` method.
+
+```php
+$botman->group(['driver' => FacebookDriver::class], function ($bot) {
+    $bot->hears('Facebook only', function ($bot) {
+        $bot->reply('You are on messenger');
+    });
+});
+```
+
+The BotMan testing environment uses a fake driver class to run the tests, but we can change the name of the driver with the `setDriver` method.
+ 
+```php
+public function testStartConversation()
+{
+	$this->bot
+	   	->setDriver(FacebookDriver::class)
+		->receives('Facebook only')
+		->assertReply('You are on messenger');
+}
+```
+
+### Set User Information
+In a similar manner you can set user information with the `setUser` method.
+
+```php
+public function testStartConversation()
+{
+	$this->bot
+		->setUser([
+			'first_name' => 'John'
+		])
+		->receives('Hi')
+		->assertReply('Hi, John!);
+}
+```
+
+### Skip Assertion
+
+In cases when your bot replies with several messages you can assert only a specific reply using the `reply` method to skip assertion. All tests below will pass.
+
+```php
+public function testStartConversation()
+{
+	$this->bot
+		->receives('Tell me something')
+		->assertReply('Hmm..')
+		->assertReply('Ok')
+		->assertQuestion('Here are some topics we could discuss');
+}
+
+public function testStartConversation()
+{
+	$this->bot
+		->receives('Tell me something')
+		->reply()
+		->assertReply('Ok')
+		->assertQuestion('Here are some topics we could discuss');
+}
+
+public function testStartConversation()
+{
+	$this->bot
+		->receives('Tell me something')
+		->reply(2)
+		->assertQuestion('Here are some topics we could discuss');
+}
+```
+
+### ReceiveRaw and AssertRaw
+
+If none of the helper methods can handle your specific test case you can use the `receiveRaw` and `assertRaw` methods.
+
+```php
+public function testStartConversation()
+{
+    $incoming = new IncomingMessage('Hi', '12345678', 'abcdefgh');
+    $outgoing = new OutgoingMessage('Hello');
+    
+	$this->bot
+		->receivesRaw($incoming)
+		->assertRaw($outgoing);
+}
+```
+
