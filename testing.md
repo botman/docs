@@ -39,7 +39,7 @@ public function testBasicTest()
 }
 ```
 
-Additionally you can you use the `assertReplies()` method.
+Additionally you can you use the `assertReplies()` method if you want to test multiple replies at once.
 
 ```php
 public function testBasicTest()
@@ -57,7 +57,7 @@ public function testBasicTest()
 ## Simulating User Messages
 ### Receiving Attachments
 
-BotMan can receive attachment objects from user and there are methods to test those cases. You can use `receivesLocation()`, `receivesImages`, `receivesVideos`, `receivesAudio` and `receivesFiles` methods to simulate that user has send valid attachments.
+BotMan can receive attachment objects from user and there are methods that help you test those cases. You can use `receivesLocation`, `receivesImages`, `receivesVideos`, `receivesAudio` and `receivesFiles` methods to simulate that user has send valid attachments.
 
 ```php
 public function testBasicTest()
@@ -91,7 +91,7 @@ public function testBasicTest()
 ```
 
 ### Receiving Interactive message
-There are cases when we expect user to respond to question with interactive reply. To simulate that use `receivesInteractiveMessage` method.
+There are cases when we expect our chatbot user to respond to a question with an interactive reply - for example a button click. To simulate that, use the `receivesInteractiveMessage` method. It accepts the button value as an argument.
 
 ```php
 public function testBasicTest()
@@ -106,7 +106,8 @@ public function testBasicTest()
 ## Available Assertions
 BotMan comes with handful of useful methods to test you chatbots.
 
-`assertReply` asserts that bot reply with given message.
+### assertReply
+The `assertReply` method asserts that the chatbot replies with the given message.
 
 ```php
 public function testBasicTest()
@@ -117,7 +118,8 @@ public function testBasicTest()
 }
 ```
 
-`assertReplies` asserts that bot reply with multiple messages.
+### assertReplies
+The `assertReplies` method asserts that the chatbot replies with all messages in the given array.
 
 ```php
 public function testBasicTest()
@@ -131,7 +133,8 @@ public function testBasicTest()
 }
 ```
 
-`assertReplyIsNot` asserts that bot does not reply with given message.
+### assertReplyIsNot
+The `assertReplyIsNot` method asserts that the chatbot does not reply with the given message.
 
 ```php
 public function testBasicTest()
@@ -142,7 +145,8 @@ public function testBasicTest()
 }
 ```
 
-`assertReplyIn` asserts that bot reply with message from given array. Helpful if your bot uses random answer generator.
+### assertReplyIn
+The `assertReplyIn` method asserts that the chatbot replies with one message from the given array. This is helpful if your bot uses random answers.
 
 ```php
 public function testBasicTest()
@@ -157,7 +161,8 @@ public function testBasicTest()
 }
 ```
 
-`assertReplyNotIn` asserts that bot does not reply with any of given messages.
+### assertReplyNotIn
+The `assertReplyNotIn` method asserts that the chatbot does not reply with any of the given messages.
 
 ```php
 public function testBasicTest()
@@ -172,19 +177,21 @@ public function testBasicTest()
 }
 ```
 
-`assertReplyNothing` asserts that bot does not reply with any message. Useful when chained with other assertion methods.
+### assertReplyNothing
+The `assertReplyNothing` method asserts that the chatbot does not reply with any message at all. Useful when chained with other assertion methods to check that the chatbot stopped responding.
 
 ```php
 public function testBasicTest()
 {
 	$this->bot
     		->receives('Hi')
-    		->assertReply('Hello)
+    		->assertReply('Hello')
     		->assertReplyNothing();
 }
 ```
 
-`assertQuestion` asserts that bot reply with Question object.
+### assertQuestion
+The `assertQuestion` method asserts that the chatbot replies with a Question object. If you call this method without an argument it just checks for a question occurance. Otherwise it will test for the question text.
 
 ```php
 public function testBasicTest()
@@ -202,7 +209,8 @@ public function testBasicTest()
 }
 ```
 
-`assertTemplate` asserts that bot does reply with given template class.
+### assertTemplate
+The `assertTemplate` method asserts that the chatbot does reply with a given template class. This is especially useful when testing Facebook reply templates.
 
 ```php
 public function testBasicTest()
@@ -213,7 +221,7 @@ public function testBasicTest()
 }
 ```
 
-You can pass `true` to second argument to tests that templates are exactly the same.
+You can pass `true` as a second argument to test that the templates are exactly the same (strict mode).
 
 ```php
 public function testStartJokeConversation()
@@ -250,7 +258,7 @@ public function testStartConversation()
 
 <a id="testing-events"></a>
 ## Testing Events
-BotMan support testing for events with `receivesEvent` method.
+BotMan supports testing for driver specific events with the `receivesEvent` method.
 
 ```php
 public function testStartConversation()
@@ -261,7 +269,7 @@ public function testStartConversation()
 }
 ```
 
-You can pass `$payload` as additional argument as well.
+You can pass a `$payload` array as an additional argument as well.
 
 ```php
 public function testStartConversation()
@@ -275,7 +283,7 @@ public function testStartConversation()
 <a id="advanced-testing"></a>
 ## Advanced Testing
 ### Set Driver
-If you are building multi-driver chatbot with BotMan you may have restricted some actions to specific drivers.
+If you are building multi-driver chatbots with BotMan you may have restricted some commands to specific drivers only - for example using the `group` method.
 
 ```php
 $botman->group(['driver' => FacebookDriver::class], function ($bot) {
@@ -285,7 +293,7 @@ $botman->group(['driver' => FacebookDriver::class], function ($bot) {
 });
 ```
 
-BotMan testing environment uses FakeDriver class to run tests but we can change name of driver with `setDriver` method.
+The BotMan testing environment uses a fake driver class to run the tests, but we can change the name of the driver with the `setDriver` method.
  
 ```php
 public function testStartConversation()
@@ -298,7 +306,7 @@ public function testStartConversation()
 ```
 
 ### Set User Information
-In similar manner you can set user information with `setUser` method.
+In a similar manner you can set user information with the `setUser` method.
 
 ```php
 public function testStartConversation()
@@ -314,7 +322,7 @@ public function testStartConversation()
 
 ### Skip Assertion
 
-In cases when your bot reply with several messages you can assert only specific reply using `reply` method to skip assertion. All tests below will pass.
+In cases when your bot replies with several messages you can assert only a specific reply using the `reply` method to skip assertion. All tests below will pass.
 
 ```php
 public function testStartConversation()
@@ -346,7 +354,7 @@ public function testStartConversation()
 
 ### ReceiveRaw and AssertRaw
 
-If none of helper methods can handle your specific test case you can use `receiveRaw` and `assertRaw` methods.
+If none of the helper methods can handle your specific test case you can use the `receiveRaw` and `assertRaw` methods.
 
 ```php
 public function testStartConversation()
