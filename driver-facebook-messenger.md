@@ -4,6 +4,7 @@
 - [Supported Features](#supported-features)
 - [Sending Facebook Templates](#sending-facebook-templates)
 - [Supported Events](#supported-events)
+- [Optin and Referral Events](#optin-referral)
 - [Built-in Natural Language Processing](#builtin-nlp)
 - [Studio Features](#studio-features)
     - [Get Started Command](#get-started-command)
@@ -220,6 +221,23 @@ The BotMan Facebook driver supports listening for the following events:
 - messaging_reads
 - messaging_referrals
 ```
+
+<a id="optin-referral"></a>
+## Optin and Referral Events
+
+To react to Optin or Referral events, use the following event syntax:
+
+```php
+$botman->on('messaging_referrals', function($payload, $bot) {
+	
+});
+
+$botman->on('messaging_optins', function($payload, $bot) {
+	
+});
+```
+
+You can find more details about M.me Links in the [official documentation](https://developers.facebook.com/docs/messenger-platform/discovery/m-me-links).
 
 <a id="builtin-nlp"></a>
 ## Built-in Natural Language Processing
