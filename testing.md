@@ -322,7 +322,7 @@ public function testStartConversation()
 
 ### Skip Assertion
 
-In cases when your bot replies with several messages you can assert only a specific reply using the `reply` method to skip assertion. All tests below will pass.
+In cases when your bot replies with several messages you can assert only a specific reply using the `skipReply` method to skip assertion. All tests below will pass.
 
 ```php
 public function testStartConversation()
@@ -338,7 +338,7 @@ public function testStartConversation()
 {
 	$this->bot
 		->receives('Tell me something')
-		->reply()
+		->skipReply()
 		->assertReply('Ok')
 		->assertQuestion('Here are some topics we could discuss');
 }
@@ -347,14 +347,14 @@ public function testStartConversation()
 {
 	$this->bot
 		->receives('Tell me something')
-		->reply(2)
+		->skipReply(2)
 		->assertQuestion('Here are some topics we could discuss');
 }
 ```
 
 ### ReceiveRaw and AssertRaw
 
-If none of the helper methods can handle your specific test case you can use the `receiveRaw` and `assertRaw` methods.
+If none of the helper methods can handle your specific test case you can use the `receivesIncomingMessage` and `assertOutgoingMessage` methods.
 
 ```php
 public function testStartConversation()
@@ -363,8 +363,8 @@ public function testStartConversation()
     $outgoing = new OutgoingMessage('Hello');
     
 	$this->bot
-		->receivesRaw($incoming)
-		->assertRaw($outgoing);
+		->receivesIncomingMessage($incoming)
+		->assertOutgoingMessage($outgoing);
 }
 ```
 
