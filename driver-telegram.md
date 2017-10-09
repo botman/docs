@@ -95,3 +95,9 @@ You can do this by sending a `POST` request to this URL:
 This POST request needs only one parameter called `url` with the URL that points to your BotMan logic / controller.
 If you use [BotMan Studio](/__version__/botman-studio) it will be:
 `https://yourapp.domain/botman`. HTTPS is a must, because of security reasons.
+
+Instead of manually sending the request to Telegram you can use a console command to register your Webhook.
+
+`$ php artisan botman:telegram:register`
+
+Optionally you can pass the `--output` flag to see the json that Telegram returns.
