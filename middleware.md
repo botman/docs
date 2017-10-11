@@ -16,7 +16,7 @@ BotMan comes with a thorough middleware system, which is flexible and powerful. 
 <a id="lifecycle"></a>
 ## Lifecycle
 
-This charts shows you the lifecycle of the incoming chatbot requests and each steps they go through.
+This chart shows you the lifecycle of the incoming chatbot requests and each steps they go through:
 
 <div class="columns">
 	<div class="column is-8">
