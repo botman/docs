@@ -45,7 +45,7 @@ $botman->middleware->captured($middleware);
 
 <a id="matching-middleware"></a>
 ## Matching Middleware
-The `matching` middleware defines how the messages will be matched. It receives the result of the regular epxression check and can perform additional checks too. This method is useful when testing incoming messages against natural language processing results - such as intents. This middleware can be applied per message that should be heard from BotMan.
+The `matching` middleware defines how the messages will be matched. It receives the result of the regular expression check and can perform additional checks too. This method is useful when testing incoming messages against natural language processing results - such as intents. This middleware can be applied per message that should be heard from BotMan.
 
 ```php
 $middleware = new Middleware();
@@ -73,7 +73,7 @@ $botman->middleware->sending($middleware);
 ```
 <a id="middleware-example"></a>
 ## Example
-Following a simple example of how to implement your custom middleware.
+The following is a simple example of how to implement your custom middleware.
 
 ```php
 class MyCustomMiddleware implements MiddlewareInterface
@@ -148,7 +148,7 @@ class MyCustomMiddleware implements MiddlewareInterface
 }
 ```
 
-Let's consider a simple use case: suppose you want to show a typing indicator as soon as your bot receives any message:
+Let's consider a simple use case - suppose you want to show a typing indicator as soon as your bot receives any message:
 
 ```php
     public function received(IncomingMessage $message, $next, BotMan $bot)
@@ -158,8 +158,8 @@ Let's consider a simple use case: suppose you want to show a typing indicator as
     }
 ```
 
-Note that we didn't use `$bot->types()` as you'd usually do, because at this point BotMan has not yet determined which driver to use. 
-The same apply to the `getUser()` function:
+Note that we didn't use `$bot->types()` as you'd usually do because, at this point, BotMan has not yet determined which driver to use. 
+The same applies to the `getUser()` function:
 
 ```php
     public function received(IncomingMessage $message, $next, BotMan $bot)
