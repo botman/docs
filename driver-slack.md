@@ -4,7 +4,7 @@
 - [Supported Features](#supported-features)
 - [Usage with a Slack App (recommended)](#slack-app)
 - [Usage with the Realtime API](#realtime-api)
-- [Usage with an outgoing webhook](#sending-facebook-templates)
+- [Usage with an outgoing webhook](#outgoing-webhook)
 - [Sending Slack Menus](#sending-slack-menus)
 
 <a id="installation-setup"></a>
@@ -142,6 +142,7 @@ $loop->run();
 
 Then simply run this file by using `php my-bot-file.php` - your bot should connect to your Slack team and respond to the messages.
 
+<a id="outgoing-webhook"></a>
 ## Usage with an outgoing webhook
 
 Add a new "Outgoing Webhook" integration to your Slack team - this URL needs to point to the controller where your BotMan bot is living in. You will find this integration when you search for `Outgoing WebHooks` in the Slack Apps Directory.
