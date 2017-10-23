@@ -52,12 +52,12 @@ $id = $user->getId();
 
 <a id="retrieving-username"></a>
 ### Retrieve The Username
-You can access the user ID using:
+You can access the user Username using:
 
 ```php
 // Access user
 $user = $bot->getUser();
-// Access ID
+// Access Username
 $id = $user->getUsername();
 ```
 
@@ -68,7 +68,7 @@ You can access also access the unprocessed raw messaging service user informatio
 ```php
 // Access user
 $user = $bot->getUser();
-// Access ID
+// Access Information
 $info = $user->getInfo();
 ```
 
