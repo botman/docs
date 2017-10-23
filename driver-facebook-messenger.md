@@ -42,7 +42,7 @@ Next you need to add to your .env file the following entries (only if you're usi
 
 ```
 FACEBOOK_TOKEN=your-facebook-page-token
-TOKEN_VERIFY=your-wehbook-verify-token
+FACEBOOK_VERIFICATION=your-facebook-verification-token
 FACEBOOK_APP_SECRET=your-facebook-app-secret
 ```
 
