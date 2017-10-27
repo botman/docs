@@ -234,18 +234,18 @@ class OnboardingConversation extends Conversation
     
     protected $email;
     
-    public function stopConversation(Message $message)
+    public function stopConversation(IncomingMessage $message)
 	{
-		if ($message->getMessage() == 'stop') {
+		if ($message->getText() == 'stop') {
 			return true;
 		}
 
 		return false;
 	}
 	
-	public function skipConversation(Message $message)
+	public function skipConversation(IncomingMessage $message)
 	{
-		if ($message->getMessage() == 'pause') {
+		if ($message->getText() == 'pause') {
 			return true;
 		}
 
