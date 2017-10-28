@@ -25,7 +25,7 @@ use BotMan\BotMan\Messages\Attachments\Image;
 $bot->receivesImages(function($bot, $images) {
 
     foreach ($images as $image) {
-    
+
         $url = $image->getUrl(); // The direct url
         $title = $image->getTitle(); // The title, if available
         $payload = $image->getPayload(); // The original payload
@@ -46,7 +46,7 @@ use BotMan\BotMan\Messages\Attachments\Video;
 $bot->receivesVideos(function($bot, $videos) {
 
     foreach ($videos as $video) {
-    
+
         $url = $video->getUrl(); // The direct url
         $payload = $video->getPayload(); // The original payload
     }
@@ -66,7 +66,7 @@ use BotMan\BotMan\Messages\Attachments\Audio;
 $bot->receivesAudio(function($bot, $audios) {
 
     foreach ($audios as $audio) {
-    
+
         $url = $audio->getUrl(); // The direct url
         $payload = $audio->getPayload(); // The original payload
     }
@@ -86,7 +86,7 @@ use BotMan\BotMan\Messages\Attachments\File;
 $bot->receivesFiles(function($bot, $files) {
 
     foreach ($files as $file) {
-    
+
         $url = $file->getUrl(); // The direct url
         $payload = $file->getPayload(); // The original payload
     }
