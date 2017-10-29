@@ -43,7 +43,7 @@ This will download the BotMan package and all it's dependencies.
 <a id="basic-usage-without-botman-studio"></a>
 ## Basic Usage without BotMan Studio
 
-This code shows you the very basics of how you can use BotMan as a standalone composer dependency.
+This code shows you the very basics of using BotMan as a standalone composer dependency.
 Make sure to place this code in a file that is accessible through the web - like a controller class.
 
 ```php
