@@ -4,6 +4,7 @@
 - [Register Your Webhook](#register-webhook)
 - [Incoming Phone Calls](#incoming-phone-calls)
 - [TwiML Support](#twiml-support)
+- [Configuration](#configuration)
 - [Supported Features](#supported-features)
 
 <a id="installation-setup"></a>
@@ -34,6 +35,16 @@ php artisan botman:install-driver twilio
 > {callout-info} [ngrok](https://ngrok.com/) is a great tool to create a public URL for your local application. If you use Laravel Valet, you can create it with "valet share" as well.
 
 To connect BotMan with Twilio, you first need to create a Twilio account [here](https://www.twilio.com/try-twilio) and [buy a phone number](https://www.twilio.com/console/phone-numbers/incoming), which is capable of sending SMS/MMS or making phone calls.
+
+Place your Twilio auth token in your BotMan configuration. If you use BotMan Studio, you can find the configuration file located under `config/botman/twilio.php`.
+
+If you dont use BotMan Studio, add these line to $config array that you pass when you create the object from BotManFactory.
+
+```php
+'twilio' => [
+    'token' => 'YOUR-TWILIO-TOKEN-HERE',
+]
+```
 
 <a id="register-webhook"></a>
 ## Register Your Webhook
