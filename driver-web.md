@@ -61,9 +61,6 @@ Pass the driver configuration to the `BotManFactory` upon initialization. If you
 ]
 ```
 
-Last you need to connect the test bot with your WeChat user account. Use the `Test account QR Code` from your sandbox page to add the bot to your contacts. And that's it - you can now use BotMan with WeChat to create interactive bots!
-
-
 <a id="supported-features"></a>
 ## Supported Features
 Since this is a "naked" web-driver implementation, it is up to you to implement the features that you need.
