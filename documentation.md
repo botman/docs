@@ -31,6 +31,7 @@
     - [Nexmo](/__version__/driver-nexmo)
     - [Slack](/__version__/driver-slack)
     - [Telegram](/__version__/driver-telegram)
+    - [Twilio](/__version__/driver-twilio)
     - [Web](/__version__/driver-web)
     - [WeChat](/__version__/driver-wechat)
 - [Testing](/__version__/testing)
