@@ -1,7 +1,7 @@
 # Natural Language Processing
 
 - [Introduction](#introduction)
-- [API.ai](#api-ai)
+- [Dialogflow (previously known as API.ai)](#dialogflow)
 
 <a id="introduction"></a>
 ## Introduction
@@ -29,33 +29,33 @@ and returns structured data that BotMan can process:
 ```
 
 Now this makes a perfect usage scenario for BotMan, as you are no longer tied to static text inputs that need to be exact matches.
-Instead you can make use of BotMan's middleware support and retrieve information from third party services like wit.ai or api.ai.
+Instead you can make use of BotMan's middleware support and retrieve information from third party services like wit.ai or Dialogflow.
 
-<a id="api-ai"></a>
-## API.ai
+<a id="dialogflow"></a>
+## Dialogflow
 
-BotMan has built-in support for the [api.ai](http://api.ai) NLP service.
-Please refer to the [API.ai documentation](https://docs.api.ai/page/guidelines) on how to set up your account and get started with the service.
+BotMan has built-in support for the [Dialogflow](https://dialogflow.com/) NLP service.
+Please refer to the [Dialogflow documentation](https://dialogflow.com/docs/getting-started/basics) on how to set up your account and get started with the service.
 
-To listen in BotMan for certain API.ai actions, you can use the ApiAi middleware class.
+To listen in BotMan for certain Dialogflow actions, you can use the ApiAi middleware class.
 
 ```php
 use BotMan\BotMan\Middleware\ApiAi;
 
-$apiAi = ApiAi::create('your-api-ai-token')->listenForAction();
+$dialogflow = ApiAi::create('your-api-ai-token')->listenForAction();
 
 // Apply global "received" middleware
-$botman->middleware->received($apiAi);
+$botman->middleware->received($dialogflow);
 
 // Apply matching middleware per hears command
 $botman->hears('my_api_action', function (BotMan $bot) {
-    // The incoming message matched the "my_api_action" on API.ai
-    // Retrieve API.ai information:
+    // The incoming message matched the "my_api_action" on Dialogflow
+    // Retrieve Dialogflow information:
     $extras = $bot->getMessage()->getExtras();
     $apiReply = $extras['apiReply'];
     $apiAction = $extras['apiAction'];
     $apiIntent = $extras['apiIntent'];
     
     $bot->reply("this is my reply");
-})->middleware($apiAi);
+})->middleware($dialogflow);
 ```
