@@ -4,7 +4,6 @@
 - [Register Your Webhook](#register-webhook)
 - [Incoming Phone Calls](#incoming-phone-calls)
 - [TwiML Support](#twiml-support)
-- [Configuration](#configuration)
 - [Supported Features](#supported-features)
 
 <a id="installation-setup"></a>
