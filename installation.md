@@ -6,6 +6,12 @@
 
 BotMan is a framework agnostic PHP library that is designed to simplify the task of developing innovative bots for multiple messaging platforms, including Slack, Telegram, Microsoft Bot Framework, Nexmo, HipChat, Facebook Messenger, WeChat and many more.
 
+<a id="requirements"></a>
+## Server Requirements
+
+- PHP >= 7
+- For BotMan Studio checkout [Laravel's requirements](https://laravel.com/docs/5.5/installation#server-requirements)
+
 <a id="installation"></a>
 ## Installing BotMan
 
