@@ -4,7 +4,7 @@
 - [Supported Features](#supported-features)
 - [Usage with a Slack App (recommended)](#slack-app)
 - [Usage with the Realtime API](#realtime-api)
-- [Usage with an outgoing webhook](#sending-facebook-templates)
+- [Usage with an outgoing webhook](#outgoing-webhook)
 - [Sending Slack Menus](#sending-slack-menus)
 
 <a id="installation-setup"></a>
@@ -33,6 +33,7 @@ php artisan botman:install-driver slack
 
 Slack is a cloud-based set of team collaboration tools and services.
 
+> {callout-info} If you're using [ngrok](https://ngrok.com/) be aware that Slack has a timeout of 3 seconds. When using ngrok, depending on your location and connection speed, the time it takes for Slack to get a 200 OK can be longer than 3 seconds. In such cases you'll notice that your bot will answer multiple times. If you're facing this issue a possible solution is to deploy your bot to a production server or try to change the ngrok server location.
 
 <a id="supported-features"></a>
 ## Supported Features
@@ -141,6 +142,7 @@ $loop->run();
 
 Then simply run this file by using `php my-bot-file.php` - your bot should connect to your Slack team and respond to the messages.
 
+<a id="outgoing-webhook"></a>
 ## Usage with an outgoing webhook
 
 Add a new "Outgoing Webhook" integration to your Slack team - this URL needs to point to the controller where your BotMan bot is living in. You will find this integration when you search for `Outgoing WebHooks` in the Slack Apps Directory.

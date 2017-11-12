@@ -8,10 +8,10 @@
 - [Skipping Conversations](#skipping-conversations)
 - [Caching Conversations](#caching-conversations)
 
-When it comes to chat bots, you probably don't want to simply react to single keywords, but instead, you might need to gather information from the user, using a conversation. 
+When it comes to chat bots, you probably don't want to simply react to single keywords, but instead, you might need to gather information from the user, using a conversation.
 Let's say, that you want your chat bot to provide an elegant user onboarding experience for your application users. In the onboarding process we are going to ask the user for their firstname and email address - that's a perfect fit for conversations!
 
-> {callout-info} You must configure a persistent [Cache Driver](/__version__/cache-drivers) to use BotMan's Conversation, as BotMan will keep the conversation state cached. BotMan Studio handles it all for you
+> {callout-info} If you are **not** using [BotMan Studio](/__version__/botman-studio), you must configure a persistent [Cache Driver](/__version__/cache-drivers) to use BotMan's Conversation, as BotMan will keep the conversation state cached.
 
 <a id="starting-a-conversation"></a>
 ## Starting A Conversation
@@ -32,7 +32,7 @@ Let's take a look at the `OnboardingConversation` class:
 class OnboardingConversation extends Conversation
 {
     protected $firstname;
-    
+
     protected $email;
 
     public function askFirstname()
@@ -90,7 +90,7 @@ public function askMood()
 Instead of passing a string to the `ask()` method, it is also possible to create a question object.
 The question objects make use of the interactive messages from supported messaging services to present the user buttons to interact with.
 <br><br>
-When passing question objects to the `ask()` method, the returned `Answer` object has a method called `isInteractiveMessageReply` to detect, if 
+When passing question objects to the `ask()` method, the returned `Answer` object has a method called `isInteractiveMessageReply` to detect, if
 the user interacted with the message and clicked on a button or simply entered text.
 <br><br>
 Creating a simple Question object:
@@ -121,7 +121,7 @@ public function askForDatabase()
 ## Asking For Images, Videos, Audio or Location
 
 With BotMan, you can easily let your bot [receive images, videos, audio files or locations](/__version__/receiving-additional-content).
-The same approach can be applied to your conversation. This is especially useful if you only want your bot users to provide you with specific attachment types. 
+The same approach can be applied to your conversation. This is especially useful if you only want your bot users to provide you with specific attachment types.
 
 You might use the `askForImages` method to ask your bot users a question and only accept one or more images as a valid answer:
 
@@ -180,10 +180,10 @@ public function askLocation()
 ## Structured Question With Patterns
 
 You might also want to ask your user questions, where you already know the answer should be in a fixed set of possible options.
-For example a simple yes or no question. 
+For example a simple yes or no question.
 
 Instead of passing a closure to the `ask` method, you can simply pass it an array.
-BotMan will then look first for a matching pattern, and execute only the callback whose pattern is matched. 
+BotMan will then look first for a matching pattern, and execute only the callback whose pattern is matched.
 
 This allows the bot to present multiple choice options, or to proceed only when a valid response has been received. The patterns can have the same placeholders as the `$bot->reply()` method has. All matching parameters will be passed to the callback function.
 
@@ -225,27 +225,28 @@ $botman->startConversation(new PizzaConversation(), 'my-recipient-user-id', Tele
 
 While being in a conversation it is sometimes useful to stop it for a certain reason. In order to make this possible there a two methods available in every conversation class: `skipConversation()` and `stopConversation()`. Inside those methods you can return true or false to skip or stop a conversation. Skip will stop the conversation just for this one request. Afterwards it will go on as if nothing happened. The stop method will delete the conversation, so there is no turning back.
 
-The example below will stop the conversation if the message says `stop` and skip it if it says `pause`. 
+The example below will stop the conversation if the message says `stop` and skip it if it says `pause`.
 
 ```php
 class OnboardingConversation extends Conversation
 {
     protected $firstname;
-    
+
     protected $email;
     
-    public function stopConversation(Message $message)
+  public function stopConversation(IncomingMessage $message)
 	{
-		if ($message->getMessage() == 'stop') {
+		if ($message->getText() == 'stop') {
 			return true;
 		}
 
 		return false;
 	}
-	
-	public function skipConversation(Message $message)
+
+
+	public function skipConversation(IncomingMessage $message)
 	{
-		if ($message->getMessage() == 'pause') {
+		if ($message->getText() == 'pause') {
 			return true;
 		}
 

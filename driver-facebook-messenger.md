@@ -4,6 +4,7 @@
 - [Supported Features](#supported-features)
 - [Sending Facebook Templates](#sending-facebook-templates)
 - [Supported Events](#supported-events)
+- [Optin and Referral Events](#optin-referral)
 - [Built-in Natural Language Processing](#builtin-nlp)
 - [Studio Features](#studio-features)
     - [Get Started Command](#get-started-command)
@@ -37,6 +38,13 @@ Or if you use BotMan Studio:
 ```sh
 php artisan botman:install-driver facebook
 ```
+Next you need to add to your .env file the following entries (only if you're using BotMan Studio): 
+
+```
+FACEBOOK_TOKEN=your-facebook-page-token
+FACEBOOK_VERIFICATION=your-facebook-verification-token
+FACEBOOK_APP_SECRET=your-facebook-app-secret
+```
 
 This driver requires a valid and secure URL in order to set up webhooks and receive events and information from the chat users. This means your application should be accessible through an HTTPS URL.
 
@@ -44,14 +52,15 @@ This driver requires a valid and secure URL in order to set up webhooks and rece
 
 To connect BotMan with Facebook Messenger, you first need to follow the [official quick start guide](https://developers.facebook.com/docs/messenger-platform/guides/quick-start) to create your Facebook Messenger application and retrieve an access token as well as an app secret. Place both of them in your BotMan configuration. If you use BotMan Studio, you can find the configuration file located under `config/botman/facebook.php`.
 
+If you dont use BotMan Studio, add these line to $config array that you pass when you create the object from BotManFactory.
 ```php
-'botman' => [
-	'facebook' => [
-		'token' => 'YOUR-FACEBOOK-PAGE-TOKEN-HERE',
-		'app_secret' => 'YOUR-FACEBOOK-APP-SECRET-HERE',
-	]
-],
+'facebook' => [
+  	'token' => 'YOUR-FACEBOOK-PAGE-TOKEN-HERE',
+	'app_secret' => 'YOUR-FACEBOOK-APP-SECRET-HERE',
+    'verification'=>'MY_SECRET_VERIFICATION_TOKEN',
+]
 ```
+
 
 After that you can setup the webhook, which connects the Facebook application with your BotMan application. This is covered in the above mentioned Quick Start Guide as well, as connecting your Facebook application to a Facebook page.
 
@@ -212,6 +221,23 @@ The BotMan Facebook driver supports listening for the following events:
 - messaging_reads
 - messaging_referrals
 ```
+
+<a id="optin-referral"></a>
+## Optin and Referral Events
+
+To react to Optin or Referral events, use the following event syntax:
+
+```php
+$botman->on('messaging_referrals', function($payload, $bot) {
+	
+});
+
+$botman->on('messaging_optins', function($payload, $bot) {
+	
+});
+```
+
+You can find more details about M.me Links in the [official documentation](https://developers.facebook.com/docs/messenger-platform/discovery/m-me-links).
 
 <a id="builtin-nlp"></a>
 ## Built-in Natural Language Processing

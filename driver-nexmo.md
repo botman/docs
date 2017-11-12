@@ -37,13 +37,13 @@ To connect BotMan with Nexmo, you first need to create a Nexmo account [here](ht
 Go to the Nexmo dashboard at [https://dashboard.nexmo.com/settings](https://dashboard.nexmo.com/settings) and copy your API key and API secret into your BotMan configuration.
 If you use BotMan Studio, you can find the configuration file located under `config/botman/nexmo.php`.
 
+If you dont use BotMan Studio, add these line to $config array that you pass when you create the object from BotManFactory.
+
 ```php
-'botman' => [
-    'nexmo' => [
-    	'key' => 'YOUR-NEXMO-APP-KEY',
-    	'nexmo_secret' => 'YOUR-NEXMO-APP-SECRET',
-    ]
-],
+'nexmo' => [
+	'key' => 'YOUR-NEXMO-APP-KEY',
+	'nexmo_secret' => 'YOUR-NEXMO-APP-SECRET',
+]
 ```
 
 <a id="register-webhook"></a>
