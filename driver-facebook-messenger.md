@@ -210,6 +210,38 @@ $bot->reply(
 );
 ```
 
+### Media Template
+
+<img alt="Facebook Media Template Screenshot" src="/img/fb/template_media.jpg" width="400">
+
+You can use the Media Template to send images or videos with optional buttons. Here is an example on how to send an image with an attachment ID.
+
+```php
+$bot->reply(MediaTemplate::create()
+        ->element(MediaAttachmentElement::create('image')
+            ->attachmentId('1543527005693234')
+            ->addButton(ElementButton::create('Tell me more')
+                ->type('postback')
+                ->payload('Tell me more'))
+            ->addButton(ElementButton::create('Documentation')
+                ->url('https://botman.io/'))));
+```
+And here is an example on how to send a video.
+
+```php
+$bot->reply(MediaTemplate::create()
+        ->element(MediaUrlElement::create('video')
+            ->url('https://www.facebook.com/liechteneckers/videos/10155225087428922/')
+            ->addButtons([
+                ElementButton::create('Web URL')
+                    ->url('http://liechtenecker.at'),
+                ElementButton::create('payload')
+                    ->type('postback')
+                    ->payload('test'),
+            ])));
+```
+You probably have noticed that the main Template is the same for images or videos. (`MediaTemplate`) With the element you decide the attachment type. But you also decide if you send the attachment with the attachment ID or an Facebook URL. Checkout the official [Facebook documentation](https://developers.facebook.com/docs/messenger-platform/send-messages/template/media) for more information. 
+
 <a id="supported-events"></a>
 ## Supported Events
 
