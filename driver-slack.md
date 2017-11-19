@@ -22,6 +22,11 @@ Then load the driver before creating the BotMan instance (**only when you don't 
 DriverManager::loadDriver(\BotMan\Drivers\Slack\SlackDriver::class);
 
 // Create BotMan instance
+$config = [
+    'slack' => [
+        'token' => 'YOUR-SLACK-BOT-TOKEN'
+    ]
+];
 BotManFactory::create($config);
 ```
 
