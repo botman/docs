@@ -60,6 +60,9 @@ use BotMan\BotMan\BotManFactory;
 
 $config = [
     // Your driver-specific configuration
+    // "telegram" => [
+    //    "token" => "TOKEN"
+    // ]
 ];
 
 // create an instance
