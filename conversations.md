@@ -72,6 +72,24 @@ As you can see in the onboarding conversation, we have two questions that get as
 
 After it retrieves an answer from the user, the callback gets executed and the bot asks the next question, which retrieves the user's email address.
 
+### Starting within a conversation
+
+When you build more and more conversations, you probably also want to connect them. This is when it gets very useful to start a conversation within another one.
+
+```php
+public function askEmail()
+{
+	$this->ask('One more thing - what is your email?', function(Answer $answer) {
+		// Save result
+		$this->email = $answer->getText();
+
+		$this->say('Great - that is all we need, '.$this->firstname);
+		
+		$this->bot->startConversation(new FavouriteLunchConversation());
+	});
+}
+```
+
 <a id="asking-questions"></a>
 ## Asking Questions
 
