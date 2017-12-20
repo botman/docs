@@ -6,6 +6,8 @@
 
 BotMan is a framework agnostic PHP library that is designed to simplify the task of developing innovative bots for multiple messaging platforms, including Slack, Telegram, Microsoft Bot Framework, Nexmo, HipChat, Facebook Messenger, WeChat and many more.
 
+> {callout-video} Want to get a headstart into chatbot development? Take a look at the [Build A Chatbot](https://buildachatbot.io) video course.
+
 <a id="requirements"></a>
 ## Server Requirements
 
@@ -65,15 +67,18 @@ $config = [
     // ]
 ];
 
-// create an instance
+// Load the driver(s) you want to use
+DriverManager::loadDriver(\BotMan\Drivers\Telegram\TelegramDriver::class);
+
+// Create an instance
 $botman = BotManFactory::create($config);
 
-// give the bot something to listen for.
+// Give the bot something to listen for.
 $botman->hears('hello', function (BotMan $bot) {
     $bot->reply('Hello yourself.');
 });
 
-// start listening
+// Start listening
 $botman->listen();
 ```
 
