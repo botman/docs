@@ -15,6 +15,8 @@
 
 Facebook Messenger is the biggest Messenger out there and therefor a great choice for building a chatbot. There are more than 1 Billion active users per month.
 
+> {callout-video} Visual learner? Take a look at the [BuildAChatbot Facebook Tutorial](https://buildachatbot.io/video/install-facebook-driver)
+
 <a id="installation-setup"></a>
 ## Installation & Setup
 
