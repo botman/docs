@@ -46,7 +46,7 @@ If you don't want to use [BotMan Studio](/__version__/botman-studio), you can in
 composer require botman/botman
 ```
 
-This will download the BotMan package and all it's dependencies.
+This will download the BotMan package and all its dependencies.
 
 <a id="basic-usage-without-botman-studio"></a>
 ## Basic Usage without BotMan Studio
