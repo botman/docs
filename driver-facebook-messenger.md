@@ -40,7 +40,7 @@ Or if you use BotMan Studio:
 ```sh
 php artisan botman:install-driver facebook
 ```
-Next you need to add to your .env file the following entries (only if you're using BotMan Studio): 
+Next you need to add to your .env file the following entries (only if you're using BotMan Studio):
 
 ```
 FACEBOOK_TOKEN=your-facebook-page-token
@@ -114,7 +114,7 @@ BotMan supports all the main [Facebook templates](https://developers.facebook.co
 
 <img alt="Facebook Button Template Screenshot" src="/img/fb/template_buttons.png" width="500">
 
-A `Button Template` is a text with several user input options. (buttons) The template uses `ElementButtons` which are different from the buttons you use for BotMan `Questions`. There are two types of ElementButtons. The default one is the `web_url` button which only needs an `url` next to the title. It links to an external website. Secondly we have `postback` buttons. They will trigger [Facebook postback actions](https://developers.facebook.com/docs/messenger-platform/webhook-reference/postback). They require the type `postback` and a `payload which is the text that Facebook will send to BotMan` when a user hits this button. In the callback you will be able to get the postback button's text with `$answer->getText()`.
+A `Button Template` is a text with several user input options. (buttons) The template uses `ElementButtons` which are different from the buttons you use for BotMan `Questions`. There are two types of ElementButtons. The default one is the `web_url` button which only needs an `url` next to the title. It links to an external website. Secondly we have `postback` buttons. They will trigger [Facebook postback actions](https://developers.facebook.com/docs/messenger-platform/webhook-reference/postback). They require the type `postback` and a `payload which is the text that Facebook will send to BotMan` when a user hits this button. If you use the ask method within a [Conversation](#conversations), you will be able to get the postback button's text with `$answer->getText()`.
 
 ```php
 $bot->reply(ButtonTemplate::create('Do you want to know more about BotMan?')
@@ -242,7 +242,7 @@ $bot->reply(MediaTemplate::create()
                     ->payload('test'),
             ])));
 ```
-You probably have noticed that the main Template is the same for images or videos. (`MediaTemplate`) With the element you decide the attachment type. But you also decide if you send the attachment with the attachment ID or an Facebook URL. Checkout the official [Facebook documentation](https://developers.facebook.com/docs/messenger-platform/send-messages/template/media) for more information. 
+You probably have noticed that the main Template is the same for images or videos. (`MediaTemplate`) With the element you decide the attachment type. But you also decide if you send the attachment with the attachment ID or an Facebook URL. Checkout the official [Facebook documentation](https://developers.facebook.com/docs/messenger-platform/send-messages/template/media) for more information.
 
 <a id="supported-events"></a>
 ## Supported Events
@@ -263,11 +263,11 @@ To react to Optin or Referral events, use the following event syntax:
 
 ```php
 $botman->on('messaging_referrals', function($payload, $bot) {
-	
+
 });
 
 $botman->on('messaging_optins', function($payload, $bot) {
-	
+
 });
 ```
 
@@ -277,7 +277,7 @@ You can find more details about M.me Links in the [official documentation](https
 ## Built-in Natural Language Processing
 
 Facebook Messenger comes with an integrated [Natural Language Processing](https://developers.facebook.com/docs/messenger-platform/built-in-nlp/) tool that you can enable for your Facebook page, if you want.
-Whenever a message contains one or more natural language processing entities that Facebook knows - such as greetings, datetimes or saying goodbye - the message will contain an extra array called "nlp". 
+Whenever a message contains one or more natural language processing entities that Facebook knows - such as greetings, datetimes or saying goodbye - the message will contain an extra array called "nlp".
 You may access this array using the `getExtras` method on the incoming message object like this:
 
 ```php
@@ -302,7 +302,7 @@ First define the payload text in your `config/botman/facebook.php` file.
 
 Then run the artisan command:
 ```sh
-php artisan botman:facebookAddStartButton 
+php artisan botman:facebookAddStartButton
 ```
 
 This will add the Get Started button to your page's chat. You are now able to listen to this button with the payload in your `hears` method.
