@@ -59,6 +59,7 @@ Make sure to place this code in a file that is accessible through the web - like
 
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\BotManFactory;
+use BotMan\BotMan\Drivers\DriverManager;
 
 $config = [
     // Your driver-specific configuration
