@@ -68,7 +68,7 @@ All conversations that your bot might use need to extend the abstract Conversati
 
 This is the starting point of your conversation and get's executed immediately.
 
-As you can see in the onboarding conversation, we have two questions that get asked one after another. Just like a regular conversation, the bot first asks for the firstname and saves the value in the conversation object itself.
+As you can see in the onboarding conversation, we have two questions that get asked one after another. Just like a regular conversation, the bot first asks for the firstname and saves the value in the conversation object itself. Beware that your class variables must be declared as `protected` or `public` so that they can be saved in cache.
 
 After it retrieves an answer from the user, the callback gets executed and the bot asks the next question, which retrieves the user's email address.
 
@@ -84,7 +84,7 @@ public function askEmail()
 		$this->email = $answer->getText();
 
 		$this->say('Great - that is all we need, '.$this->firstname);
-		
+
 		$this->bot->startConversation(new FavouriteLunchConversation());
 	});
 }
@@ -251,7 +251,7 @@ class OnboardingConversation extends Conversation
     protected $firstname;
 
     protected $email;
-    
+
   public function stopsConversation(IncomingMessage $message)
 	{
 		if ($message->getText() == 'stop') {
