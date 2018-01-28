@@ -116,6 +116,16 @@ $botman->group(['recipient' => '1234567890'], function($bot) {
 });
 ```
 
+You may also use an array of recipients to restrict certain commands.
+
+```php
+$botman->group(['recipient' => ['1234567890', '2345678901', '3456789012']], function($bot) {
+    $bot->hears('keyword', function($bot) {
+        // Only listens when recipient '1234567890', '2345678901' or '3456789012' is sending the message.
+    });
+});
+```
+
 <a id="fallbacks"></a>
 ## Fallbacks
 
