@@ -25,7 +25,7 @@ A driver is a class which extends `BotMan\BotMan\Drivers\HttpDriver`.
 
 This parent class defines a blueprint by which the driver must adhere to. Succesfully implementing the methods set out in this class, results in a fully working driver. 
 
-```
+```php
 <?php
 
 namespace App\Drivers;
@@ -42,7 +42,8 @@ class MyDriver extends HttpDriver
 
 When each driver is instantiated by BotMan, the `buildPayload()` method is called. This method is used to carry out the initial setup. In the case of Facebook, it looks like this.
 
-```
+```php
+
 /**
 * @param Request $request
 */
@@ -60,9 +61,9 @@ BotMan needs to be notified whether or not the driver can handle the incoming re
 
 This method interogates the incoming request to determine whether it contains anything that the driver is expecting and simply returns a boolean.
 
-In the case of Slack, we know it's a Slack message if the incoming event contains a user, `team_domain` or `bot_id`.
+In the case of Slack, we know it's a Slack message if the incoming event contains a `user`, `team_domain` or `bot_id`.
 
-```
+```php
 public function matchesRequest()
 {
     return ! is_null($this->event->get('user')) || ! is_null($this->event->get('team_domain')) || ! is_null($this->event->get('bot_id'));
@@ -80,7 +81,7 @@ BotMan is expecting the `messages` property to contain an array of `BotMan\BotMa
 
 It's important to note that even if the request only contains a single message, the `messages` property should be an array.
 
-```
+```php
 /**
 * Retrieve the chat message.
 *
@@ -105,8 +106,9 @@ public function getMessages()
 BotMan ships with a class for managing users: `BotMan\BotMan\Users\User`
 
 To set this up simply return a new `User` object from the `getUser` method of the driver.
+If your messaging service supports additional information about your user, you can pass these parameters to the user object.
 
-```
+```php
 **
 * Retrieve User information.
 * @param IncomingMessage $matchingMessage
@@ -125,7 +127,7 @@ For your bot to respond to conversations, the `getConversationAnswer` method nee
 
 From here, simply return an instance of `BotMan\BotMan\Messages\Incoming\Answer`
 
-```
+```php
 /**
 * @param IncomingMessage $message
 * @return \BotMan\BotMan\Messages\Incoming\Answer
@@ -147,7 +149,7 @@ In order for your bot to send a message, there are two methods that need definin
 
 The `buildServicePayload` method receives the message instance to be sent by BotMan. The purpose of this method is to take the message and transform it into the payload required by your driver.
 
-```
+```php
 /**
 * @param string|Question|OutgoingMessage $message
 * @param IncomingMessage $matchingMessage
@@ -173,7 +175,7 @@ Your driver has access to a HTTP client which can assist with this.
 
 The example below posts the payload to a given endpoint and handles the addtion of any required headers.
 
-```
+```php
 /**
 * @param mixed $payload
 * @return Response
@@ -197,7 +199,7 @@ There are two steps required to activate a driver.
 
 Firstly, define the `isConfigured` method of the driver. This should return a boolean as to whether or not the driver is ready for use. Typically, it's a good idea to check any required configuration has been set for the driver in this method.
 
-```
+```php
 /**
 * @return bool
 */
@@ -213,7 +215,7 @@ If you are using BotMan studio for Laravel, this is easy. Simply open `App\Provi
 
 If you are using the package in a different environment, use the `DriverManager` to load your driver as follows:
 
-```
+```php
 use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\Drivers\DriverManager;
 
@@ -232,7 +234,7 @@ This object is passed to the `buildServicePayload` method of your driver. As suc
 
 Below is an example of a template which contains text and buttons:
 
-```
+```php
 class ExampleTemplate implements \JsonSerializable
 {
     /** @var string */
