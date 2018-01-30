@@ -21,6 +21,7 @@
 
 - Extending BotMan
 	- [Middleware](/__version__/middleware)
+	- [Drivers](/__version__/drivers)
 
 - Drivers
 	- [Amazon Alexa](/__version__/driver-amazon-alexa)
