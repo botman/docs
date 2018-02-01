@@ -75,6 +75,16 @@ $botman->hears('I want ([0-9]+)', function ($bot, $number) {
 
 Just like the command parameters, each regular expression match group will be passed to the handling Closure.
 
+In addition to using regular expression matching groups, you can also use regular epxressions to generally match incoming requests.
+
+Take this example, which listens for either "Hi" or "Hello" anywhere in the incoming message:
+
+```php
+$botman->hears('.*(Hi|Hello).*', function ($bot) {
+    $bot->reply('Nice to meet you!');
+});
+```
+
 <a id="command-groups"></a>
 ## Command Groups
 
