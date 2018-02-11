@@ -8,6 +8,7 @@
     - [Middleware](#command-groups-middleware)
     - [Recipients](#command-groups-recipients)
 - [Fallbacks](#fallbacks)
+- [Get full request payload](#payload)
 
 <a id="basic-commands"></a>
 ## Basic Commands
@@ -146,3 +147,8 @@ $botman->fallback(function($bot) {
     $bot->reply('Sorry, I did not understand these commands. Here is a list of commands I understand: ...');
 });
 ```
+
+<a id="payload"></a>
+## Get full request payload
+
+BotMan does already a great job in providing you with data from the incoming message requests with helpers like `$bot->getUser();` or `$bot->getDriver();`. But sometimes messenger add extra data to their requests which you can't access directly like that. This is when it gets useful to grab the whole payload of the incoming request with `$bot->getMessage()->getPayload();`. This way you have full access to all the data and can decide for yourself what you need and how to process it.
