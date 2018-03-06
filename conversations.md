@@ -5,7 +5,7 @@
 - [Asking For Images, Videos, Audio Or Location](#asking-for-data)
 - [Structured Question With Patterns](#structured-question)
 - [Originating Conversations](#originating-conversations)
-- [Skipping Conversations](#skipping-conversations)
+- [Skip or Stop Conversations](#skip-stop-conversations)
 - [Caching Conversations](#caching-conversations)
 
 When it comes to chat bots, you probably don't want to simply react to single keywords, but instead, you might need to gather information from the user, using a conversation.
@@ -238,7 +238,7 @@ To do so, just use the `startConversation` method, as you would normally do, but
 $botman->startConversation(new PizzaConversation(), 'my-recipient-user-id', TelegramDriver::class);
 ```
 
-<a id="skipping-conversations"></a>
+<a id="#skip-stop-conversations"></a>
 ## Skip or Stop Conversations
 
 While being in a conversation it is sometimes useful to stop it for a certain reason. In order to make this possible there a two methods available in every conversation class: `skipsConversation()` and `stopsConversation()`. Inside those methods you can return true or false to skip or stop a conversation. Skip will stop the conversation just for this one request. Afterwards it will go on as if nothing happened. The stop method will delete the conversation, so there is no turning back.
