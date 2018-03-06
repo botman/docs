@@ -1,6 +1,7 @@
 # Web
 
 - [Installation & Setup](#installation-setup)
+- [Web Widget](#web-widget)
 - [Supported Features](#supported-features)
 
 <a id="installation-setup"></a>
@@ -76,6 +77,12 @@ Pass the driver configuration to the `BotManFactory` upon initialization. If you
     ]
 ]
 ```
+
+<a id="web-widget"></a>
+## Web Widget
+The most common use case for the BotMan web driver is probably to use it in combination with a frontend widget and provide a chat interface on your existing website. To make this as easy as possible, BotMan ships with a ready-to-use web widget, that you can add to your website.
+You can find the documentation [here](/__version__/web-widget). 
+
 
 <a id="supported-features"></a>
 ## Supported Features
