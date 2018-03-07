@@ -28,6 +28,7 @@
 	- [Amazon Alexa](/__version__/driver-amazon-alexa)
 	- [Cisco Spark](/__version__/driver-cisco-spark)
     - [Facebook Messenger](/__version__/driver-facebook-messenger)
+    - [Hangouts Chat](/__version__/driver-hangouts-chat)
     - [HipChat](/__version__/driver-hipchat)
     - [Microsoft Bot Framework](/__version__/driver-ms-bot-framework)
     - [Nexmo](/__version__/driver-nexmo)
