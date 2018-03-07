@@ -64,7 +64,7 @@ If a driver does not support a specific action, it is in most cases a limitation
 	</tr>
 	<tr>
 		<td>Image Attachment</td>
-		<td>❌</td>
+		<td>✅</td>
 	</tr>
 	<tr>
 		<td>Video Attachment</td>
