@@ -35,9 +35,10 @@ This driver requires a valid and secure URL in order to set up webhooks and rece
 
 To connect BotMan with your Telegram Bot, you first need to follow the [official guide](https://core.telegram.org/bots#3-how-do-i-create-a-bot) to create your Telegram Bot and an access token.
 
-Once you have obtained the access token, place it in your BotMan configuration. If you use BotMan Studio, you can find the configuration file located under `config/botman/telegram.php`.
+Once you have obtained the access token, place it in your `.env` file like `TELEGRAM_TOKEN=YOUR-TELEGRAM-TOKEN-HERE`. There it gets automatically loaded to your `config/botman/telegram.php` file.
 
-If you dont use BotMan Studio, add these line to $config array that you pass when you create the object from BotManFactory.
+
+If you don't use BotMan Studio, add these line to $config array that you pass when you create the object from BotManFactory.
 
 ```php
 'telegram' => [

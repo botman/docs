@@ -52,9 +52,10 @@ This driver requires a valid and secure URL in order to set up webhooks and rece
 
 > {callout-info} [ngrok](https://ngrok.com/) is a great tool to create such a public HTTPS URL for your local application. If you use Laravel Valet, you can create it with "valet share" as well.
 
-To connect BotMan with Facebook Messenger, you first need to follow the [official quick start guide](https://developers.facebook.com/docs/messenger-platform/guides/quick-start) to create your Facebook Messenger application and retrieve an access token as well as an app secret. Place both of them in your BotMan configuration. If you use BotMan Studio, you can find the configuration file located under `config/botman/facebook.php`.
+To connect BotMan with Facebook Messenger, you first need to follow the [official quick start guide](https://developers.facebook.com/docs/messenger-platform/guides/quick-start) to create your Facebook Messenger application and retrieve an access token as well as an app secret. Switch both of them with the dummy values in your BotMan `.env` file.
 
-If you dont use BotMan Studio, add these line to $config array that you pass when you create the object from BotManFactory.
+
+If you don't use BotMan Studio, add these lines to the $config array that you pass when you create the object from BotManFactory.
 ```php
 'facebook' => [
   	'token' => 'YOUR-FACEBOOK-PAGE-TOKEN-HERE',
@@ -62,7 +63,6 @@ If you dont use BotMan Studio, add these line to $config array that you pass whe
     'verification'=>'MY_SECRET_VERIFICATION_TOKEN',
 ]
 ```
-
 
 After that you can setup the webhook, which connects the Facebook application with your BotMan application. This is covered in the above mentioned Quick Start Guide as well, as connecting your Facebook application to a Facebook page.
 
