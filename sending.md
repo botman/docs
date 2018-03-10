@@ -208,6 +208,8 @@ $botman->say('Message', 'my-recipient-user-id', TelegramDriver::class);
 
 Just as the regular `reply` method, this method also accepts either simple strings or `OutgoingMessage` objects.
 
+For BotFramework (Skype) you shoud pass `['serviceUrl' => 'https://smba.trafficmanager.net/apis/']` in fourth parameter.
+
 
 <a id="sending-low-level-requests"></a>
 ## Sending Low-Level Requests
