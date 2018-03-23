@@ -6,7 +6,7 @@
 - [Can I use NLP platforms like Wit.ai or Dialogflow?](#can-i-use-nlp-platforms-like-witai-or-dialogflow)
 - [Does it work without Laravel?](#does-it-work-without-laravel)
 - [Which PHP version do I need?](#which-php-version-do-i-need)
-- [How does BotMan saves the state of a conversation?](#how-does-botman-saves-the-state-of-a-conversation)
+- [How does BotMan save the state of a conversation?](#how-does-botman-save-the-state-of-a-conversation)
 - [Why when I change the webhook URL to something other than /botman does it stop working?](#change-web-hook-url)
 
 <a id="what-can-i-use-botman-for"></a>
@@ -39,8 +39,8 @@ As already mentioned BotMan is a framework agnostic PHP library. So yes, it work
 
 BotMan requires PHP >=7.0.
 
-<a id="how-does-botman-saves-the-state-of-a-conversation"></a>
-## How does BotMan saves the state of a conversation?
+<a id="how-does-botman-save-the-state-of-a-conversation"></a>
+## How does BotMan save the state of a conversation?
 
 BotMan provides a Conversation object that is used to string together several messages, including questions for the user, into a cohesive unit. In order to always know the current state of the conversation, the object gets saved through the cache.
 
