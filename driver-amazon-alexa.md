@@ -56,7 +56,7 @@ If a driver does not support a specific action, it is in most cases a limitation
 <tbody>
     <tr>
         <td>Conversations</td>
-        <td>❌</td>
+        <td>✅</td>
     </tr>
     <tr>
         <td>Question-Buttons</td>
