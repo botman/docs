@@ -6,7 +6,7 @@
 
 ## Upgrading To 2.0 From 1.5
 
-The BotMan 2.0 release is a new major version release. While the first version of BotMan was provided under the personal vendor namespace `mpociot`, the projectt is now moved into a separate [GitHub organization](https://github.com/botman/). This results in a change of all BotMan classes, since they now live in a different namespace than in version 1.5.
+The BotMan 2.0 release is a new major version release. While the first version of BotMan was provided under the personal vendor namespace `mpociot`, the project is now moved into a separate [GitHub organization](https://github.com/botman/). This results in a change of all BotMan classes, since they now live in a different namespace than in version 1.5.
 
 ### Changing Dependencies
 
