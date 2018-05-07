@@ -11,6 +11,11 @@
 ## Introduction
 
 BotMan does not only allow you to listen for incoming textual messages, but also gives you the ability to listen for incoming images, videos, audio messages and locations.
+You need to manually load corresponding driver, for example:
+
+```php
+DriverManager::loadDriver(\BotMan\Drivers\Telegram\TelegramPhotoDriver::class);
+```
 
 <a id="images"></a>
 ## Listen for images
