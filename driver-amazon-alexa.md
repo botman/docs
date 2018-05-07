@@ -95,7 +95,7 @@ $botman->hears('My-Intent-Name', function($bot) {
 <a id="sending-alexa-cards"></a>
 ## Sending Alexa Cards
 
-Amazon Alexa allows your custom skill to reply not only by using voice, but also by adding custom [Skill Cards](https://developer.amazon.com/de/custom-skills/include-a-card-in-your-skills-response.html) to your replies. These are graphical cards that describe or enhance the voice interaction.
+Amazon Alexa allows your custom skill to reply not only by using voice, but also by adding custom [Skill Cards](https://developer.amazon.com/docs/custom-skills/include-a-card-in-your-skills-response.html) to your replies. These are graphical cards that describe or enhance the voice interaction.
 
 To create and send such a Card with BotMan, just create a `Card` object and add it as an OutgoingMessage attachment like this:
 
