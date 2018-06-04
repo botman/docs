@@ -30,7 +30,7 @@ The `received` middleware can be used to manipulate all incoming messaging servi
 
 ### Example middleware class
 
-This exampe `received` middleware takes the incoming message and adds some extra information to it, which can be used later throughout your chatbot application.
+This example `received` middleware takes the incoming message and adds some extra information to it, which can be used later throughout your chatbot application.
 As multiple middleware classes can be applied, make sure to return a call to `$next` with the incoming message as a parameter.
 
 ```php
@@ -71,7 +71,7 @@ Since the `captured` middleware needs to be applied to all incoming requests, it
 
 ### Example middleware class
 
-This exampe `captured` middleware takes the incoming message and adds some extra information to it, which can be used later throughout your chatbot application.
+This example `captured` middleware takes the incoming message and adds some extra information to it, which can be used later throughout your chatbot application.
 As multiple middleware classes can be applied, make sure to return a call to `$next` with the incoming message as a parameter.
 
 ```php
@@ -111,7 +111,7 @@ The `matching` middleware defines how the messages will be matched. It receives 
 
 ### Example middleware class
 
-This exampe `matching` middleware takes the incoming message and checks not only for the regular expression match - but also checks that the message was sent from a specific user. Every BotMan commands under this middleware will only be heard, when the correct pattern is sent **and** the correct user sends the message. Otherwise BotMan will not call the command callback.
+This example `matching` middleware takes the incoming message and checks not only for the regular expression match - but also checks that the message was sent from a specific user. Every BotMan commands under this middleware will only be heard, when the correct pattern is sent **and** the correct user sends the message. Otherwise BotMan will not call the command callback.
 
 ```php
 use BotMan\BotMan\Interfaces\Middleware\Matching;
@@ -155,7 +155,7 @@ The `heard` middleware works similar to how the `received` middleware works. It 
 
 ### Example middleware class
 
-This exampe `heard` middleware takes the incoming message and adds some extra information to it, which can be used later throughout your chatbot application.
+This example `heard` middleware takes the incoming message and adds some extra information to it, which can be used later throughout your chatbot application.
 As multiple middleware classes can be applied, make sure to return a call to `$next` with the incoming message as a parameter.
 
 ```php
@@ -196,7 +196,7 @@ You can also manipulate the outgoing payload data before it gets sent to the mes
 
 ### Example middleware class
 
-This exampe `sending` middleware simply logs the outgoing payload data into a file called log.txt.
+This example `sending` middleware simply logs the outgoing payload data into a file called log.txt.
 
 ```php
 use BotMan\BotMan\Interfaces\Middleware\Sending;
