@@ -265,7 +265,7 @@ public function testStartConversation()
 {
 	$this->bot
 		->receivesEvent('event_name')
-		->assertReplies('Received event');
+		->assertReply('Received event');
 }
 ```
 
@@ -276,7 +276,7 @@ public function testStartConversation()
 {
 	$this->bot
 		->receivesEvent('event_name', ['key' => 'value'])
-		->assertReplies('Received event);
+		->assertReply('Received event');
 }
 ```
 
