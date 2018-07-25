@@ -2,7 +2,7 @@
 
 - [Introduction](#introduction)
 - [Testing Multiple Replies](#testing-multiple-replies)
-- [Simulating User Messages](#simulationg-user-messages)
+- [Simulating User Messages](#simulating-user-messages)
 - [Available Assertions](#available-assertions)
 - [Testing Conversations](#testing-conversations)
 - [Testing Events](#testing-events)
@@ -10,6 +10,7 @@
 
 > {callout-info} The BotMan testing features are only available in combination with [BotMan Studio](/__version__/botman-studio).
 
+<a id="introduction"></a>
 ## Introduction
 
 Like Laravel, BotMan is build with testing in mind. Every part of it is well tested and this is the only way to keep such a big project running properly.
