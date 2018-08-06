@@ -161,7 +161,7 @@ As multiple middleware classes can be applied, make sure to return a call to `$n
 ```php
 use BotMan\BotMan\Interfaces\Middleware\Heard;
 
-class CustomCapturedMiddleware implements Heard
+class CustomHeardMiddleware implements Heard
 {
     /**
      * Handle a message that was successfully heard, but not processed yet.
