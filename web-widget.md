@@ -21,24 +21,23 @@ The BotMan Web Widget is a frontend widget to use in combination with the [Web D
 
 ### Usage with BotMan Studio
 
-If you use BotMan Studio - using the web widget could not be simpler. By installing the web driver, BotMan Studio automatically comes with a view and route to use in combination with the web widget.
-After installing the web driver, simply add the Javascript snippet to your website:
+If you use BotMan Studio - using the web widget could not be simpler. It already includes the web driver it automatically comes with a view and route to use in combination with the web widget.
+Simply add the Javascript snippet to your website:
 
 ```html
 <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
 ```
 
-That's it. 
+That's it. You will now see a message icon in the bottom right corner. When you click it, it will open the chat widget.
 
-Really.
+> {callout-info} The script is now loading the chat iFrame from the `botman/chat` endpoint, which is automatically being added by the web-driver.
 
 ### Usage without BotMan Studio
 
 If you are not using BotMan Studio and want to make use of the BotMan web widget, there are 2 steps involved.
 
 #### Chat Frame 
-When you open the web widget, it will load an iframe containing the chat area. In order to load this iframe, create a URL / route that is accessible from your application and contains
-the chat frame sourcecode:
+When you open the web widget, it will load an iframe containing the chat area. In order to load this iframe, create a URL / route that is accessible from your application and contains the chat frame sourcecode:
 
 ```html
 <!doctype html>
@@ -63,7 +62,7 @@ Simply add the Javascript to your website and configure it using a global config
 ```html
 <script>
 var botmanWidget = {
-    frameEndpoint: '/your/chat/html/url'    
+    frameEndpoint: '/iFrameUrl'    
 };
 </script>
 <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
