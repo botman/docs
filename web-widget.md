@@ -21,7 +21,7 @@ The BotMan Web Widget is a frontend widget to use in combination with the [Web D
 
 ### Usage with BotMan Studio
 
-If you use BotMan Studio - using the web widget could not be simpler. It already includes the web driver it automatically comes with a view and route to use in combination with the web widget.
+If you use BotMan Studio - using the web widget could not be simpler. It already includes the web driver which comes with a view and route to use in combination with the web widget.
 Simply add the Javascript snippet to your website:
 
 ```html
