@@ -4,7 +4,6 @@
 
 - Setup
 	- [Installation](/__version__/installation)
-	- [BotMan Studio](/__version__/botman-studio)
 	- [Cache drivers](/__version__/cache-drivers)
 	- [Web Widget](/__version__/web-widget)
 

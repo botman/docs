@@ -7,6 +7,7 @@
 - [Originating Conversations](#originating-conversations)
 - [Skip or Stop Conversations](#skip-stop-conversations)
 - [Caching Conversations](#caching-conversations)
+- [Debugging Conversations](#debugging-conversations)
 
 When it comes to chat bots, you probably don't want to simply react to single keywords, but instead, you might need to gather information from the user, using a conversation.
 Let's say, that you want your chat bot to provide an elegant user onboarding experience for your application users. In the onboarding process we are going to ask the user for their firstname and email address - that's a perfect fit for conversations!
@@ -22,9 +23,8 @@ You can start a conversation with your users using the `startConversation` metho
 $botman->hears('Hello', function($bot) {
     $bot->startConversation(new OnboardingConversation);
 });
-// Listen
-$botman->listen();
 ```
+<a href="#" onclick="botmanChatWidget.say('Hello');return false;" class="w-full block text-right font-bold">Try it out</a>
 
 Let's take a look at the `OnboardingConversation` class:
 
@@ -295,10 +295,27 @@ $botman->hears('pause', function(BotMan $bot) {
 <a id="caching-conversations"></a>
 ## Caching Conversations
 
-Conversations get persisted in the cache. This means that the conversation class will be serialized in order to maintain the conversation state. Keep that in mind when developing for BotMan. The default cache duration is set to 30 minutes. If you need to increase or decrease this value, you can set a `conversation_cache_time` key on your BotMan configuration.
+Conversations get persisted in on of the available [cache drivers](/__version__/cache-drivers). This means that the conversation class will be serialized in order to maintain the conversation state. Keep that in mind when developing for BotMan. The default cache duration is set to 30 minutes. If you need to increase or decrease this value, you can set a `conversation_cache_time` key on your BotMan configuration.
 
 ```php
 'botman' => [
-	'conversation_cache_time' => 30
+    'conversation_cache_time' => 30
 ],
 ```
+
+
+<a id="debugging-conversations"></a>
+## Debugging Conversations
+
+As conversations get persisted in the cache, it can happen to you that you fix a bug inside one of your conversation scripts - but when you retry the chat command it still does not work.
+One of the reasons for this could be, that BotMan is still using the cached conversation that might still contain the error that you just fixed.
+
+If you use BotMan Studio you can clear the cache by using:
+
+```sh
+php artisan cache:clear
+```
+
+Then you can try the command again.
+
+If you do not use BotMan Studio, you have to manually delete the cache entries that BotMan created.

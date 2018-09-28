@@ -24,24 +24,26 @@ Bots can also originate messages - that means, sending messages based on some in
 
 ## Single Message Replies
 
-Once a bot has received a message using `hears()`, you may send a response  using `$bot->reply()`.
+Once a bot has received a message using `hears()`, you may send a response using `$bot->reply()`.
 
 This is the simplest way to respond to an incoming command:
 
 ```php
-$botman->hears('keyword', function (BotMan $bot) {
+$botman->hears('single response', function (BotMan $bot) {
     $bot->reply("Tell me more!");
 });
 ```
+<a href="#" onclick="botmanChatWidget.say('single response');return false;" class="w-full block text-right font-bold">Try it out</a>
 
 Do you feel like chatting some more? You may also send multiple responses in a single method.
 
 ```php
-$botman->hears('keyword', function (BotMan $bot) {
+$botman->hears('multi response', function (BotMan $bot) {
     $bot->reply("Tell me more!");
     $bot->reply("And even more");
 });
 ```
+<a href="#" onclick="botmanChatWidget.say('multi response');return false;" class="w-full block text-right font-bold">Try it out</a>
 
 <a id="attachments"></a>
 
@@ -57,9 +59,9 @@ individual messaging service.
 use BotMan\BotMan\Messages\Attachments\Image;
 use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
 
-$botman->hears('keyword', function (BotMan $bot) {
+$botman->hears('image attachment', function (BotMan $bot) {
     // Create attachment
-    $attachment = new Image('http://image-url-here.jpg');
+    $attachment = new Image('https://botman.io/img/logo.png');
 
     // Build message object
     $message = OutgoingMessage::create('This is my text')
@@ -69,6 +71,7 @@ $botman->hears('keyword', function (BotMan $bot) {
     $bot->reply($message);
 });
 ```
+<a href="#" onclick="botmanChatWidget.say('image attachment');return false;" class="w-full block text-right font-bold">Try it out</a>
 
 ### Images
 You may use the `Image` class to attach an image URL to your outgoing message.
