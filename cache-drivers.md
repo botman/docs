@@ -61,8 +61,8 @@ Use any [Symfony Cache](http://symfony.com/doc/current/components/cache.html) co
 
 ```php
 use BotMan\BotMan\Cache\SymfonyCache;
-use Symfony\Component\Cache\Simple\FilesystemCache;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
-$adapter = new FilesystemCache();
+$adapter = new FilesystemAdapter();
 $botman = BotManFactory::create($config, new SymfonyCache($adapter));
 ```
