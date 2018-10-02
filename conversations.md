@@ -93,7 +93,7 @@ public function askEmail()
 <a id="asking-questions"></a>
 ## Asking Questions
 
-BotMan gives you two ways to ask your users questions. The straight forward aproach is simply using a string as a question:
+BotMan gives you two ways to ask your users questions. The straight forward approach is simply using a string as a question:
 
 ```php
 // ...inside the conversation object...
