@@ -69,7 +69,7 @@ After that you can setup the webhook, which connects the Facebook application wi
 
 <a id="supported-features"></a>
 ## Supported Features
-This is a list of features that the this driver supports.
+This is a list of features that the driver supports.
 If a driver does not support a specific action, it is in most cases a limitation from the messaging service - not BotMan.
 
 <table class="table">
@@ -81,7 +81,7 @@ If a driver does not support a specific action, it is in most cases a limitation
 </thead>
 <tbody>
 	<tr>
-		<td>Question-Buttons</td>
+		<td>Question Buttons</td>
 		<td>✅</td>
 	</tr>
 	<tr>
@@ -106,7 +106,7 @@ If a driver does not support a specific action, it is in most cases a limitation
 <a id="sending-facebook-templates"></a>
 ## Sending Facebook Templates
 
-BotMan supports all the main [Facebook templates](https://developers.facebook.com/docs/messenger-platform/send-api-reference/templates) like `Button`, `Generic`, `List` and `Receipt`. All of them are available through an expressive and easy API.
+BotMan supports all the main [Facebook templates](https://developers.facebook.com/docs/messenger-platform/send-api-reference/templates) like `Button`, `Generic`, `List`, `Receipt`, `OpenGraph` and `Airline`. All of them are available through an expressive and easy API.
 
 > {callout-info} Facebook is still experimenting a lot with its Messenger features. This is why some of them behave differently on certain platforms. General it is easy to say that all of them work within the native Messenger on your phones. But e.g. the List Template cover image is not working inside the Facebook website chat and the online Messenger.
 
@@ -114,12 +114,17 @@ BotMan supports all the main [Facebook templates](https://developers.facebook.co
 
 <img alt="Facebook Button Template Screenshot" src="/img/fb/template_buttons.png" width="500">
 
-A `Button Template` is a text with several user input options. (buttons) The template uses `ElementButtons` which are different from the buttons you use for BotMan `Questions`. There are two types of ElementButtons. The default one is the `web_url` button which only needs an `url` next to the title. It links to an external website. Secondly we have `postback` buttons. They will trigger [Facebook postback actions](https://developers.facebook.com/docs/messenger-platform/webhook-reference/postback). They require the type `postback` and a `payload which is the text that Facebook will send to BotMan` when a user hits this button. If you use the ask method within a [Conversation](/__version__/conversations), you will be able to get the postback button's text with `$answer->getText()`.
+A [`Button Template`](https://developers.facebook.com/docs/messenger-platform/send-messages/template/button) is a text with several user input options. (buttons) The template uses `ElementButtons` which are different from the buttons you use for BotMan `Questions`. There are two types of ElementButtons. The default one is the `web_url` button which only needs an `url` next to the title. It links to an external website. Secondly we have `postback` buttons. They will trigger [Facebook postback actions](https://developers.facebook.com/docs/messenger-platform/webhook-reference/postback). They require the type `postback` and a `payload which is the text that Facebook will send to BotMan` when a user hits this button. If you use the ask method within a [Conversation](/__version__/conversations), you will be able to get the postback button's text with `$answer->getText()`.
 
 ```php
 $bot->reply(ButtonTemplate::create('Do you want to know more about BotMan?')
-	->addButton(ElementButton::create('Tell me more')->type('postback')->payload('tellmemore'))
-	->addButton(ElementButton::create('Show me the docs')->url('http://botman.io/'))
+	->addButton(ElementButton::create('Tell me more')
+	    ->type('postback')
+	    ->payload('tellmemore')
+	)
+	->addButton(ElementButton::create('Show me the docs')
+	    ->url('http://botman.io/')
+	)
 );
 ```
 
@@ -127,25 +132,29 @@ $bot->reply(ButtonTemplate::create('Do you want to know more about BotMan?')
 
 <img alt="Facebook Generic Template Screenshot" src="/img/fb/template_generic.png" width="500">
 
-A `Generic Template` is a horizontal scrollable carousel of elements. Every element requires at least a title which is provided through the static `create` method. Additionally it can have a `subtitle`, `image` and `buttons`.
+A [`Generic Template`](https://developers.facebook.com/docs/messenger-platform/send-messages/template/generic) is a horizontal scrollable carousel of elements. Every element requires at least a title which is provided through the static `create` method. Additionally it can have a `subtitle`, `image` and `buttons`.
 
 ```php
 $bot->reply(GenericTemplate::create()
-	->addImageAspectRatio(GenericTemplate::RATIO_SQUARE)
-	->addElements([
-		Element::create('BotMan Documentation')
-			->subtitle('All about BotMan')
-			->image('http://botman.io/img/botman-body.png')
-			->addButton(ElementButton::create('visit')->url('http://botman.io'))
-			->addButton(ElementButton::create('tell me more')
-				->payload('tellmemore')->type('postback')),
-		Element::create('BotMan Laravel Starter')
-			->subtitle('This is the best way to start with Laravel and BotMan')
-			->image('http://botman.io/img/botman-body.png')
-			->addButton(ElementButton::create('visit')
-				->url('https://github.com/mpociot/botman-laravel-starter')
-			)
-	])
+    ->addImageAspectRatio(GenericTemplate::RATIO_SQUARE)
+    ->addElements([
+        Element::create('BotMan Documentation')
+            ->subtitle('All about BotMan')
+            ->image('http://botman.io/img/botman-body.png')
+            ->addButton(ElementButton::create('visit')
+                ->url('http://botman.io')
+            )
+            ->addButton(ElementButton::create('tell me more')
+                ->payload('tellmemore')
+                ->type('postback')
+            ),
+        Element::create('BotMan Laravel Starter')
+            ->subtitle('This is the best way to start with Laravel and BotMan')
+            ->image('http://botman.io/img/botman-body.png')
+            ->addButton(ElementButton::create('visit')
+                ->url('https://github.com/mpociot/botman-laravel-starter')
+            ),
+    ])
 );
 ```
 
@@ -153,27 +162,29 @@ $bot->reply(GenericTemplate::create()
 
 <img alt="Facebook List Template Screenshot" src="/img/fb/template_list.png" width="500">
 
-The `List Template` is a template that allows you to present a set of elements vertically. The default list will set the first element as a cover image. If you don't want a cover image call the `useCompactView()` method. Additionally to the elements your list can have one global button too. This is when you need the `addGlobalButton(...)` method.
+The [`List Template`](https://developers.facebook.com/docs/messenger-platform/send-messages/template/list) is a template that allows you to present a set of elements vertically. The default list will set the first element as a cover image. If you don't want a cover image call the `useCompactView()` method. Additionally to the elements your list can have one global button too. This is when you need the `addGlobalButton(...)` method.
 
 ```php
 $bot->reply(ListTemplate::create()
-	->useCompactView()
-	->addGlobalButton(ElementButton::create('view more')->url('http://test.at'))
-	->addElement(
-		Element::create('BotMan Documentation')
-			->subtitle('All about BotMan')
-			->image('http://botman.io/img/botman-body.png')
-			->addButton(ElementButton::create('tell me more')
-				->payload('tellmemore')->type('postback'))
-	)
-	->addElement(
-		Element::create('BotMan Laravel Starter')
-			->subtitle('This is the best way to start with Laravel and BotMan')
-			->image('http://botman.io/img/botman-body.png')
-			->addButton(ElementButton::create('visit')
-				->url('https://github.com/mpociot/botman-laravel-starter')
-			)
-	)
+    ->useCompactView()
+    ->addGlobalButton(ElementButton::create('view more')
+        ->url('http://test.at')
+    )
+    ->addElement(Element::create('BotMan Documentation')
+        ->subtitle('All about BotMan')
+        ->image('http://botman.io/img/botman-body.png')
+        ->addButton(ElementButton::create('tell me more')
+            ->payload('tellmemore')
+            ->type('postback')
+        )
+    )
+    ->addElement(Element::create('BotMan Laravel Starter')
+        ->subtitle('This is the best way to start with Laravel and BotMan')
+        ->image('http://botman.io/img/botman-body.png')
+        ->addButton(ElementButton::create('visit')
+            ->url('https://github.com/mpociot/botman-laravel-starter')
+        )
+    )
 );
 ```
 
@@ -181,34 +192,41 @@ $bot->reply(ListTemplate::create()
 
 <img alt="Facebook Receipt Template Screenshot" src="/img/fb/template_receipt.png" width="500">
 
-Use the `Receipt Template` to send a order confirmation, with the transaction summary and description for each element. This template differs a lot from the others. This is why there are custom `ReceiptElements` and lots of other custom fields. Checkout the official [Facebook documentation](https://developers.facebook.com/docs/messenger-platform/send-api-reference/receipt-template) and the example below to see all the possibilities. In your Messenger you can click the template to see all of the information.
+Use the [`Receipt Template`](https://developers.facebook.com/docs/messenger-platform/send-messages/template/receipt) to send a order confirmation, with the transaction summary and description for each element. This template differs a lot from the others. This is why there are custom `ReceiptElements` and lots of other custom fields. Checkout the official [Facebook documentation](https://developers.facebook.com/docs/messenger-platform/send-api-reference/receipt-template) and the example below to see all the possibilities. In your Messenger you can click the template to see all of the information.
 
 ```php
-$bot->reply(
-	ReceiptTemplate::create()
-		->recipientName('Christoph Rumpel')
-		->merchantName('BotMan GmbH')
-		->orderNumber('342343434343')
-		->timestamp('1428444852')
-		->orderUrl('http://test.at')
-		->currency('USD')
-		->paymentMethod('VISA')
-		->addElement(ReceiptElement::create('T-Shirt Small')->price(15.99)->image('http://botman.io/img/botman-body.png'))
-		->addElement(ReceiptElement::create('Sticker')->price(2.99)->image('http://botman.io/img/botman-body.png'))
-		->addAddress(ReceiptAddress::create()
-			->street1('Watsonstreet 12')
-			->city('Bot City')
-			->postalCode(100000)
-			->state('Washington AI')
-			->country('Botmanland')
-		)
-		->addSummary(ReceiptSummary::create()
-			->subtotal(18.98)
-			->shippingCost(10 )
-			->totalTax(15)
-			->totalCost(23.98)
-		)
-		->addAdjustment(ReceiptAdjustment::create('Laravel Bonus')->amount(5))
+$bot->reply(ReceiptTemplate::create()
+    ->recipientName('Christoph Rumpel')
+    ->merchantName('BotMan GmbH')
+    ->orderNumber('342343434343')
+    ->timestamp('1428444852')
+    ->orderUrl('http://test.at')
+    ->currency('USD')
+    ->paymentMethod('VISA')
+    ->addElement(ReceiptElement::create('T-Shirt Small')
+        ->price(15.99)
+        ->image('http://botman.io/img/botman-body.png')
+    )
+    ->addElement(ReceiptElement::create('Sticker')
+        ->price(2.99)
+        ->image('http://botman.io/img/botman-body.png')
+    )
+    ->addAddress(ReceiptAddress::create()
+        ->street1('Watsonstreet 12')
+        ->city('Bot City')
+        ->postalCode(100000)
+        ->state('Washington AI')
+        ->country('Botmanland')
+    )
+    ->addSummary(ReceiptSummary::create()
+        ->subtotal(18.98)
+        ->shippingCost(10 )
+        ->totalTax(15)
+        ->totalCost(23.98)
+    )
+    ->addAdjustment(ReceiptAdjustment::create('Laravel Bonus')
+        ->amount(5)
+    )
 );
 ```
 
@@ -216,33 +234,162 @@ $bot->reply(
 
 <img alt="Facebook Media Template Screenshot" src="/img/fb/template_media.jpg" width="400">
 
-You can use the Media Template to send images or videos with optional buttons. Here is an example on how to send an image with an attachment ID.
+You can use the [`Media Template`](https://developers.facebook.com/docs/messenger-platform/send-messages/template/media) to send images or videos with optional buttons. Here is an example on how to send an image with an attachment ID.
 
 ```php
 $bot->reply(MediaTemplate::create()
-        ->element(MediaAttachmentElement::create('image')
-            ->attachmentId('1543527005693234')
-            ->addButton(ElementButton::create('Tell me more')
-                ->type('postback')
-                ->payload('Tell me more'))
-            ->addButton(ElementButton::create('Documentation')
-                ->url('https://botman.io/'))));
+    ->element(MediaAttachmentElement::create('image')
+        ->attachmentId('1543527005693234')
+        ->addButton(ElementButton::create('Tell me more')
+            ->type('postback')
+            ->payload('Tell me more')
+        )
+        ->addButton(ElementButton::create('Documentation')
+            ->url('https://botman.io/')
+        )
+    )
+);
 ```
 And here is an example on how to send a video.
 
 ```php
 $bot->reply(MediaTemplate::create()
-        ->element(MediaUrlElement::create('video')
-            ->url('https://www.facebook.com/liechteneckers/videos/10155225087428922/')
-            ->addButtons([
-                ElementButton::create('Web URL')
-                    ->url('http://liechtenecker.at'),
-                ElementButton::create('payload')
-                    ->type('postback')
-                    ->payload('test'),
-            ])));
+    ->element(MediaUrlElement::create('video')
+        ->url('https://www.facebook.com/liechteneckers/videos/10155225087428922/')
+        ->addButtons([
+            ElementButton::create('Web URL')->url('http://liechtenecker.at'),
+            ElementButton::create('payload')->type('postback')->payload('test'),
+        ])
+    )
+);
 ```
 You probably have noticed that the main Template is the same for images or videos. (`MediaTemplate`) With the element you decide the attachment type. But you also decide if you send the attachment with the attachment ID or an Facebook URL. Checkout the official [Facebook documentation](https://developers.facebook.com/docs/messenger-platform/send-messages/template/media) for more information.
+
+### OpenGraph Template
+
+You can use the [`OpenGraph Template`](https://developers.facebook.com/docs/messenger-platform/send-messages/template/open-graph) to send a structured message with an open graph url and a button (optional).
+
+```php
+$bot->reply(OpenGraphTemplate::create()
+    ->addElement(OpenGraphElement::create()->url('https://example.com'))
+    ->addElements([
+        OpenGraphElement::create()->url('https://example.com'),
+        OpenGraphElement::create()->url('https://example.com'),
+    ])
+);
+```
+
+### AirlineBoardingPass Template
+
+You can use the [`AirlineBoardingPass Template`](https://developers.facebook.com/docs/messenger-platform/send-messages/template/airline) to send boarding pass with travel's details (flight number, departure airport, arrival airport, flight schedule).
+
+```php
+$bot->reply(
+    AirlineBoardingPassTemplate::create(
+        'You are checked in.',
+        'en_US',
+        [
+            AirlineBoardingPass::create(
+                'Jones Farbound',
+                'CG4X7U',
+                'https://www.example.com/en/logo.png',
+                'M1JONES FARBOUND  CG4X7U nawouehgawgnapwi3jfa0wfh',
+                'https://www.example.com/en/PLAT.png',
+                AirlineFlightInfo::create(
+                    'c001',
+                    AirlineAirport::create('SFO', 'San Francisco'),
+                    AirlineAirport::create('SLC', 'Salt Lake City'),
+                    AirlineFlightSchedule::create('2016-01-02T19:45')
+                )
+            ),
+        ]
+    )
+    ->themeColor('#FF0000')
+);
+```
+
+### AirlineCheckInTemplate Template
+
+You can use the [`AirlineCheckIn Template`](https://developers.facebook.com/docs/messenger-platform/send-messages/template/airline) to send check in informations (flight number, departure airport, arrival airport, flight schedule).
+
+```php
+$bot->reply(
+    AirlineCheckInTemplate::create(
+        'Check-in is available now.',
+        'en_US',
+        'ABCDEF',
+        [
+            AirlineFlightInfo::create(
+                'c001',
+                AirlineAirport::create('SFO', 'San Francisco'),
+                AirlineAirport::create('SLC', 'Salt Lake City'),
+                AirlineFlightSchedule::create('2016-01-02T19:45')
+            ),
+        ],
+        'https://www.airline.com/check-in'
+    )
+    ->themeColor('#FF0000')
+);
+```
+
+### AirlineItinerary Template
+
+You can use the [`AirlineItinerary Template`](https://developers.facebook.com/docs/messenger-platform/send-messages/template/airline) to send flight itinerary's details (passengers information, flight details).
+
+```php
+$bot->reply(
+    AirlineItineraryTemplate::create(
+        'Here\'s your flight itinerary.',
+        'en_US',
+        'ABCDEF',
+        [
+            AirlinePassengerInfo::create('p001', 'Farbound Smith Jr'),
+        ],
+        [
+            AirlineExtendedFlightInfo::create(
+                'c001',
+                's001',
+                'KL9123',
+                AirlineAirport::create('SFO', 'San Francisco'),
+                AirlineAirport::create('SLC', 'Salt Lake City'),
+                AirlineFlightSchedule::create('2016-01-02T19:45'),
+                Airline::TRAVEL_TYPE_FIRST_CLASS
+            ),
+        ],
+        [
+            AirlinePassengerSegmentInfo::create('s001', 'p001', '12A', 'Business'),
+        ],
+        '14003',
+        'USD'
+    )
+    ->themeColor('#FF0000')
+    ->addPriceInfo('Fuel surcharge', '1597', 'USD')
+    ->basePrice('12206')
+    ->tax('200')
+);
+```
+
+### AirlineUpdate Template
+
+You can use the [`AirlineUpdate Template`](https://developers.facebook.com/docs/messenger-platform/send-messages/template/airline) to send an update regarding a flight (reason, updated flight informations).
+
+```php
+$bot->reply(
+    AirlineUpdateTemplate::create(
+        Airline::UPDATE_TYPE_DELAY,
+        'en_US',
+        'CF23G2',
+        AirlineFlightInfo::create(
+            'c001',
+            AirlineAirport::create('SFO', 'San Francisco'),
+            AirlineAirport::create('SLC', 'Salt Lake City'),
+            AirlineFlightSchedule::create('2016-01-02T19:45')
+        )
+    )
+    ->themeColor('#FF0000')
+    ->introMessage('Your flight is delayed')
+);
+```
 
 <a id="supported-events"></a>
 ## Supported Events
