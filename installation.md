@@ -12,7 +12,7 @@ BotMan is a framework agnostic PHP library that is designed to simplify the task
 <a id="requirements"></a>
 ## Technical Requirements
 
-- PHP >= 7
+- PHP >= 7.1.3
 - For BotMan Studio checkout [Laravel's requirements](https://laravel.com/docs/5.5/installation#server-requirements)
 
 <a id="getting-started"></a>
