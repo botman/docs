@@ -49,7 +49,7 @@ If you don't use BotMan Studio, add these line to $config array that you pass wh
 
 <a id="supported-features"></a>
 ## Supported Features
-This is a list of features that the this driver supports.
+This is a list of features that the driver supports.
 If a driver does not support a specific action, it is in most cases a limitation from the messaging service - not BotMan.
 
 <table class="table">
@@ -86,8 +86,7 @@ If a driver does not support a specific action, it is in most cases a limitation
 <a id="register-webhook"></a>
 ## Register Your Webhook
 
-To let your Telegram Bot know, how it can communicate with your BotMan bot, you have to register the URL where BotMan is running at,
-with Telegram.
+To let your Telegram Bot know, how it can communicate with your BotMan bot, you have to register the URL where BotMan is running at, with Telegram.
 
 You can do this by sending a `POST` request to this URL:
 
