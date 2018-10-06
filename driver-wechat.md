@@ -56,7 +56,7 @@ Last you need to connect the test bot with your WeChat user account. Use the `Te
 
 <a id="supported-features"></a>
 ## Supported Features
-This is a list of features that the this driver supports.
+This is a list of features that the driver supports.
 If a driver does not support a specific action, it is in most cases a limitation from the messaging service - not BotMan.
 
 <table class="table">
