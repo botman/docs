@@ -22,7 +22,7 @@ The open-source chatbot development framework for cross platform chat- and voice
 		</a>
 	</div>
 	<div class="w-1/2 lg:w-1/3 flex justify-center">
-		<a class="shadow w-4/5 flex px-4 mr-4" href="/__version__/installation">
+		<a class="shadow w-4/5 flex px-4 mr-4" href="/__version__/receiving">
 			<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" class="w-1/3 pr-4 heroicon-chat heroicon heroicons-lg">
                     <path class="heroicon-chat-bubble-back heroicon-component-accent heroicon-component-fill" d="M62 12v16H47a3 3 0 1 0-6 0h-3c-1.06 0-2.08.16-3.04.47a3 3 0 1 0-3.94 2.37A9.97 9.97 0 0 0 28 38v17.17l-4 4V50H8c-3.3 0-6-2.7-6-6V12a6 6 0 0 1 6-6h48c3.3 0 6 2.7 6 6z"></path>
                     <path class="heroicon-chat-bubble-front heroicon-component-fill" d="M90 78H72v13.17L58.83 78H37.99A8 8 0 0 1 30 70V38a8 8 0 0 1 8-8h52a8 8 0 0 1 8 8v32a8 8 0 0 1-8 8z"></path>
@@ -40,7 +40,7 @@ The open-source chatbot development framework for cross platform chat- and voice
 		</a>
 	</div>
 	<div class="w-1/2 lg:w-1/3 flex justify-center">
-		<a class="shadow w-4/5 flex px-4 mr-4 flex-no-wrap" href="/__version__/installation">
+		<a class="shadow w-4/5 flex px-4 mr-4 flex-no-wrap" href="/__version__/sending">
 			<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" class="w-1/3 pr-4 heroicon-announcement heroicon heroicons-lg">
                     <path class="heroicon-announcement-bowl heroicon-component-fill" d="M88 9.98A82.6 82.6 0 0 1 46 26.6v28.78a82.6 82.6 0 0 1 42 16.63V9.98z"></path>
                     <path class="heroicon-announcement-front heroicon-component-accent heroicon-component-fill" d="M94 36V4a2 2 0 0 0-2-2h-2v78h2a2 2 0 0 0 2-2V46h2a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-2z"></path>
