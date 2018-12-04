@@ -53,7 +53,7 @@ The open-source chatbot development framework for cross platform chat- and voice
 		    <div class="w-2/3">
 		    	<h3 class="m-0">Sending Messages</h3>
 		    	<p>
-					Reply to your users with text, images, audio, video or even locatio data.
+					Reply to your users with text, images, audio, video or even location data.
 		    	</p>
 		    </div>
 		</a>
