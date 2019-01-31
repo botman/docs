@@ -110,7 +110,7 @@ A common use-case for command groups is restricting the commands to a specific m
 Like this, you can limit the chatbot logic for one - or multiple messenger services. In this case, the `keyword` method will only be called when the incoming message comes from Slack or Facebook:
 
 ```php
-$botman->group(['driver' => [SlackDriver::class, FacebookDriver::class], function($bot) {
+$botman->group(['driver' => [SlackDriver::class, FacebookDriver::class]], function($bot) {
     $bot->hears('keyword', function($bot) {
         // Only listens on Slack or Facebook
     });
