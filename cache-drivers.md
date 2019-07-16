@@ -1,6 +1,7 @@
 # Cache drivers
 
 - [PSR6 Cache](#psr6)
+- [Laravel Cache](#laravel)
 - [Doctrine Cache](#doctrine)
 - [CodeIgniter Cache](#codeigniter)
 - [Redis Cache](#redis)
