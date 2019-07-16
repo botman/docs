@@ -24,6 +24,16 @@ $adapter = new MyCustomPsr6CacheAdapter();
 $botman = BotManFactory::create($config, new Psr6Cache($adapter));
 ```
 
+<a id="laravel"></a>
+### Laravel Cache
+When using botman in an existing Laravel project, you can use the Botman's built in LaravelCache.
+
+```php
+use BotMan\BotMan\Cache\LaravelCache;
+
+$botman = BotManFactory::create($config, new LaravelCache());
+```
+
 <a id="doctrine"></a>
 ### Doctrine Cache
 Use any [Doctrine Cache](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/caching.html) driver by passing it to the factory:
