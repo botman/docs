@@ -1,6 +1,7 @@
 # Web Widget
 
 - [Introduction](#introduction)
+- [Requirements & Building](#building)
 - [Installation & Setup](#installation-setup)
 - [Configuration & Customization](#configuration)
 - [API](#api)
@@ -13,6 +14,79 @@ To make it as easy as possible for you, to add a BotMan powered chatbot into you
 The web widget currently supports buttons, texts, images, videos, audio responses and the Facebook list- and button-template, so that you can just use the web widget, without modifying the code - even if it is specific to a messenger service.   
 
 You can also see it running here in the documentation - most of the code samples work with the web driver, so feel free to just give it a try!
+
+<a id="building"></a>
+## Requirements & Building
+
+### Install nodejs
+```
+apt-get install build-essential libssl-dev
+apt-get install nodejs
+nodejs -v
+apt-get install npm
+npm -v
+```
+
+### Install nvm
+
+To download the nvm installation script from the project's GitHub page, you can use curl. Note that the version number may differ from what is highlighted here:
+
+```
+curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh -o install_nvm.sh
+```
+
+Inspect the installation script with nano:
+
+```
+nano install_nvm.sh
+```
+
+Run the script with bash:
+
+```
+bash install_nvm.sh
+```
+
+It will install the software into a subdirectory of your home directory at ~/.nvm. It will also add the necessary lines to your ~/.profile file to use the file.
+
+To gain access to the nvm functionality, you'll need to either log out and log back in again or source the ~/.profile file so that your current session knows about the changes:
+
+```
+source ~/.profile
+```
+
+With nvm installed, you can install isolated Node.js versions. For information about the versions of Node.js that are available, type:
+
+```
+nvm ls-remote
+```
+
+Then you can use nvm to install the node version you need
+
+```
+nvm use <version>
+```
+
+
+### On Mac via homebrew:
+
+```
+brew install npm
+brew install nvm
+```
+
+## Build the widget
+
+```
+cd <path_to_widget>
+npm install -g grunt-cli
+npm install -g webpack
+npm install -g bower
+npm install -g gulp
+npm install preact
+npm install
+npm run-script build
+```
 
 <a id="installation-setup"></a>
 ## Installation & Setup
@@ -36,7 +110,7 @@ That's it. You will now see a message icon in the bottom right corner. When you 
 
 If you are not using BotMan Studio and want to make use of the BotMan web widget, there are 2 steps involved.
 
-#### Chat Frame 
+#### Chat Frame
 When you open the web widget, it will load an iframe containing the chat area. In order to load this iframe, create a URL / route that is accessible from your application and contains the chat frame sourcecode:
 
 ```html
