@@ -1,6 +1,7 @@
 # Cache drivers
 
 - [PSR6 Cache](#psr6)
+- [Laravel Cache](#laravel)
 - [Doctrine Cache](#doctrine)
 - [CodeIgniter Cache](#codeigniter)
 - [Redis Cache](#redis)
@@ -22,6 +23,16 @@ use BotMan\BotMan\Cache\Psr6Cache;
 
 $adapter = new MyCustomPsr6CacheAdapter();
 $botman = BotManFactory::create($config, new Psr6Cache($adapter));
+```
+
+<a id="laravel"></a>
+### Laravel Cache
+When using botman in an existing Laravel project, you can use the Botman's built in LaravelCache.
+
+```php
+use BotMan\BotMan\Cache\LaravelCache;
+
+$botman = BotManFactory::create($config, new LaravelCache());
 ```
 
 <a id="doctrine"></a>
