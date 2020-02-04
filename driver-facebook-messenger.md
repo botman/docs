@@ -468,7 +468,7 @@ The [Facebook Greeting](https://developers.facebook.com/docs/messenger-platform/
 Define this text in your `config/botman/facebook.php` file. Then use the Artisan command to trigger the command:
 
 ```sh
-php artisan botman:facebookAddGreetingText
+php artisan botman:facebook:AddGreetingText
 ```
 
 <a id="persistent-menu-command"></a>
@@ -479,7 +479,7 @@ With BotMan Studio it now gets much easier to add a [Persistent Facebook Menu](h
 Then use the Artisan command to trigger the command:
 
 ```sh
-php artisan botman:facebookAddMenu
+php artisan botman:facebook:AddMenu
 ```
 
 <a id="whitelist-domains-command"></a>
@@ -490,7 +490,7 @@ Some features like Messenger Extensions and Checkbox Plugin require a bot to spe
 Define all domains in your `config/botman/facebook.php` file. Then use the Artisan command to trigger the command:
 
 ```sh
-php artisan botman:facebookWhitelistDomains
+php artisan botman:facebook:whitelistDomains
 ```
 
 <a id="configure-nlp"></a>
@@ -499,11 +499,11 @@ php artisan botman:facebookWhitelistDomains
 Facebook Messenger comes with an integrated [Natural Language Processing](https://developers.facebook.com/docs/messenger-platform/built-in-nlp/) tool that you can enable or disable using the BotMan Studio command.
 
 ```sh
-php artisan botman:facebookNlp
+php artisan botman:facebook:nlp
 ```
 
 If you want to disable the NLP feature for your Facebook page, you may use the `--disable` option:
 
 ```sh
-php artisan botman:facebookNlp --disable
+php artisan botman:facebook:nlp --disable
 ```
