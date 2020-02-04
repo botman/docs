@@ -5,7 +5,7 @@
 - [Retrieve The User's First Name](#retrieving-user-firstname)
 - [Retrieve The User's Last Name](#retrieving-user-lastname)
 - [Retrieve The User-ID](#retrieving-user-id)
-- [Retrieve The Username](retrieving-username)
+- [Retrieve The Username](#retrieving-username)
 - [Retrieve The Raw User Information](#retrieving-raw-user-information)
 - [Caching User Information](#caching-user-information)
 
