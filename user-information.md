@@ -60,6 +60,7 @@ $user = $bot->getUser();
 // Access Username
 $id = $user->getUsername();
 ```
+Be aware that you might not receive any username data if the user hasn't set a username in their messenger settings.
 
 <a id="retrieving-raw-user-information"></a>
 ### Retrieve The Raw User Information
