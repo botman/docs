@@ -253,6 +253,17 @@ The UI of the chat widget itself can simply be customized via CSS - take a look 
     </tr>
     <tr>
         <td>
+            <pre>headerTextColor</pre>
+        </td>
+        <td>
+            <pre>#333</pre>
+        </td>
+        <td>
+            The main color used in the widget header text.
+        </td>
+    </tr>
+    <tr>
+        <td>
             <pre>mainColor</pre>
         </td>
         <td>
