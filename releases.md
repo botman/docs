@@ -44,7 +44,7 @@ public function testUserGreeting()
 For more information on testing, check out the <a href="">testing documentation</a>.
 
 ## Middleware
-The concept of middleware has drastically improved with BotMan 2.0. Where 1.5 was very limited in the available entry points of your webhooks, 2.0 gives you the flexibility you need to extend the lifecircle of your chatbot application.
+The concept of middleware has drastically improved with BotMan 2.0. Where 1.5 was very limited in the available entry points of your webhooks, 2.0 gives you the flexibility you need to extend the lifecycle of your chatbot application.
 
 This also means, that you can now limit where in your chatbot you want to add middlewares. 
 The available entry points are: `sending`, `received`, `heard`. 
