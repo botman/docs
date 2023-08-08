@@ -44,6 +44,7 @@ use BotMan\BotMan\Middleware\ApiAi;
 
 $dialogflow = ApiAi::create('your-api-ai-token')->listenForAction();
 
+$botman = resolve('botman');
 // Apply global "received" middleware
 $botman->middleware->received($dialogflow);
 
