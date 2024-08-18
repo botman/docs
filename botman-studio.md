@@ -1,73 +1,91 @@
 # BotMan Studio
 
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [Tinker](#tinker)
-- [List All Drivers](#list-drivers)
-- [Install New Drivers](#install-drivers)
+BotMan Studio is an old project to make BotMan easier to work with using Laravel. 
 
-## Introduction
 
-While BotMan itself is framework agnostic, BotMan is also available as a bundle with the great [Laravel](http://laravel.com) PHP framework. This bundled version is called BotMan Studio and makes the chatbot development experience even better, by providing testing tools, an out of the box web driver implementation to get you started and additional tools like easier driver installation and configuration support.
-If you are not yet familiar with Laravel, you may take a look at the Laracasts [free introduction to Laravel](https://laracasts.com/series/laravel-from-scratch-2017) video course.
+However, it is simpler just to have a normal BotMan instance.. inside the Laravel shell manually. 
+As a result, this part of BotMan has been deprecated.
 
-<a id="installation"></a>
-## Installation
+# Laravel Installation
 
-First, download the BotMan installer using Composer:
+This example uses Telegram as an example. Modify these instructions to choose your preferred driver as needed. 
 
-```sh
-composer global require "botman/installer"
+### Install Laravel
+
 ```
-
-Make sure to place the `$HOME/.composer/vendor/bin` directory (or the equivalent directory for your OS) in your $PATH so the `botman` executable can be located by your system.
-<br><br>
-Once installed, the `botman new` command will create a fresh BotMan Studio installation in the directory you specify. For instance, `botman new weatherbot` will create a directory named `weatherbot` containing a fresh BotMan Studio installation with all of BotMan's dependencies already installed:
-
-```sh
-botman new weatherbot
+composer create-project laravel/laravel botman-demo
 ```
+###  Install Botman
 
-Alternatively, you may also install BotMan Studio by issuing the Composer create-project command in your terminal:
-
-```sh
-composer create-project --prefer-dist botman/studio weatherbot
 ```
+cd botman-demo
+composer require botman/botman botman/driver-telegram
+```
+###  Configure Botman
 
-<a id="tinker"></a>
-## Tinker
+```
+mkdir config\botman
+copy vendor\botman\botman\assets\config.php config\botman
+copy vendor\botman\driver-telegram\stubs\telegram.php config\botman
+```
+_Remember to setup the Telegram token in app\config\telegram.php_
 
-Chatbot development should be easy to get started with. Picking a messaging service and taking care of all the developer account pre-requisites is not.
-That's why BotMan Studio comes with a ready-to-use BotMan web driver implementation.
-This allows you to develop your chatbot locally and test it using your local BotMan Studio installation.
-Your newly installed BotMan Studio project will contain a `/botman/tinker` route, where you will see a very simple VueJS based chat widget, that let's you communicate with your chatbot.
-<br><br>
-If you want to disable the built-in tinker route, just remove the line from your `routes/web.php` file:
+###  Add in app\routes\web.php
 
 ```php
-Route::get('/botman/tinker', 'BotManController@tinker');
+Route::any('telegram', [App\Http\Controllers\TelegramController::class, 'index'])->name('telegram');
 ```
 
-If you want to modify the pre-installed VueJS component, you may modify the `BotManTinker.vue` file located at `resources/assets/js/components` in your BotMan Studio folder structure.
+###  Ignore CSRF token in app\Http\Middleware\VerifyCsrfToken.php
 
-<a id="list-drivers"></a>
-## List All Drivers
-
-BotMan Studio makes Driver installation as easy as possible. To get an overview of all core drivers that are available and installed in your application, you can use the BotMan Studio artisan command:
-
-```sh
-php artisan botman:list-drivers
+```php
+    protected $except = [
+        '/telegram',
+    ];
 ```
 
-<a id="install-drivers"></a>
-## Install New Drivers
+### Create file app\Http\Controllers\TelegramController.php
 
-Just like listing all available and installed drivers, you may also install new drivers using the `botman:install-driver` artisan command. It takes the driver name as an argument and will perform a `composer require` of the selected BotMan messaging driver.
+```php
+<?php
 
-So if you want to install the Facebook driver for BotMan, you can do this by using this artisan command:
+namespace App\Http\Controllers;
 
-```sh
-php artisan botman:install-driver facebook
+use BotMan\BotMan\BotMan;
+use BotMan\BotMan\BotManFactory;
+use BotMan\BotMan\Cache\LaravelCache;
+use BotMan\BotMan\Drivers\DriverManager;
+use BotMan\Drivers\Telegram\TelegramContactDriver;
+use BotMan\Drivers\Telegram\TelegramDriver;
+use BotMan\Drivers\Telegram\TelegramLocationDriver;
+use BotMan\Drivers\Telegram\TelegramPhotoDriver;
+use Illuminate\Http\Request;
+
+class TelegramController extends Controller
+{
+    public function index(Request $request)
+    {
+        DriverManager::loadDriver(TelegramDriver::class);
+        DriverManager::loadDriver(TelegramPhotoDriver::class);
+        DriverManager::loadDriver(TelegramLocationDriver::class);
+        DriverManager::loadDriver(TelegramContactDriver::class);
+
+        $config = array_merge([
+            'config' => config('botman.config')
+        ], [
+            'web' => config('botman.web', [])
+        ]);
+
+        $botman = BotManFactory::create($config, new LaravelCache);
+
+        $botman->hears('Hi', function (BotMan $bot) {
+            $bot->reply('Hello!');
+        });
+
+        $botman->listen();
+    }
+}
 ```
 
-After composer has downloaded all the driver dependencies, a new configuration file will automatically be published inside your `config/botman` directory.
+_Originally posted by @filippotoso in https://github.com/botman/botman/discussions/1308#discussioncomment-3008604_
+

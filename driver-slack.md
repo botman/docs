@@ -30,12 +30,6 @@ $config = [
 BotManFactory::create($config);
 ```
 
-Or if you use BotMan Studio:
-
-```sh
-php artisan botman:install-driver slack
-```
-
 Slack is a cloud-based set of team collaboration tools and services.
 
 > {callout-info} If you're using [ngrok](https://ngrok.com/) be aware that Slack has a timeout of 3 seconds. When using ngrok, depending on your location and connection speed, the time it takes for Slack to get a 200 OK can be longer than 3 seconds. In such cases you'll notice that your bot will answer multiple times. If you're facing this issue a possible solution is to deploy your bot to a production server or try to change the ngrok server location.
@@ -104,48 +98,7 @@ That's it.
 
 
 <a id="realtime-api"></a>
-## Usage with the Realtime API
 
-> {callout-info} Please note: The Realtime API requires the additional composer package `mpociot/slack-client` to be installed.
-> 
-> Simply install it using `composer require mpociot/slack-client`.
-
-Add a new Bot user to your Slack team and take note of the bot token slack gives you.
-Use this token as your `slack_token` configuration parameter.
-
-As the Realtime API needs a websocket, you need to create a PHP script that will hold your bot logic, as you can not use the HTTP controller way for it.
-
-```php
-<?php
-require 'vendor/autoload.php';
-
-use React\EventLoop\Factory;
-use BotMan\BotMan\BotManFactory;
-use BotMan\BotMan\Drivers\DriverManager;
-use BotMan\Drivers\Slack\SlackRTMDriver;
-
-// Load driver
-DriverManager::loadDriver(SlackRTMDriver::class);
-
-$loop = Factory::create();
-$botman = BotManFactory::createForRTM([
-    'slack' => [
-        'token' => 'YOUR-SLACK-BOT-TOKEN',
-    ],
-], $loop);
-
-$botman->hears('keyword', function($bot) {
-    $bot->reply('I heard you! :)');
-});
-
-$botman->hears('convo', function($bot) {
-    $bot->startConversation(new ExampleConversation());
-});
-
-$loop->run();
-```
-
-Then simply run this file by using `php my-bot-file.php` - your bot should connect to your Slack team and respond to the messages.
 
 <a id="outgoing-webhook"></a>
 ## Usage with an outgoing webhook
